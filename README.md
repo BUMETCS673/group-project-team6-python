@@ -2,9 +2,9 @@
 group-project-team6-java created by GitHub Classroom
 
 
-balalala
+this is the lab-1 file
 
-this is siming
+this is siming.
 
 Nice to meet you everyone!
 
