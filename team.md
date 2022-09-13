@@ -11,3 +11,5 @@ Nice to meet you everyone!
 Hi, Haiyang is here. You can commit whatever you what.
 
 Hi, it's Shawn :)
+
+Hi, this is Dawei.
