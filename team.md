@@ -1,6 +1,5 @@
 # group-project-team6-java
-group-project-team6-java created by GitHub Classroom
-
+### profile
 
 this is the lab-1 file
 
