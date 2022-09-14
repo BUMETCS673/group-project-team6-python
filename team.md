@@ -17,3 +17,5 @@ hi, it's Dawei here
 Hi, It's Shawn :) 
 It's nice to meet you guys!
 
+Hi, It's Lijian here, I also go by James!
+
