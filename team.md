@@ -1,22 +1,14 @@
-# group-project-team6-java
-### profile
 
-this is the lab-1 file
+### Group Member: 
 
-this is siming.
+Shawn - Team leader 
 
-Nice to meet you everyone!
+Siming  - Requirement Leader
 
-Hi, Haiyang is here. You can commit whatever you what.
+Youqing  - Design and Implementation leader
 
-hi, it's Dawei here
+Lijian - Configuration leader
 
+Dawei - QA leader
 
-
-Hi, It's Shawn :) 
-It's nice to meet you guys!
-
-Hi, It's Lijian here, I also go by James!
-
-
-Hi, It's Youqing Shao here, I also go by TSing!
+Haiyang Wang - Security leader 
