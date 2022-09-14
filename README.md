@@ -1,9 +1,10 @@
-# CS673 Fall2022 Section Team 6 - BOLTX
+CS673 Fall2022 Section Team 6 - BOLTX
+=====================================
 
 Group Project goes by Java
 
 
-Group Member: 
+### Group Member: 
 
 Shawn - Team leader 
 
