@@ -2,7 +2,7 @@
 group-project-team6-java created by GitHub Classroom
 
 
-balalala
+this is the lab-1 file
 
 this is siming.
 
@@ -10,8 +10,14 @@ Nice to meet you everyone!
 
 Hi, Haiyang is here. You can commit whatever you what.
 
-Hi, it's Shawn :)
+hi, it's Dawei here
 
-Hi, it's Dawei here
 
-Hi, it's tsing(Youqing Shao) here !
+
+Hi, It's Shawn :) 
+It's nice to meet you guys!
+
+Hi, It's Lijian here, I also go by James!
+
+
+Hi, It's Youqing Shao here, I also go by TSing!
