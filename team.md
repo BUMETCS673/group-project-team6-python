@@ -1,12 +1,14 @@
 
-### Group Member: 
+## Group Member: 
 
-Shawn - Team leader 
+#### Shawn - Team leader 
 
-Siming  - Requirement Leader
+Hi all, It's nice to study with you guys in this project. Base on my major was Mathematics during my undergraduate, I would really like to do moren stuff about software development. Hope we could have a great time with group work :) 
 
-Lijian - Configuration leader
+#### Siming  - Requirement Leader
 
-Dawei - QA leader
+#### Lijian - Configuration leader
 
-Haiyang Wang - Security leader 
+#### Dawei - QA leader
+
+#### Haiyang Wang - Security leader 
