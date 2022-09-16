@@ -1,14 +1,24 @@
+# Introduction of Team Members: 
 
-## Group Member: 
 
-#### Shawn - Team leader 
+### Shawn - Team leader 
 
-Hi all, It's nice to study with you guys in this project. Base on my major was Mathematics during my undergraduate, I would really like to do moren stuff about software development. Hope we could have a great time with group work :) 
 
-#### Siming  - Requirement Leader
+Hi all, 
 
-#### Lijian - Configuration leader
+It's nice to study with you guys in this project. Base on my major was Mathematics during my undergraduate, I would really like to do moren stuff about software development. 
 
-#### Dawei - QA leader
+Hope we could have a great time with group work :) 
 
-#### Haiyang Wang - Security leader 
+
+
+
+
+
+### Siming  - Requirement Leader
+
+### Lijian - Configuration leader
+
+### Dawei - QA leader
+
+### Haiyang Wang - Security leader 
