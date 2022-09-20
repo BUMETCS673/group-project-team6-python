@@ -9,8 +9,8 @@ CS673 Fall2022 Team 6 - iGroup
 |Shawn(baymax@bu.edu) - Team leader 
 Dawei(davidyin@bu.edu)- Design and Implementation leader
 Lijian(yao049@bu.edu) - Configuration leader
-Siming(s1a1d1f1@bu.edu)- QA leader
-Haiyang(whaiyang@bu.edu) - Security leader & Requirement Leader |
+Siming(s1a1d1f1@bu.edu)- Security leader & Requirement Leader
+Haiyang(whaiyang@bu.edu) - QA leader |
 
 
 ## Project Description:
