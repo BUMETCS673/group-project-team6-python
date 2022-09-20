@@ -15,10 +15,12 @@ Hope we could have a great time with group work :)
 
 
 
-### Siming  - Requirement Leader
+### Siming  - QA leader
 
 ### Lijian - Configuration leader
 
-### Dawei - QA leader
+### Dawei - Design and Implementation leader
 
-### Haiyang Wang - Security leader 
+### Haiyang Wang - Security leader & Requirement Leader
+
+
