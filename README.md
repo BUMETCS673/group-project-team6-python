@@ -15,7 +15,7 @@ Haiyang(whaiyang@bu.edu) - Security leader & Requirement Leader |
 
 ## Project Description:
 
-Our project is to make a team assignment tool that can automatically assign tasks to students, which involves the concepts of front-end, back-end, database and so on. We named it "iGroup".  The main idea of the Team assignment tool is to help create teams based on students preferences and background. Algorithmically, we weight different preferences to create the most appropriate team.
+Our project is making a team assignment tool that can automatically assign students to a team, which involves the concepts of front-end, back-end, database and so on. We named it "iGroup".  The main idea of the Team assignment tool is to help create teams based on students preferences and background. Algorithmically, we weight different preferences to create the most appropriate team.
 
 ## Tech Stack and Frameworks:
 
