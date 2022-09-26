@@ -73,6 +73,7 @@ Use Maven to pack our Spring Boot project to an executable jar file or in other 
 
 ## Quality Assurance Management
 
+
 ### Coding Standard
 Please refer to this link: 
 https://www.geeksforgeeks.org/coding-standards-and-guidelines/
