@@ -1,7 +1,7 @@
 """
 Data structure for student
 """
-from question import SingleChoiceQuestion, MultipleChoiceQuestion
+from data_structure.question import SingleChoiceQuestion, MultipleChoiceQuestion
 
 
 class AnswerSheet:
