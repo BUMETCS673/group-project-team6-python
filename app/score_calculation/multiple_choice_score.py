@@ -31,4 +31,4 @@ def cal_multiple_score(team_size, max_num_choice, option_scores):
 
 	score = 1 - (sum_b / base)
 
-	return score
+	return round(score, 3)

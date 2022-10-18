@@ -61,22 +61,22 @@ student_5 = Student(name="stu 5", email="test",user_id=5)
 student_1_answer = {
     0: 3,  # single choice
     1: 2,  # multiple choice
-    2: {0: 5, 1: 2,2:3}  # multiple choice
+    2: {0: 5, 1:2}  # multiple choice
 }
 student_2_answer = {
     0: 3,  # single choice
     1: 1,  # multiple choice
-    2: {0: 5, 1:2, 2:3}  # multiple choice
+    2: {0: 5, 1:2}  # multiple choice
 }
 student_3_answer = {
     0: 1,  # single choice
     1: 1,  # multiple choice
-    2: {0: 5, 1:2, 2:3}  # multiple choice
+    2: {0: 5}  # multiple choice
 }
 student_4_answer = {
     0: 1,  # single choice
     1: 2,  # multiple choice
-    2: {0: 1, 1:2, 2:3}  # multiple choice
+    2: {0: 5}  # multiple choice
 }
 
 # step 6. student submit their response
@@ -88,8 +88,9 @@ student_4.answer_survey(survey_1, student_4_answer)
 
 # step 7. randomly assigned 4 student to the 2 teams, but here for the sake of illustration, I manually assign them
 team_1 = Team(team_size=4, team_name="t1", survey_target=survey_1)
-team_2 = Team(team_size=2, team_name="t2", survey_target=survey_1)
+team_2 = Team(team_size=4, team_name="t2", survey_target=survey_1)
 team_1.team_members = [student_1, student_2, student_3, student_4]
+team_2.team_members = [student_1, student_2, student_3]
 
 # step 8. calculate the two team scores?
 
