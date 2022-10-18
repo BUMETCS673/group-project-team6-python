@@ -78,6 +78,10 @@ class Team:
 		return scores
 
 	def get_mul_choices_score(self):
+		"""
+		calculate all multiple choice scores for this team
+		@return: all multiple choice question scores for this team.
+		"""
 		pass
 
 	def get_sch_score(self):
