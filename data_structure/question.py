@@ -124,3 +124,10 @@ class MultipleChoiceQuestion(Question):
         @return: int of length
         """
         return len(self.choices)
+
+    def get_weight(self):
+        """
+        get this question weight
+        @return: weight of this question
+        """
+        return self.weight
