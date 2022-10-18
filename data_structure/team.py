@@ -143,6 +143,7 @@ class Team:
 
 					option_scores[choice_index][1] += 1
 
+
 			# after having option_scores, we can calculate the total scores for this question
 
 			score = multiple_choice_score.cal_multiple_score(team_size=self.team_size, max_num_choice=max_num_choice,

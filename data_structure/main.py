@@ -51,6 +51,7 @@ student_1 = Student(name="stu 1", email="test@gmail.com", user_id=1)
 student_2 = Student(name="stu 2", email="test@gmail.com", user_id=2)
 student_3 = Student(name="stu 3", email="test@gmail.com", user_id=3)
 student_4 = Student(name="stu 4", email="test@gmail.com", user_id=4)
+student_5 = Student(name="stu 5", email="test",user_id=5)
 
 # step 5: student respond to the survey
 
@@ -60,22 +61,22 @@ student_4 = Student(name="stu 4", email="test@gmail.com", user_id=4)
 student_1_answer = {
     0: 3,  # single choice
     1: 2,  # multiple choice
-    2: {0: 2}  # multiple choice
+    2: {0: 5, 1: 2,2:3}  # multiple choice
 }
 student_2_answer = {
     0: 3,  # single choice
     1: 1,  # multiple choice
-    2: {0: 1}  # multiple choice
+    2: {0: 5, 1:2, 2:3}  # multiple choice
 }
 student_3_answer = {
     0: 1,  # single choice
     1: 1,  # multiple choice
-    2: {0: 3}  # multiple choice
+    2: {0: 5, 1:2, 2:3}  # multiple choice
 }
 student_4_answer = {
     0: 1,  # single choice
     1: 2,  # multiple choice
-    2: {0: 4}  # multiple choice
+    2: {0: 1, 1:2, 2:3}  # multiple choice
 }
 
 # step 6. student submit their response
@@ -83,6 +84,7 @@ student_1.answer_survey(survey_1, student_1_answer)
 student_2.answer_survey(survey_1, student_2_answer)
 student_3.answer_survey(survey_1, student_3_answer)
 student_4.answer_survey(survey_1, student_4_answer)
+#student_5.answer_survey(survey_1,student_5_answer)
 
 # step 7. randomly assigned 4 student to the 2 teams, but here for the sake of illustration, I manually assign them
 team_1 = Team(team_size=4, team_name="t1", survey_target=survey_1)

@@ -11,14 +11,24 @@ def cal_multiple_score(team_size, max_num_choice, option_scores):
 	@param option_scores: option scores and its occurrence
 	@return: the raw score
 	"""
+
 	# drop the scores with occurrence less or equal to 1
-	option_scores = [score for score in option_scores if score[1] > 1]
+	option_scores = [s for s in option_scores if s[1] > 1]
+
+	# recalculate the max_num_choice
+	num_valid_option = len(option_scores)
+
+	# if no valid option, score set to 1
+	if num_valid_option == 0:
+		score = 1
+		return score
 	# calculate the total scores
 
 	# 1. need to find the base
 	expression = lambda x: x ** 2
-	base = (team_size ** 2) * sum(expression(max_num_choice - i) for i in range(max_num_choice))
+	base = (team_size ** 2) * sum(expression(max_num_choice - i) for i in range(num_valid_option))
 	sum_b = sum(expression(i[0]) for i in option_scores)
-	score = 1 - sum_b / base
+
+	score = 1 - (sum_b / base)
 
 	return score
