@@ -1,3 +1,6 @@
+import math
+
+
 class Team:
     total_score = 0
 
@@ -83,6 +86,7 @@ class Team:
         calculate all multiple choice scores for this team
         @return: all multiple choice question scores for this team.
         """
+        self.team_size = len(self.__team_members)
 
         # for each student, get multiple choice answers in the
         # dictionary format {student id : {question index, multiple choice answer obj}}
@@ -140,11 +144,15 @@ class Team:
             option_scores = [score for score in option_scores if score[1] > 1]
             # calculate the total scores
 
+            # 1. need to find the base
+            expression = lambda x: x ** 2
+            base = (self.team_size ** 2)* sum(expression(max_choice_num - i) for i in range(max_choice_num))
+            sum_b = sum(expression(i[0]) for i in option_scores)
+            score = 1 - sum_b / base
+            # up date scores
+            scores[question_index] = score
 
-
-
-            pass
-        return multiple_choice_questions, multiple_choice_questions_weight, multiple_choice_answers
+        return scores
 
     def get_sch_score(self):
         pass
