@@ -32,15 +32,6 @@ Source control version repository.
 MySQL
 
 
-## Related Work:
-#### Try to comprehensive the previous student project 
-https://github.com/BUMETCS673/BUMETCS673A1F21P3
-#### Survey
-https://docs.google.com/forms/d/e/1FAIpQLSfkskHnSJLweJSulYyeBenhNPSyzHkQTRW6wzakM_Ffb3gJFA/viewform
-#### Team Sign
-https://docs.google.com/document/d/1PzFrv9GLrKaXZP46fl1S_kaAev4Gb6BcfAxBUfSvNSs/edit
-#### Related Literature
- https://drive.google.com/drive/u/1/folders/1BBafMsvOnvsn76p2TktR9ZJ1NIbP4Eg5
 
 
 
@@ -72,6 +63,8 @@ GitHub Flow is a very suitable Git Branching Strategy for a small team like us. 
 Use Maven to pack our Spring Boot project to an executable jar file or in other ways.
 
 
+
+
 ## Quality Assurance Management
 
 
@@ -82,3 +75,15 @@ Our standards will be based on the contents in this link.
 
 
 
+
+
+
+## Related Work:
+#### Try to comprehensive the previous student project 
+https://github.com/BUMETCS673/BUMETCS673A1F21P3
+#### Survey
+https://docs.google.com/forms/d/e/1FAIpQLSfkskHnSJLweJSulYyeBenhNPSyzHkQTRW6wzakM_Ffb3gJFA/viewform
+#### Team Sign
+https://docs.google.com/document/d/1PzFrv9GLrKaXZP46fl1S_kaAev4Gb6BcfAxBUfSvNSs/edit
+#### Related Literature
+ https://drive.google.com/drive/u/1/folders/1BBafMsvOnvsn76p2TktR9ZJ1NIbP4Eg5
