@@ -21,11 +21,20 @@ class Team:
 
 	@property
 	def team_members(self):
+		"""
+		get all the student
+		@return: all the student objects
+		"""
 		# print(f"show group{self.team_name} members:{self.__team_members}")
 		return self.__team_members
 
 	@team_members.setter
 	def team_members(self, members):
+		"""
+		set the team member for this team
+		@param members: the list of student members
+		@return: None
+		"""
 		print("set team members")
 		self.__team_members = members
 

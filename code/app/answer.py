@@ -16,7 +16,7 @@ class Answer(ABC):
         @param survey: the question that in the survey
         @param kwargs: reserved
         """
-        self.question_type = question
+        self.question = question
         self.question_type = question.question_type
         self.survey = survey
 

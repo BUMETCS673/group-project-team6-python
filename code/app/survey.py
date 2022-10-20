@@ -11,7 +11,7 @@ class Survey:
 
 	def __init__(self, survey_name, survey_id, questions=None, students=None, **kwargs):
 		"""
-
+		this is the init method for survey class.
         :param survey_name: the name of the survey
         :param survey_id: unique survey id
         :param questions: the question in the survey (list type i.e. [question obj])
