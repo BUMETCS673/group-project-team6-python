@@ -32,18 +32,6 @@ Source control version repository.
 MySQL
 
 
-## Related Work:
-#### Try to comprehensive the previous student project 
-https://github.com/BUMETCS673/BUMETCS673A1F21P3
-#### Survey
-https://docs.google.com/forms/d/e/1FAIpQLSfkskHnSJLweJSulYyeBenhNPSyzHkQTRW6wzakM_Ffb3gJFA/viewform
-#### Team Sign
-https://docs.google.com/document/d/1PzFrv9GLrKaXZP46fl1S_kaAev4Gb6BcfAxBUfSvNSs/edit
-#### Related Literature
- https://drive.google.com/drive/u/1/folders/1BBafMsvOnvsn76p2TktR9ZJ1NIbP4Eg5
-
-
-
 ## Proposed High level Requirements
 
 #### a.Functional Requirements  
@@ -79,3 +67,16 @@ Use Maven to pack our Spring Boot project to an executable jar file or in other 
 Please refer to this link: 
 https://www.geeksforgeeks.org/coding-standards-and-guidelines/
 Our standards will be based on the contents in this link.
+
+
+
+
+## Related Work:
+#### Try to comprehensive the previous student project 
+https://github.com/BUMETCS673/BUMETCS673A1F21P3
+#### Survey
+https://docs.google.com/forms/d/e/1FAIpQLSfkskHnSJLweJSulYyeBenhNPSyzHkQTRW6wzakM_Ffb3gJFA/viewform
+#### Team Sign
+https://docs.google.com/document/d/1PzFrv9GLrKaXZP46fl1S_kaAev4Gb6BcfAxBUfSvNSs/edit
+#### Related Literature
+ https://drive.google.com/drive/u/1/folders/1BBafMsvOnvsn76p2TktR9ZJ1NIbP4Eg5
