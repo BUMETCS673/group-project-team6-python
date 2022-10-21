@@ -13,10 +13,13 @@ Alex(alexrw@bu.edu)- Security leader
 Siming(s1a1d1f1@bu.edu)- Requirement Leader
 Haiyang(whaiyang@bu.edu) - QA leader |
 
+<br />
 
 ## Project Description:
 
 Our project is making a team assignment tool that can automatically assign students to a team, which involves the concepts of front-end, back-end, database and so on. We named it "iGroup".  The main idea of the Team assignment tool is to help create teams based on students preferences and background. Algorithmically, we weight different preferences to create the most appropriate team.
+
+<br /><br />
 
 ## Tech Stack and Frameworks:
 
@@ -25,12 +28,16 @@ HTML: Front End building block <br>
 CSS: Front End building block <br>
 Javascript: used for more dynamic elements in front end
 #### Back End:
-Python (Django)
-#### Git(Github): 
-Source control version repository.
+Django(option)
+Pure Python(Algorithm)
+#### Management:
+Git/Github: Version control tool 
+Pivotal Tracker: Project Management
 #### Database:
-MySQL
+MySQL(optional)
+.CSV file
 
+<br /><br />
 
 ## Proposed High level Requirements
 
@@ -39,9 +46,12 @@ MySQL
 #### c.Optional Features
 #### d.Security Requirements
 
+<br /><br />
 
 ## Risk Management
 https://docs.google.com/spreadsheets/d/1oXajwHWtP0rqrXSfCWsf2NTtd7TqJNTJ5b6tWfP5csk/edit
+
+<br /><br />
 
 ## Configuration Management
 #### Tools
@@ -59,6 +69,8 @@ GitHub Flow is a very suitable Git Branching Strategy for a small team like us. 
 #### Deployment Plan if applicable
 Use Maven to pack our Spring Boot project to an executable jar file or in other ways.
 
+<br /><br />
+
 
 ## Quality Assurance Management
 
@@ -69,7 +81,7 @@ https://www.geeksforgeeks.org/coding-standards-and-guidelines/
 Our standards will be based on the contents in this link.
 
 
-
+<br /><br />
 
 ## Related Work:
 #### Try to comprehensive the previous student project 
