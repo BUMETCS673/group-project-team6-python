@@ -1,7 +1,7 @@
 """
 Data structure for survey
 """
-from code.app.question import SingleChoiceQuestion, MultipleChoiceQuestion
+from question import SingleChoiceQuestion, MultipleChoiceQuestion
 
 
 class Survey:

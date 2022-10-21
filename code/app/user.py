@@ -2,7 +2,7 @@
 Data structure for user
 """
 from abc import ABC, abstractmethod
-from code.app.answer_sheet import AnswerSheet
+from answer_sheet import AnswerSheet
 
 
 class User(ABC):

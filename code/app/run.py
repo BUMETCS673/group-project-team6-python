@@ -1,7 +1,7 @@
 """
 class for instructor specific parameter
 """
-
+from instance import Instance
 
 class Run:
 
@@ -22,5 +22,6 @@ class Run:
 		run the allocation algorithm
 		@return: the team formation
 		"""
-		#for each_pass in range(self.num_max_pass)
+
+
 		pass 
