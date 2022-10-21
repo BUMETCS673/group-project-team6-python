@@ -1,8 +1,8 @@
-from question import SingleChoiceQuestion, MultipleChoiceQuestion
-from survey import Survey
-from user import Student
-from answer_sheet import AnswerSheet
-from team import Team
+from code.app.question import SingleChoiceQuestion, MultipleChoiceQuestion
+from code.app.survey import Survey
+from code.app.user import Student
+from code.app.answer_sheet import AnswerSheet
+from code.app.team import Team
 
 """
 illustrate the steps for creating survey and answer the survey from students
