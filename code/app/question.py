@@ -56,8 +56,10 @@ class SingleChoiceQuestion(Question):
         return self.question_type
 
     def delete_choice(self, choice_index):
-        """
+        self.choices.remove(choice_index)
 
+
+        """
         :param choice_index: the index of the choice need to be deleted from the question
         :return: None
         """
