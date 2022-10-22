@@ -55,12 +55,14 @@ class test_single_choice_question(unittest.TestCase):
     def test_get_weight(self):
         self.assertEqual(self.question1.get_weight(), 1)
         self.assertEqual(self.question2.get_weight(), 2)
+        self.assertEqual(self.question3.get_weight(), 3)
 
     # test add_choice
     def test_add_choice(self):
-        self.assertEqual(self.question1.choices, ["A", "B", "C"])
-
-        self.assertEqual(self.question2.choices, ["1", "2", "3"])
+        self.question1.add_choice("D")
+        self.question2.add_choice("4")
+        self.assertEqual(self.question1.choices, ["A", "B", "C", "D"])
+        self.assertEqual(self.question2.choices, ["1", "2", "3", "4"])
 
     # test get_question_type
     def test_get_question_type(self):
@@ -95,12 +97,93 @@ class test_single_choice_question(unittest.TestCase):
 class test_multiple_choice_question(unittest.TestCase):
     # set up test objects
     def setUp(self):
-        self.question1 = question.SingleChoiceQuestion(question_name="q1", description="test q1", weight=1,
-                                                       choices=None, )
-        self.question2 = question.SingleChoiceQuestion(question_name="q2", description="test q2", weight=2,
-                                                       choices=None)
-        self.question3 = question.SingleChoiceQuestion(question_name="q3", description="test q3", weight=3,
-                                                       choices=None)
+        self.question1 = question.MultipleChoiceQuestion(question_name="q1", description="test q1", weight=1,
+                                                         choices=None, max_num_choice=2)
+        self.question2 = question.MultipleChoiceQuestion(question_name="q2", description="test q2", weight=2,
+                                                         choices=None, max_num_choice=3)
+        self.question3 = question.MultipleChoiceQuestion(question_name="q3", description="test q3", weight=3,
+                                                         choices=None, max_num_choice=4)
+
+        self.question1.add_choice("A")
+        self.question1.add_choice("B")
+        self.question1.add_choice("C")
+        self.question1.add_choice("D")
+        self.question1.add_choice("E")
+
+        self.question2.add_choice("1")
+        self.question2.add_choice("2")
+        self.question2.add_choice("3")
+        self.question2.add_choice("4")
+        self.question2.add_choice("5")
+
+        self.question3.add_choice("Python")
+        self.question3.add_choice("Java")
+        self.question3.add_choice("C")
+        self.question3.add_choice("C++")
+
+    # test multiple choice question init
+    def test_single_choice_question_init(self):
+        # test question_name
+        self.assertEqual(self.question1.question_name, "q1")
+        self.assertEqual(self.question2.question_name, "q2")
+        self.assertEqual(self.question3.question_name, "q3")
+
+        # test description
+        self.assertEqual(self.question1.description, "test q1")
+        self.assertEqual(self.question2.description, "test q2")
+        self.assertEqual(self.question3.description, "test q3")
+
+        # test weight
+        self.assertEqual(self.question1.weight, 1)
+        self.assertEqual(self.question2.weight, 2)
+        self.assertEqual(self.question3.weight, 3)
+
+        # test choice
+        self.assertEqual(self.question1.choices, ["A", "B", "C", "D", "E"])
+        self.assertEqual(self.question2.choices, ["1", "2", "3", "4", "5"])
+        self.assertEqual(self.question3.choices, ["Python", "Java", "C", "C++"])
+
+        # test max num choice
+        # test choice
+        self.assertEqual(self.question1.max_num_choice, 2)
+        self.assertEqual(self.question2.max_num_choice, 3)
+        self.assertEqual(self.question3.max_num_choice, 4)
+
+        # test type
+        self.assertTrue(isinstance(self.question1, question.Question))
+        self.assertTrue(isinstance(self.question2, question.Question))
+        self.assertTrue(isinstance(self.question3, question.Question))
+
+    # Test get_weight
+    def test_get_weight(self):
+        self.assertEqual(self.question1.get_weight(), 1)
+        self.assertEqual(self.question2.get_weight(), 2)
+        self.assertEqual(self.question3.get_weight(), 3)
+
+    # Test add_choice
+    def test_add_choice(self):
+        self.question1.add_choice("F")
+        self.question2.add_choice("6")
+        self.assertEqual(self.question1.choices, ["A", "B", "C", "D", "E", "F"])
+        self.assertEqual(self.question2.choices, ["1", "2", "3", "4", "5", "6"])
+
+    # test delete_choice
+    def test_delete_choice(self):
+        self.question1.delete_choice(1)
+        self.assertEqual(self.question1.choices, ["A", "C", "D", "E"])
+        self.question2.delete_choice(0)
+        self.assertEqual(self.question2.choices, ["2", "3", "4", "5"])
+
+    # test get question type
+    def test_get_question_type(self):
+        self.assertEqual(self.question1.get_question_type(), "multiple")
+        self.assertEqual(self.question2.get_question_type(), "multiple")
+        self.assertEqual(self.question3.get_question_type(), "multiple")
+
+    def test_get_choice_size(self):
+        self.assertEqual(self.question1.get_choice_size(), 5)
+        self.assertEqual(self.question2.get_choice_size(), 5)
+        self.assertEqual(self.question3.get_choice_size(), 4)
 
 
 if __name__ == '__main__':
