@@ -57,12 +57,10 @@ class SingleChoiceQuestion(Question):
 
     def delete_choice(self, choice_index):
         self.choices.remove(choice_index)
-
         """
         :param choice_index: the index of the choice need to be deleted from the question
         :return: None
         """
-        pass
 
     def get_all_choice(self):
         """
@@ -109,12 +107,13 @@ class MultipleChoiceQuestion(Question):
         return None
 
     def delete_choice(self, choice_index):
+        self.choices.remove(choice_index)
+
         """
 
         :param choice_index: the index of the choice need to be deleted from the question
         :return: None
         """
-        pass
 
     def get_question_type(self):
         return self.question_type
