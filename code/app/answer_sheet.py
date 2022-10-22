@@ -22,7 +22,7 @@ class AnswerSheet:
     def set_answers(self, raw_answers):
         """
         translate the raw input answer from student in json form to the answer sheet.
-        :param raw_answers: the answer to the survey in json format
+        :param raw_answers: dict, the answer to the survey in json format
          for example: {question index : answer object}
         :return: None
         """
