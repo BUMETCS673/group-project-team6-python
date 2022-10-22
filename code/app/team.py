@@ -8,11 +8,9 @@ class Team:
     def __init__(self, team_name, survey_target, **kwargs):
         """
 
-        :param team_size: the size of the team
-        :param team_name: the name of the team
-        :param members: list of students in the team
-        :param survey: the survey that is targeting for calculating the team score
-        :param kwargs: reserved
+        @param team_name: str, the name of the team
+        @param survey_target: Survey, the survey target
+        @param kwargs: reserved for future use
         """
         self.team_name = team_name
         self.survey_target = survey_target
@@ -75,6 +73,10 @@ class Team:
         #return old_student
 
     def get_team_size(self):
+        """
+        
+        @return:
+        """
         return len(self.__team_members)
 
     def get_all_team_member_id(self):
