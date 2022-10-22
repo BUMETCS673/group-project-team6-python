@@ -1,7 +1,7 @@
 """
 class for instructor specific parameter
 """
-from instance import Instance
+from code.app.instance import Instance
 
 class Run:
 

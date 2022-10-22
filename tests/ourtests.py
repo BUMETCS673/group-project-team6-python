@@ -2,32 +2,13 @@ import unittest
 from code.app import team
 from code.app import question
 from code.app import survey
-from code.app import answer_sheet as an
+from code.app import answer_sheet
 from code.app import instance
 from code.app import answer
 from code.app import user
-from code.app import run
-from code.app import main
 
 
-# test survey, not finished
-class question_test(unittest.TestCase):
-    # set up test objects
-    def setUp(self):
-        self.question1 = question.Question("q1", "test q1", 1)
 
-    def test_question_init(self):
-        # test question_name
-        self.assertEqual(self.question1.question_name, "q1")
-
-        # test description
-        self.assertEqual(self.question1.description, "test q1")
-
-        # test weight
-        self.assertEqual(self.question1.weight, 1)
-
-        # test type
-        self.assertTrue(isinstance(self.question1, question.Question))
 
 
 # test survey, not finished
@@ -76,6 +57,10 @@ class survey_test(unittest.TestCase):
 
 # test answer, not finished
 class answer_test(unittest.TestCase):
+    # Set Uo test objects
+    def setUp(self):
+        self.question1 = question.Question("q1", "test q1", 1)
+
     def test(self):
         self.assertEqual(1, 1)
 
@@ -95,15 +80,12 @@ class team_test(unittest.TestCase):
         self.questions1 = [self.question1]
         self.students1 = ["a", "b", "c"]
         self.survey1 = survey.Survey("s1", "1", self.questions1, self.students1)
-        self.team1 = team.Team(3, "good", self.survey1)
+        self.team1 = team.Team("team1", self.survey1)
 
     # test initial function in team
     def test_init(self):
-        # test team_size
-        self.assertEqual(self.team1.team_size, 3)
-
         # test team_name
-        self.assertEqual(self.team1.team_name, "good")
+        self.assertEqual(self.team1.team_name, "team1")
 
         # test survey_target.survey_name
         self.assertEqual(self.team1.survey_target.survey_name, "s1")

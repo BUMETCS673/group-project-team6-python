@@ -1,5 +1,5 @@
-from score_calculation import multiple_choice_score
-from score_calculation import single_choice_score
+from code.app.score_calculation import multiple_choice_score
+from code.app.score_calculation import single_choice_score
 
 
 class Team:
