@@ -11,7 +11,6 @@ class Question(ABC):
 
     def __init__(self, question_name, description, weight, **kwargs):
         """
-
         :param question_name: the name for the question
         :param description: the description for the question
         :param weight: the weight of this question
@@ -56,13 +55,11 @@ class SingleChoiceQuestion(Question):
         return self.question_type
 
     def delete_choice(self, choice_index):
-        self.choices.remove(choice_index)
-
+        self.choices.pop(choice_index)
         """
         :param choice_index: the index of the choice need to be deleted from the question
         :return: None
         """
-        pass
 
     def get_all_choice(self):
         """
@@ -85,7 +82,6 @@ class MultipleChoiceQuestion(Question):
 
     def __init__(self, choices=None, max_num_choice=9999, **kwargs):
         """
-
         :param choices: all available choices in list datatype, default to None
         :param max_num_choice: the max number of choice in int datatype student can choose, default to 0
         :param choices_score: the scores of each choice
@@ -109,12 +105,11 @@ class MultipleChoiceQuestion(Question):
         return None
 
     def delete_choice(self, choice_index):
+        self.choices.pop(choice_index)
         """
-
         :param choice_index: the index of the choice need to be deleted from the question
         :return: None
         """
-        pass
 
     def get_question_type(self):
         return self.question_type
