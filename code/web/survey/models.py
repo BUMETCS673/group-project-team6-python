@@ -39,11 +39,11 @@ class Question(models.Model):
 	survey = models.ForeignKey(Survey, on_delete=CASCADE)
 
 
-class Choice(models.Model):
+class Option(models.Model):
 	"""
 	choice field
 	"""
-	choice_index = models.IntegerField() # the position of the choice
+	choice_index = models.IntegerField()  # the position of the choice
 	choice_name = models.CharField(max_length=50)
 	question = models.ForeignKey(Question, on_delete=CASCADE)
 
@@ -54,7 +54,7 @@ class AnswerSheet(models.Model):
 	Answer sheet
 	"""
 	answer_sheet_id = models.AutoField(primary_key=True)
-	survey = models.ForeignKey(Survey, on_delete=CASCADE)
+	survey = models.OneToOneField(Survey, on_delete=CASCADE)
 	student = None  # should link to student
 
 
@@ -64,6 +64,14 @@ class Answer(models.Model):
 	abstract model answer
 	"""
 	answer_id = models.AutoField(primary_key=True)
+	answer_index = models.IntegerField(default=None)
 	answer_sheet = models.ForeignKey(AnswerSheet, on_delete=CASCADE)
 	answer_type = models.CharField(max_length=50)
-	question = models.ForeignKey(Question, on_delete=CASCADE)
+	question = models.OneToOneField(Question, on_delete=CASCADE)
+
+
+class AnswerChoice(Answer):
+	"""
+	single choice
+	"""
+	choice = models.ForeignKey(Option, on_delete=CASCADE)

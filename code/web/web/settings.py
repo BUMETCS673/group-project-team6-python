@@ -36,6 +36,8 @@ INSTALLED_APPS = [
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
 	'survey',  # add iGroup to the web app
+	'iGroup',
+
 ]
 
 MIDDLEWARE = [

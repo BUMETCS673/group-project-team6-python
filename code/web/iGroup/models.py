@@ -1,29 +1,14 @@
 from django.db import models
 
-# Create your models here.
 
-# user generic
-class User(models.Model):
+class ConfigInstance(models.Model):
 	"""
-
+	The parameter for running the instance
 	"""
-# instructor
+	instructor = None # need to specifys
 
-# student
 
-# survey
-
-# question generic
-
-# single choice question
-
-# multiple choice question
-
-# answer sheet
-
-# answer question generic
-
-# single choice answer
-
-# multiple choice answer
-
+class ResultInstance(models.Model):
+	"""
+	The result from the instance
+	"""
