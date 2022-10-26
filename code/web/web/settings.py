@@ -37,6 +37,8 @@ INSTALLED_APPS = [
 	'django.contrib.staticfiles',
 	'survey',  # add iGroup to the web app
 	'iGroup',
+	'user',
+
 
 ]
 
