@@ -16,9 +16,21 @@ class Question(ABC):
         :param weight: the weight of this question
         :param kwargs: reserved for future use
         """
-        self.description = description
-        self.question_name = question_name
-        self.weight = weight
+        # check None inputs
+        if description is not None:
+            self.description = description
+        else:
+            self.description = None
+
+        if question_name is not None:
+            self.question_name = question_name
+        else:
+            self.question_name = None
+
+        if weight is not None:
+            self.weight = weight
+        else:
+            self.weight = None
 
     def get_weight(self):
         return self.weight
@@ -47,15 +59,24 @@ class SingleChoiceQuestion(Question):
         :param choice: str datatype, add the available option to the question
         :return: None
         """
-        self.choices.append(choice)
-
-        return None
+        # check legal new choice
+        if choice is not None and choice != "":
+            self.choices.append(choice)
+        else:
+            print("input is illegal")
 
     def get_question_type(self):
         return self.question_type
 
     def delete_choice(self, choice_index):
-        self.choices.pop(choice_index)
+        # check choices len, and choice_index
+        if len(self.choices) > 0:
+            if len(self.choices) > choice_index >= 0:
+                self.choices.pop(choice_index)
+            else:
+                print("index out of bound")
+        else:
+            print("choices is empty")
         """
         :param choice_index: the index of the choice need to be deleted from the question
         :return: None
@@ -92,7 +113,11 @@ class MultipleChoiceQuestion(Question):
             choices = []
 
         self.choices = choices
-        self.max_num_choice = max_num_choice
+
+        if max_num_choice is not None and max_num_choice >= 2:
+            self.max_num_choice = max_num_choice
+        else:
+            self.max_num_choice = 2
 
     def add_choice(self, choice):
         """
@@ -100,12 +125,21 @@ class MultipleChoiceQuestion(Question):
         :param choice: str datatype, add the available option to the question
         :return: None
         """
-        self.choices.append(choice)
-
-        return None
+        # check legal new choice
+        if choice is not None and choice != "":
+            self.choices.append(choice)
+        else:
+            print("input is illegal")
 
     def delete_choice(self, choice_index):
-        self.choices.pop(choice_index)
+        # check choices len, and choice_index
+        if len(self.choices) > 0:
+            if len(self.choices) > choice_index >= 0:
+                self.choices.pop(choice_index)
+            else:
+                print("index out bound")
+        else:
+            print("choices is empty")
         """
         :param choice_index: the index of the choice need to be deleted from the question
         :return: None
@@ -120,3 +154,17 @@ class MultipleChoiceQuestion(Question):
         @return: int of length
         """
         return len(self.choices)
+
+    def get_max_num_of_choice(self):
+        """
+        get max number of the options that can be chosen
+        @return: int
+        """
+        return self.max_num_choice
+
+    def get_all_choices(self):
+        """
+        get all choice in this question
+        @return: string array
+        """
+        return self.choices
