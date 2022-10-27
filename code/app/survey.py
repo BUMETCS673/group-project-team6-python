@@ -113,7 +113,9 @@ class Survey:
         @return: the type of such question
         """
         question_type = None
+        # check empty questions
         if len(self.questions) > 0:
+            # check if index in bound
             if len(self.questions) > index_value >= 0:
                 question = self.get_question_by_index(index_value)
                 question_type = question.get_question_type()
