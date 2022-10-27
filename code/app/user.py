@@ -15,9 +15,10 @@ class User(ABC):
 
         :param name: the name of the user
         """
+        self.id = user_id  # should be unique
         self.name = name
         self.email = email
-        self.id = user_id  # should be unique
+
 
 
 class Student(User):
