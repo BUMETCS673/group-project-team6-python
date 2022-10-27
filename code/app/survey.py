@@ -95,7 +95,7 @@ class Survey:
         @return: the question obj
         """
         # check length of questions
-        if len(self.questions) is not 0:
+        if len(self.questions) > 0:
             # check if index in bound
             if len(self.questions) > index_value >= 0:
                 return self.questions[index_value]
