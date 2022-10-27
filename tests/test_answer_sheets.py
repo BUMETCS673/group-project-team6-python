@@ -5,7 +5,7 @@ from code.app import answer_sheet
 
 
 # not finished
-class survey_test(unittest.TestCase):
+class answer_sheet_test(unittest.TestCase):
     def test(self):
         self.assertEqual(1, 1)
 
