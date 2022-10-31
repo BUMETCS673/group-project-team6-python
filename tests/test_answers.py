@@ -108,11 +108,74 @@ class test_multiple(unittest.TestCase):
         self.survey2 = survey.Survey("survey 2", "s2", self.questions_array2, self.students2)
 
         self.multiple1 = answer.MultipleChoiceAnswer(question=self.question4, survey=self.survey2,
-                                                     choice_result={0: 1, 1: 2})
+                                                     choices_result={0: 1, 1: 2})
         self.multiple2 = answer.MultipleChoiceAnswer(question=self.question5, survey=self.survey2,
-                                                     choice_result={0: 3, 1: 1, 2: 4})
-        self.multiple2 = answer.MultipleChoiceAnswer(question=self.question6, survey=self.survey2,
-                                                     choice_result={0: 1, 1: 0, 2: 3, 3: 4})
+                                                     choices_result={0: 3, 1: 1, 2: 4})
+        self.multiple3 = answer.MultipleChoiceAnswer(question=self.question6, survey=self.survey2,
+                                                     choices_result={0: 1, 1: 0, 2: 3, 3: 4})
+        # special condition
+        self.multiple4 = answer.MultipleChoiceAnswer(question=None, survey=None, choices_result={15: 1111, 11: 5555})
+        self.multiple5 = answer.MultipleChoiceAnswer(question=None, survey=None, choices_result={-5: 1, -10: -1})
+        self.multiple6 = answer.MultipleChoiceAnswer(question=None, survey=None, choices_result=None)
+
+    # test init
+    def test03_init(self):
+        # test question
+        self.assertEqual(self.question4, self.multiple1.question)
+        self.assertEqual(self.question5, self.multiple2.question)
+        self.assertEqual(self.question6, self.multiple3.question)
+        self.assertEqual(None, self.multiple4.question)
+        self.assertEqual(None, self.multiple5.question)
+        self.assertEqual(None, self.multiple6.question)
+
+        # test survey
+        self.assertEqual(self.survey2, self.multiple1.survey)
+        self.assertEqual(self.survey2, self.multiple2.survey)
+        self.assertEqual(self.survey2, self.multiple3.survey)
+        self.assertEqual(None, self.multiple4.survey)
+        self.assertEqual(None, self.multiple5.survey)
+        self.assertEqual(None, self.multiple6.survey)
+
+        # test choices result
+        self.assertEqual({0: 1, 1: 2}, self.multiple1.choices_result)
+        self.assertEqual({0: 3, 1: 1, 2: 4}, self.multiple2.choices_result)
+        self.assertEqual({0: 1, 1: 0, 2: 3, 3: 4}, self.multiple3.choices_result)
+        self.assertEqual({15: 1111, 11: 5555}, self.multiple4.choices_result)
+        self.assertEqual({-5: 1, -10: -1}, self.multiple5.choices_result)
+        self.assertEqual(None, self.multiple6.choices_result)
+
+        # test question types
+        self.assertEqual("multiple", self.multiple1.question_type)
+        self.assertEqual("multiple", self.multiple2.question_type)
+        self.assertEqual("multiple", self.multiple3.question_type)
+        self.assertEqual(None, self.multiple4.question_type)
+        self.assertEqual(None, self.multiple5.question_type)
+        self.assertEqual(None, self.multiple6.question_type)
+
+        # test answer types
+        self.assertEqual("multiple", self.multiple1.answer_type)
+        self.assertEqual("multiple", self.multiple2.answer_type)
+        self.assertEqual("multiple", self.multiple3.answer_type)
+        self.assertEqual("multiple", self.multiple4.answer_type)
+        self.assertEqual("multiple", self.multiple5.answer_type)
+        self.assertEqual("multiple", self.multiple6.answer_type)
+
+        # test type
+        self.assertIsInstance(self.multiple1, answer.MultipleChoiceAnswer)
+        self.assertIsInstance(self.multiple2, answer.MultipleChoiceAnswer)
+        self.assertIsInstance(self.multiple3, answer.MultipleChoiceAnswer)
+        self.assertIsInstance(self.multiple4, answer.MultipleChoiceAnswer)
+        self.assertIsInstance(self.multiple5, answer.MultipleChoiceAnswer)
+        self.assertIsInstance(self.multiple6, answer.MultipleChoiceAnswer)
+
+    # test get_choice_result
+    def test04_get_choice_result(self):
+        self.assertEqual({0: 1, 1: 2}, self.multiple1.get_choice_result())
+        self.assertEqual({0: 3, 1: 1, 2: 4}, self.multiple2.get_choice_result())
+        self.assertEqual({0: 1, 1: 0, 2: 3, 3: 4}, self.multiple3.get_choice_result())
+        self.assertEqual({15: 1111, 11: 5555}, self.multiple4.get_choice_result())
+        self.assertEqual({-5: 1, -10: -1}, self.multiple5.get_choice_result())
+        self.assertEqual(None, self.multiple6.get_choice_result())
 
 
 if __name__ == '__main__':
