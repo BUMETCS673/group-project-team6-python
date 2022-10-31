@@ -45,22 +45,16 @@ class Team:
         del self.__team_members
 
     def get_member_by_index(self, member_index):
-        """
-        get a team member by its position
-        @return: Student
-        """
         return self.team_members[member_index]
 
     def add_team_member(self, student):
-        """
-
-        @param student: Student, the student add to the team
-        @return: None
-        """
-
         self.team_members.append(student)
         self.team_size += 1
         return
+
+    def remove_team_member(self, student):
+        self.team_members.remove(student)
+        self.team_size -= 1
 
     def replace_team_member(self, student_index, new_student):
         """
@@ -74,18 +68,11 @@ class Team:
         #return old_student
 
     def get_team_size(self):
-        """
-        
-        @return:
-        """
         return len(self.__team_members)
 
     def get_all_team_member_id(self):
-        """
-        return all team member id
-        @return: list, id s
-        """
         return [info.id for info in self.team_members]
+        "@return: list, id of all members"
 
 
     def get_single_choice_scores(self):

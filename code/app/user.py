@@ -11,10 +11,8 @@ class User(ABC):
     """
 
     def __init__(self, user_id, name, email):
-        """
+        ":param name: the name of the user"
 
-        :param name: the name of the user
-        """
         self.id = user_id  # should be unique
         self.name = name
         self.email = email
