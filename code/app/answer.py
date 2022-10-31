@@ -67,8 +67,8 @@ class MultipleChoiceAnswer(Answer):
     def __init__(self, choices_result, **kwargs):
         """
 
-        @param choices_result: all choices result for the question, should be the list,
-        i.e. {0: 2, 1: 3, 2: 5} which {order of choice, the index of the option}
+        @param choices_result: List, all choice option index result for the question,
+        i.e. [0,1,3,4] where its index is the order, and value is the option index
         @param weights_result: the weights for the choice
         @param kwargs:
         @return:

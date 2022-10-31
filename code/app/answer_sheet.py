@@ -55,7 +55,7 @@ class AnswerSheet:
                     having conflict with answer class
                     choices_result should be a dict according to answer class, but here it is an array.
                     """
-                    new_response = [val for _, val in sorted(response.items())]
+                    new_response = [val for _, val in sorted(response.items())] # List
                     answer = MultipleChoiceAnswer(question=question,
                                                   survey=self.survey,
                                                   choices_result=new_response)
