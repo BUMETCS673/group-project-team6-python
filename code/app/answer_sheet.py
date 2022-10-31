@@ -51,11 +51,7 @@ class AnswerSheet:
                                                 choice_result=response)
                 elif question_type == "multiple":
                     # need to preprocess the result
-                    """
-                    having conflict with answer class
-                    choices_result should be a dict according to answer class, but here it is an array.
-                    """
-                    new_response = [val for _, val in sorted(response.items())] # List
+                    new_response = [val for val in sorted(response)]  # List
                     answer = MultipleChoiceAnswer(question=question,
                                                   survey=self.survey,
                                                   choices_result=new_response)
@@ -83,6 +79,7 @@ class AnswerSheet:
                 return self.answers[index]
             else:
                 print("input index not exist")
+        return None
 
     def get_all_answer_indexes_by_question_type(self, question_type):
         """
@@ -119,12 +116,15 @@ class AnswerSheet:
         result = dict()
         # check None survey
         if self.survey is None:
+            print("None survey")
             pass
         # check empty answers
         elif len(self.answers) == 0:
+            print("empty answers")
             pass
         # check input question_type
         elif question_type != "single" and question_type != "multiple":
+            print("wrong question type")
             pass
         else:
             question_indexes = self.get_all_answer_indexes_by_question_type(question_type=question_type)
