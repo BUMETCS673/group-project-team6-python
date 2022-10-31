@@ -1,5 +1,5 @@
 from django.db import models
-from user.models import Instructor, Student
+from account.models import Instructor, Student
 from survey.models import Survey
 from django.db.models import CASCADE
 
