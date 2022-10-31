@@ -75,7 +75,11 @@ class MultipleChoiceAnswer(Answer):
         """
         super().__init__(**kwargs)
         # check if choice_result is None
-        self.choices_result = choices_result  # should be dict, dict key is the index of question
+        if choices_result is not None:
+            self.choices_result = choices_result
+        else:
+            self.choices_result = None
+            print("choice_result is None")  # should be dict, dict key is the index of question
 
         # reserved for future
         # self.weights_result = weights_result
