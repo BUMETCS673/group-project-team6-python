@@ -1,12 +1,24 @@
 from django import views
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, View
 from .forms import InstructorCreationForm
 from .models import Instructor
+from django.contrib.auth import authenticate, login, logout
 
 
-class register(CreateView):
-	form_class = InstructorCreationForm
-	success_url = reverse_lazy("login")
-	template_name = "registration/register.html"
+def home(request):
+	render(request, 'welcome.html')
+
+
+def register(request):
+	if request.method == 'POST':
+		form = InstructorCreationForm(request.POST)
+		if form.is_valid():
+			user = form.save()
+			login(request, user)
+			return redirect('home')
+	else:
+		form = InstructorCreationForm()
+
+	return render(request, 'registration/register.html', {'form': form})

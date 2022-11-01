@@ -8,6 +8,7 @@ class ConfigInstance(models.Model):
 	"""
 	The parameter for running the instance
 	"""
+	instance_id = models.AutoField(primary_key=True)
 	instructor = models.ForeignKey(Instructor, on_delete=CASCADE)  # need to specify
 	max_num_pass = models.IntegerField()
 	survey = models.ForeignKey(Survey, on_delete=CASCADE)
@@ -18,6 +19,7 @@ class ResultInstance(models.Model):
 	"""
 	The result from the instance
 	"""
+	result_id = models.AutoField(primary_key=True)
 
 
 class StudentSet(models.Model):

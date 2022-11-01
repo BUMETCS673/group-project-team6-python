@@ -40,9 +40,8 @@ INSTALLED_APPS = [
 	'iGroup',
 	'account',
 
-
 ]
-AUTH_USER_MODEL = "account.Instructor" # use customized account model
+AUTH_USER_MODEL = "account.Instructor"  # use customized account model
 
 MIDDLEWARE = [
 	'django.middleware.security.SecurityMiddleware',
@@ -124,7 +123,5 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
-
-LOGIN_REDIRECT_URL = "home"
-LOGOUT_REDIRECT_URL = "home"
+LOGIN_REDIRECT_URL = "create-instance" #home
+LOGOUT_REDIRECT_URL = "welcome"

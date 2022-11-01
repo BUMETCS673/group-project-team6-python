@@ -1,0 +1,12 @@
+{% extend 'base.html' %}
+
+{% block title%}
+This is the iGroup system
+{% endblock %}
+
+
+{%block content%}
+    {% for td in user.todolist_set%}
+        <p><a href="{{td.id}}">{{td.name}} </a> </p>
+    {% endfor %}
+{% endblock %}
