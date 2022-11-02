@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title%}
+instance detail page
+{% endblock %}
+
+{%block content%}
+    {{ instance.instance_name }}
+    {{ instance.instructor.username }}
+{% endblock %}

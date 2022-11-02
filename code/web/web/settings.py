@@ -124,5 +124,5 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = "home" # the page after login, should set to home page
+LOGIN_REDIRECT_URL = "iGroup:home"  # the page after login, should set to home page
 LOGOUT_REDIRECT_URL = "welcome"

@@ -18,7 +18,11 @@ from django.urls import path, include
 from django.views.generic.base import TemplateView
 from . import views
 
+app_name = "iGroup"
+
 urlpatterns = [
 	path('home/', views.index, name='home'),
-	path('create/instance/', views.create_instance, name='create-instance')
+	path('instance/create', views.create_instance, name='create'),
+	path('instance/<slug:slug>/edit', views.update_instance, name='update'),
+	path('instance/<slug:slug>', views.detail_instance, name='detail'),
 ]

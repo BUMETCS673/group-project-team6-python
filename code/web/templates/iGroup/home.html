@@ -4,9 +4,17 @@
 This is the iGroup system
 {% endblock %}
 
-
 {%block content%}
-    {% for td in user.todolist_set%}
-        <p><a href="{{td.id}}">{{td.name}} </a> </p>
+    <p> welcome instructor: {{ current_instructor.username }}</p>
+    {% if not instances %}
+    <div> No instance here, please create one first</div>
+    {% else %}
+
+    {% for instance in instances%}
+        <p> Instance name:  {{ instance.instance_name }}</p>
+        <li><a href="{{ instance.get_absolute_url }}"> view detail </a></li>
+
     {% endfor %}
+    {% endif %}
+      <a href="{% url 'iGroup:create' %}">create an instance</a>
 {% endblock %}
