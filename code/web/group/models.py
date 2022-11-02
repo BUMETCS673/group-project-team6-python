@@ -1,23 +1,24 @@
 from django.db import models
+from django.db.models import CASCADE
+
 
 # Create your models here.
 
 # Group
 
 class Group(models.Model):
-    """
+	"""
     Group Model
     """
 
-    group_id = models.AutoField(primary_key = True)
-    group_name = models.CharField(max_lengh = 50)
-    group_score = modles.IntegerField(max_length= 50)
-    survey = models.ForeignKey('Survey', on_delete = models)
+	group_id = models.AutoField(primary_key=True)
+	group_name = models.CharField(max_length=50)
+	group_score = models.IntegerField()
+	survey = models.ForeignKey('survey.Survey', on_delete=CASCADE)
+
 
 class Member(models.Model):
-    """
+	"""
     Member Model // Inheritance from student
     """
-    student = modles.ForeignKey('Student', on_delete = models)
-
-
+	student = models.ForeignKey('account.Student', on_delete=CASCADE)

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
 	'survey',  # add iGroup to the web app
 	'iGroup',
 	'account',
+	'group'
 
 ]
 AUTH_USER_MODEL = "account.Instructor"  # use customized account model
@@ -123,5 +124,5 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = "create-instance" #home
+LOGIN_REDIRECT_URL = "home" # the page after login, should set to home page
 LOGOUT_REDIRECT_URL = "welcome"

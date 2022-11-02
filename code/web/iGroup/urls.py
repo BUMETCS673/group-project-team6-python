@@ -19,6 +19,6 @@ from django.views.generic.base import TemplateView
 from . import views
 
 urlpatterns = [
-	#path('home/', views., name='home'),
-	path('create-instance/', views.create_instance, name='create-instance')
+	path('home/', views.index, name='home'),
+	path('create/instance/', views.create_instance, name='create-instance')
 ]

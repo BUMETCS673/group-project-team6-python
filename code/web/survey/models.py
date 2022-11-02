@@ -14,6 +14,7 @@ class Survey(models.Model):
 	num_question = models.IntegerField()
 	active = models.BooleanField()
 	send_survey = models.BooleanField()
+	instance = models.OneToOneField('iGroup.Instance', on_delete=CASCADE)
 
 
 # question
@@ -36,7 +37,8 @@ class Question(models.Model):
 	question_name = models.CharField(max_length=50)
 	description = models.CharField(max_length=50)
 	weight = models.IntegerField()
-	survey = models.ForeignKey(Survey, on_delete=CASCADE)
+	weight = models.IntegerField()
+	survey = models.ForeignKey('Survey', on_delete=CASCADE)
 
 
 class Option(models.Model):
@@ -45,7 +47,7 @@ class Option(models.Model):
 	"""
 	choice_index = models.IntegerField()  # the position of the choice
 	choice_name = models.CharField(max_length=50)
-	question = models.ForeignKey(Question, on_delete=CASCADE)
+	question = models.ForeignKey('Question', on_delete=CASCADE)
 
 
 # answer sheet
@@ -54,7 +56,7 @@ class AnswerSheet(models.Model):
 	Answer sheet
 	"""
 	answer_sheet_id = models.AutoField(primary_key=True)
-	survey = models.OneToOneField(Survey, on_delete=CASCADE)
+	survey = models.OneToOneField('Survey', on_delete=CASCADE)
 	student = None  # should link to student
 
 
@@ -65,13 +67,13 @@ class Answer(models.Model):
 	"""
 	answer_id = models.AutoField(primary_key=True)
 	answer_index = models.IntegerField(default=None)
-	answer_sheet = models.ForeignKey(AnswerSheet, on_delete=CASCADE)
+	answer_sheet = models.ForeignKey('AnswerSheet', on_delete=CASCADE)
 	answer_type = models.CharField(max_length=50)
-	question = models.OneToOneField(Question, on_delete=CASCADE)
+	question = models.OneToOneField('Question', on_delete=CASCADE)
 
 
 class AnswerChoice(Answer):
 	"""
 	single choice
 	"""
-	choice = models.ForeignKey(Option, on_delete=CASCADE)
+	choice = models.ForeignKey('Option', on_delete=CASCADE)

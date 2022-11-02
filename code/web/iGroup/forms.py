@@ -1,13 +1,20 @@
 from django import forms
-from .models import ConfigInstance
+from .models import ConfigInstance, Instance, ResultInstance
+from survey.models import Survey
 from django.forms import ModelForm
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
 
-class ConfigInstanceCreationForm(ModelForm):
-	"""Instance config form to create a instance config"""
-
+class InstanceCreationForm(ModelForm):
+	"""Instance form to create an instance"""
 
 	class Meta:
-		model = ConfigInstance
-		fields = ("max_num_pass", "num_group", "survey", )
+		model = Instance
+		fields = ("instance_name",)
+
+
+class SurveyCreationForm(ModelForm):
+	"""Survey from to create n survey"""
+
+	class Meta:
+		model = Survey
+		fields = ('survey_name',)
