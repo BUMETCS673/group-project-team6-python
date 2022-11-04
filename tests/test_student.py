@@ -1,6 +1,7 @@
 import unittest
 from source_code.app import user
 
+
 class student_test_sheet(unittest.TestCase):
     def setUp(self):
         self.student1 = user.Student(user_id="001", name="Jessie", email="jessie@doe.com")
@@ -10,7 +11,6 @@ class student_test_sheet(unittest.TestCase):
         self.student5 = user.Student(user_id="005", name="JOHN", email="john@doe.com")
         self.student6 = user.Student(user_id="006", name="JaGeR", email="jager@doe.com")
         self.student7 = user.Student(user_id="007", name="jessica", email="jessica@doe.com")
-
 
     def test01_ID(self):
         self.assertEqual(self.student1.get_ID(), "001")
@@ -47,6 +47,7 @@ class student_test_sheet(unittest.TestCase):
         self.assertEqual(self.student5.get_email(), "john@doe.com")
         self.assertEqual(self.student6.get_email(), "jager@doe.com")
         self.assertEqual(self.student7.get_email(), "jessica@doe.com")
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -63,9 +63,9 @@ class Team:
         @param new_student: Student, the new student want to join in the team
         @return: Student, the old student pop out the team
         """
-        #old_student = self.team_members[student_index]
+        # old_student = self.team_members[student_index]
         self.team_members[student_index] = new_student
-        #return old_student
+        # return old_student
 
     def get_team_size(self):
         return len(self.__team_members)
@@ -73,7 +73,6 @@ class Team:
     def get_all_team_member_id(self):
         return [info.id for info in self.team_members]
         "@return: list, id of all members"
-
 
     def get_single_choice_scores(self):
         """

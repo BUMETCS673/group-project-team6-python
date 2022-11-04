@@ -32,7 +32,7 @@ class survey_test(unittest.TestCase):
         self.useless = survey.Survey("", "", None, None)
 
     # test initial function in survey
-    def test_survey_init(self):
+    def test01_survey_init(self):
         # test survey_name
         self.assertEqual("survey 1", self.survey1.survey_name)
         self.assertEqual("survey 2", self.survey2.survey_name)
@@ -67,7 +67,7 @@ class survey_test(unittest.TestCase):
         self.assertIsInstance(self.useless, survey.Survey)
 
     # test append_question in survey
-    def test_append_question(self):
+    def test02_append_question(self):
         # create questions need to append
         self.question7 = question.SingleChoiceQuestion(question_name="q7", description="test q3", weight=3,
                                                        choices=["A", "B", "C", "D"])
@@ -87,7 +87,7 @@ class survey_test(unittest.TestCase):
         self.assertEqual(self.question7, self.survey2.questions[3])
 
     # test insert_question in survey
-    def test_insert_question(self):
+    def test03_insert_question(self):
         # create questions need to insert
         self.question7 = question.SingleChoiceQuestion(question_name="q7", description="test q3", weight=3,
                                                        choices=["A", "B", "C", "D"])
@@ -116,7 +116,7 @@ class survey_test(unittest.TestCase):
         self.assertEqual(self.question7, self.useless.questions[0])
 
     # test get_all_question_indexes_by_type in survey, not finished
-    def test_get_all_question_indexes_by_type(self):
+    def test04_get_all_question_indexes_by_type(self):
         self.assertEqual({0, 1}, self.survey1.get_all_question_indexes_by_type("single"))
         self.assertEqual({2}, self.survey1.get_all_question_indexes_by_type("multiple"))
 
@@ -128,7 +128,7 @@ class survey_test(unittest.TestCase):
         self.assertEqual(set(), self.useless.get_all_question_indexes_by_type("multiple"))
 
     # test get_all_question_weight_by_type
-    def test_get_all_question_weight_by_type(self):
+    def test05_get_all_question_weight_by_type(self):
         self.assertEqual({0: 1, 1: 2}, self.survey1.get_all_question_weight_by_type("single"))
         self.assertEqual({2: 1}, self.survey1.get_all_question_weight_by_type("multiple"))
 
@@ -140,7 +140,7 @@ class survey_test(unittest.TestCase):
         self.assertEqual(dict(), self.useless.get_all_question_weight_by_type("multiple"))
 
     # test get_question_by_index
-    def test_get_question_by_index(self):
+    def test06_get_question_by_index(self):
         self.assertEqual(self.question2, self.survey1.get_question_by_index(1))
         self.assertEqual(self.question6, self.survey2.get_question_by_index(2))
 
@@ -149,7 +149,7 @@ class survey_test(unittest.TestCase):
         self.assertEqual(None, self.useless.get_question_by_index(2))
 
     # test get_question_type_by_index
-    def test_get_question_type_by_index(self):
+    def test07_get_question_type_by_index(self):
         self.assertEqual("single", self.survey1.get_question_type_by_index(1))
         self.assertEqual("multiple", self.survey1.get_question_type_by_index(2))
 
@@ -161,7 +161,7 @@ class survey_test(unittest.TestCase):
         self.assertEqual(None, self.survey2.get_question_type_by_index(20))
 
     # test get_all_questions_by_type
-    def test_get_all_questions_by_type(self):
+    def test08_get_all_questions_by_type(self):
         self.assertEqual({0: self.question1, 1: self.question2}, self.survey1.get_all_questions_by_type("single"))
         self.assertEqual({2: self.question4}, self.survey1.get_all_questions_by_type("multiple"))
 
