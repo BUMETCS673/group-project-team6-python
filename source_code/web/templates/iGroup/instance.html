@@ -7,5 +7,5 @@ instance detail page
 {%block content%}
     {{ instance.instance_name }}
     {{ instance.instructor.username }}
-    <a href= "{% url 'survey:create' instance_slug=instance.slug %}" >create a survey to start the allocation</a>
+    <a href= "{% url 'survey:create_or_update' instance_slug=instance.slug %}" >create a survey to start the allocation</a>
 {% endblock %}

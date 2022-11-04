@@ -1,26 +1,27 @@
 {% extends 'base.html' %}
-
 {% block title%}
 This is the survey creation page
 {% endblock %}
 
-<style>
-    .question_form {
 
-    }
-    .hidden{
-        display: none;
-    }
-</style>
 
 
 
 {%block content%}
-    <form action="." method="post">
-  {% csrf_token %}
 
-<div>{{ survey_form.as_p }}</div>
-<div>
+    <style>
+        .question_form {
+
+        }
+        .hidden{
+            display: none;
+        }
+    </style>
+
+    <form action="." method="post">
+    {% csrf_token %}
+    {{ survey_form.as_p }}
+    <div>
     {% if question_formset %}
     <h3>Questions</h3>
         {{ question_formset.management_form }}
@@ -37,9 +38,10 @@ This is the survey creation page
     <button id='add-more-question' type="button">add more question</button>
     {% endif %}
     <button style="margin-top: 10px" type="submit">save</button>
+    </div>
+    </form>
 
-</div>
-</form>
+
 
 <script>
 
@@ -70,10 +72,4 @@ This is the survey creation page
 
 </script>
 
-
-
-
-
-
 {% endblock %}
-

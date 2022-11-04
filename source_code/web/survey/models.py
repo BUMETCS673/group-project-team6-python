@@ -46,7 +46,7 @@ class Question(models.Model):
 	question_index = models.IntegerField()  # position in the survey
 	question_name = models.CharField(max_length=50)
 	description = models.CharField(max_length=50)
-	weight = models.IntegerField()
+	weight = models.IntegerField(default=0)
 	survey = models.ForeignKey('Survey', on_delete=CASCADE)
 
 	def get_absolute_url(self):
@@ -55,6 +55,7 @@ class Question(models.Model):
 	def get_options_set(self):
 		"""get all option to this question"""
 		return self.option_set.all()
+
 
 class Option(models.Model):
 	"""
