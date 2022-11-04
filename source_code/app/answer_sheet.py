@@ -1,8 +1,8 @@
 """
 Data structure for student
 """
-from code.app.question import SingleChoiceQuestion, MultipleChoiceQuestion
-from code.app.answer import SingleChoiceAnswer, MultipleChoiceAnswer
+from source_code.app.question import SingleChoiceQuestion, MultipleChoiceQuestion
+from source_code.app.answer import SingleChoiceAnswer, MultipleChoiceAnswer
 
 
 class AnswerSheet:

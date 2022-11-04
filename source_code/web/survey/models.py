@@ -1,5 +1,8 @@
 from django.db import models
 from django.db.models import CASCADE
+from django.utils.text import slugify
+from django.db.models.signals import pre_save, post_save
+from django.urls import reverse
 
 
 # Create your models here.
@@ -11,10 +14,17 @@ class Survey(models.Model):
 	"""
 	survey_id = models.AutoField(primary_key=True)
 	survey_name = models.CharField(max_length=20)
-	num_question = models.IntegerField()
-	active = models.BooleanField()
-	send_survey = models.BooleanField()
+	num_question = models.IntegerField(default=0)
+	active = models.BooleanField(default=False)
+	send_survey = models.BooleanField(default=False)
 	instance = models.OneToOneField('iGroup.Instance', on_delete=CASCADE)
+
+	def get_absolute_url(self):
+		return reverse('survey:detail', kwargs={"survey_id": self.survey_id})
+
+	def get_questions_set(self):
+		"""get all question set to this survey"""
+		return self.question_set.all()
 
 
 # question
@@ -33,13 +43,18 @@ class Question(models.Model):
 
 	question_id = models.AutoField(primary_key=True)
 	question_type = models.CharField(choices=QuestionType.choices, max_length=50)
-	question_index = models.IntegerField()
+	question_index = models.IntegerField()  # position in the survey
 	question_name = models.CharField(max_length=50)
 	description = models.CharField(max_length=50)
 	weight = models.IntegerField()
-	weight = models.IntegerField()
 	survey = models.ForeignKey('Survey', on_delete=CASCADE)
 
+	def get_absolute_url(self):
+		return self.survey.get_absolute_url()
+
+	def get_options_set(self):
+		"""get all option to this question"""
+		return self.option_set.all()
 
 class Option(models.Model):
 	"""

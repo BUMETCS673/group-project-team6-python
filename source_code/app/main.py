@@ -1,9 +1,9 @@
-from code.app.question import SingleChoiceQuestion, MultipleChoiceQuestion
-from code.app.survey import Survey
-from code.app.user import Student
-from code.app.answer_sheet import AnswerSheet
-from code.app.team import Team
-from code.app.instance import Instance
+from source_code.app.question import SingleChoiceQuestion, MultipleChoiceQuestion
+from source_code.app.survey import Survey
+from source_code.app.user import Student
+from source_code.app.answer_sheet import AnswerSheet
+from source_code.app.team import Team
+from source_code.app.instance import Instance
 
 """
 illustrate the steps for creating survey and answer the survey from students

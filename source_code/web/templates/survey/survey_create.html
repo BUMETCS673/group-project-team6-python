@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title%}
+This is the survey creation page
+{% endblock %}
+
+<style>
+    .question_form {
+
+    }
+    .hidden{
+        display: none;
+    }
+</style>
+
+
+
+{%block content%}
+    <form action="." method="post">
+  {% csrf_token %}
+
+<div>{{ survey_form.as_p }}</div>
+<div>
+    {% if question_formset %}
+    <h3>Questions</h3>
+        {{ question_formset.management_form }}
+    <div id = 'question-form-list'>
+       {% for quetion_from in question_formset %}
+          <div class = 'question-form'>
+            {{ quetion_from.as_p }}
+          </div>
+
+       {% endfor %}
+    </div>
+
+    <div id = 'empty-form' class = 'hidden'>{{ question_formset.empty_form.as_p  }}</div>
+    <button id='add-more-question' type="button">add more question</button>
+    {% endif %}
+    <button style="margin-top: 10px" type="submit">save</button>
+
+</div>
+</form>
+
+<script>
+
+    const addMoreQuestionBtn = document.getElementById('add-more-question')
+    const totalNewForm = document.getElementById('id_form-TOTAL_FORMS')
+
+
+    addMoreQuestionBtn.addEventListener('click',add_new_question_from)
+
+    function add_new_question_from(event){
+        if (event){
+            event.preventDefault()
+        }
+
+        const currentQuestionForms = document.getElementsByClassName('question-form')
+
+        const formCopyTarget = document.getElementById('question-form-list')
+        const currentQuestionFormCount = currentQuestionForms.length //index value
+        const copyEmptyFormEl = document.getElementById('empty-form').cloneNode(true)
+        copyEmptyFormEl.setAttribute('class','question-form')
+        copyEmptyFormEl.setAttribute('id', `form-${currentQuestionFormCount}`)
+        const regex = new RegExp('__prefix__','g')
+        copyEmptyFormEl.innerHTML = copyEmptyFormEl.innerHTML.replace(regex,currentQuestionFormCount)
+        totalNewForm.setAttribute('value', currentQuestionFormCount + 1)
+        // add new empty form element to html page
+        formCopyTarget.append(copyEmptyFormEl)
+    }
+
+</script>
+
+
+
+
+
+
+{% endblock %}
+

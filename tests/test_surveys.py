@@ -1,6 +1,6 @@
 import unittest
-from code.app import question
-from code.app import survey
+from source_code.app import question
+from source_code.app import survey
 
 
 class survey_test(unittest.TestCase):

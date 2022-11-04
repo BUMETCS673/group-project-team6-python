@@ -27,19 +27,19 @@ def create_instance(request):
 	if request.method == 'POST':
 		# if post, input form and current instructor
 		form = InstanceCreationForm(current_instructor, request.POST)
+		if form.is_valid():
+			# if the form is valid
+			instance_object = form.save(commit=False)
+			instance_object.instructor = current_instructor
+			instance_object.save()
+			# redirect back to index(home) page
+			return redirect('iGroup:home')
 	else:
 		# if GET
 		form = InstanceCreationForm(current_instructor)
 	context = {
 		"form": form
 	}
-	if form.is_valid():
-		# if the form is valid
-		instance_object = form.save(commit=False)
-		instance_object.instructor = current_instructor
-		instance_object.save()
-		# redirect back to index(home) page
-		return redirect('iGroup:home')
 
 	return render(request, 'iGroup/instance_create.html', context)
 
@@ -59,4 +59,9 @@ def detail_instance(request, slug=None):
 
 @login_required(login_url="/login")
 def update_instance(request):
+	return None
+
+
+@login_required(login_url="/login")
+def delete(request):
 	return None

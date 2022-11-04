@@ -3,7 +3,7 @@ The instance class, which is the team formation for each pass.
 Swap happens here
 """
 import random
-from code.app.team import Team
+from source_code.app.team import Team
 
 
 class Instance:

@@ -52,6 +52,10 @@ class Instance(models.Model):
 		"""reverse url"""
 		return reverse("iGroup:detail", kwargs={"slug": self.slug})
 
+	def get_edit_url(self):
+		"""get url for updating instance"""
+		return reverse("iGroup:update",kwargs={"slug":self.slug})
+
 
 def slugify_instance_name(instance, save=False):
 	"""function for slugify the instance name"""

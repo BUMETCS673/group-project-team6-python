@@ -1,7 +1,7 @@
 import unittest
-from code.app import question
-from code.app import survey
-from code.app import answer
+from source_code.app import question
+from source_code.app import survey
+from source_code.app import answer
 
 
 # test single choice answer

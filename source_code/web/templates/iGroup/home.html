@@ -11,8 +11,7 @@ This is the iGroup system
     {% else %}
 
     {% for instance in instances%}
-        <p> Instance name:  {{ instance.instance_name }}</p>
-        <li><a href="{{ instance.get_absolute_url }}"> view detail </a></li>
+        <li><a href="{{ instance.get_absolute_url }}"> instance name : {{ instance.instance_name }} </a></li>
 
     {% endfor %}
     {% endif %}
