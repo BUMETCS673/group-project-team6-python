@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Instance
+from .models import Instance,ConfigInstance,ResultInstance
 
 
 # Register your models here.
@@ -9,3 +9,4 @@ class InstanceAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Instance)
+admin.site.register(ConfigInstance)
