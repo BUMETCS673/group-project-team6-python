@@ -65,3 +65,7 @@ def update_instance(request):
 @login_required(login_url="/login")
 def delete(request):
 	return None
+
+
+def config_instance(request):
+	return None

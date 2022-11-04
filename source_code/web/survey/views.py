@@ -5,7 +5,7 @@ from .forms import SurveyCreationForm, QuestionCreationForm, \
 	OptionCreationForm, QuestionCreationFormSet, OptionCreationFormSet
 from django.forms.models import modelformset_factory
 from iGroup.models import Instance
-from .models import Survey
+from .models import Survey, Question
 
 
 @login_required(login_url="/login")
@@ -30,10 +30,12 @@ def create_update_survey(request, instance_slug=None):
 				question.question_index = question_index
 				question.save()
 				question_index += 1
-
-		return redirect('iGroup:detail', slug=instance_slug)
+		context = {
+			'survey_form': survey_form,
+			'question_formset': question_formset,
+		}
+		return render(request, "survey/survey_create.html", context)
 	else:
-		survey = Survey.objects.get(instance=instance_obj)
 		survey_form = SurveyCreationForm(instance=survey)
 		questions = survey.get_questions_set()
 		question_formset = QuestionCreationFormSet(queryset=questions)
@@ -43,6 +45,40 @@ def create_update_survey(request, instance_slug=None):
 		'question_formset': question_formset,
 	}
 	return render(request, "survey/survey_create.html", context)
+
+
+@login_required(login_url="/login")
+def create_update_options(request, question_id=None):
+	"""create or update option of a given question"""
+	current_instructor = request.user
+	question_obj = get_object_or_404(Question, question_id=question_id)
+	instance_obj = question_obj.survey.instance
+	if question_obj.survey.instance.instructor != current_instructor:
+		raise Http404  # not allowed to modify
+
+	options = question_obj.get_options_set()
+
+	if request.method == 'POST':
+		option_formset = OptionCreationFormSet(request.POST, queryset=options)
+		option_index = 0
+		if option_formset.is_valid():
+			for option_form in option_formset:
+				option = option_form.save(commit=False)
+				option.question = question_obj
+				option.choice_index = option_index
+				option.save()
+		return redirect('survey:survey_create_update', instance_slug=instance_obj.slug)
+	else:
+		option_formset = OptionCreationFormSet(queryset=options)
+
+	context = {
+		'option_formset': option_formset,
+		'current_question': question_obj,
+
+	}
+
+	print("okkkk")
+	return render(request, "survey/option_create.html", context)
 
 
 @login_required(login_url="/login")

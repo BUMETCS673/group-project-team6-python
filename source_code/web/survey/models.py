@@ -66,6 +66,14 @@ class Option(models.Model):
 	question = models.ForeignKey('Question', on_delete=CASCADE)
 
 
+
+
+
+
+
+
+
+
 # answer sheet
 class AnswerSheet(models.Model):
 	"""
