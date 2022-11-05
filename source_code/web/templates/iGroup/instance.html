@@ -8,4 +8,5 @@ instance detail page
     {{ instance.instance_name }}
     {{ instance.instructor.username }}
     <a href= "{% url 'survey:survey_create_update' instance_slug=instance.slug %}" >create a survey to start the allocation</a>
+    <a href="{% url 'iGroup:config' slug=instance.slug %}">click to start the config</a>
 {% endblock %}
