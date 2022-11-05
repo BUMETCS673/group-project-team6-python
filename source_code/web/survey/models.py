@@ -66,38 +66,32 @@ class Option(models.Model):
 	question = models.ForeignKey('Question', on_delete=CASCADE)
 
 
-
-
-
-
-
-
-
-
 # answer sheet
 class AnswerSheet(models.Model):
 	"""
 	Answer sheet
 	"""
 	answer_sheet_id = models.AutoField(primary_key=True)
-	survey = models.OneToOneField('Survey', on_delete=CASCADE)
-	student = None  # should link to student
+	survey = models.ForeignKey('Survey', on_delete=CASCADE)
+	student = models.ForeignKey('account.Instructor', on_delete=CASCADE)  # should link to student
 
 
 # generic answer
 class Answer(models.Model):
 	"""
-	abstract model answer
+	 model answer
 	"""
 	answer_id = models.AutoField(primary_key=True)
 	answer_index = models.IntegerField(default=None)
 	answer_sheet = models.ForeignKey('AnswerSheet', on_delete=CASCADE)
 	answer_type = models.CharField(max_length=50)
-	question = models.OneToOneField('Question', on_delete=CASCADE)
+	question = models.ForeignKey('Question', on_delete=CASCADE)
+	num_choice = models.IntegerField()
 
 
-class AnswerChoice(Answer):
+class AnswerChoice(models.Model):
 	"""
-	single choice
+	choice
 	"""
-	choice = models.ForeignKey('Option', on_delete=CASCADE)
+	choice = models.ForeignKey(Option, on_delete=CASCADE)
+	answer = models.ForeignKey(Answer, on_delete=CASCADE)
