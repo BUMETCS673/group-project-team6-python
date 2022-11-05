@@ -6,6 +6,7 @@ from .models import Instance
 from survey.models import Survey
 
 
+
 # The iGroup system
 @login_required(login_url="/login")
 def index(request):
@@ -83,6 +84,7 @@ def config_instance(request, slug=None):
 			config_instance_object.survey = survey
 			config_instance_object.instructor = current_instructor
 			config_instance_object.save()
+
 
 	else:
 		form = InstructorParameterForm()
