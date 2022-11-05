@@ -82,14 +82,7 @@ class Team:
 
         # for each student,
         # get single choice answers in the dictionary format {student id : {question index, answer obj}}
-        single_choice_answers = {}
-        for student in self.__team_members:
-            # do the query, get the student response(answer sheet) to that survey
-            student_answer_sheet = student.get_answer_sheet_by_survey(survey=self.survey_target)
-            # get the all single choice questions from the student answer sheet, and put it in the
-            # single_choice_questions dict
-            single_choice_answers[student.id] = student_answer_sheet.get_all_answers_by_question_type(
-                question_type="single")
+        single_choice_answers = self.get_single_choice_answer()
         # get the single choice question in the dictionary format {question index : question obj}
         single_choice_questions = self.survey_target.get_all_questions_by_type(question_type="single")
 
@@ -129,14 +122,7 @@ class Team:
 
         # for each student, get multiple choice answers in the
         # dictionary format {student id : {question index, multiple choice answer obj}}
-        multiple_choice_answers = {}
-        for student in self.__team_members:
-            # do the query, get the student response(answer sheet) to that survey
-            student_answer_sheet = student.get_answer_sheet_by_survey(survey=self.survey_target)
-            # get the all multiple choice questions from the student answer sheet, and put it in the
-            # multiple_choice_answers dict
-            multiple_choice_answers[student.id] = student_answer_sheet.get_all_answers_by_question_type(
-                question_type="multiple")
+        multiple_choice_answers = self.get_multiple_choice_answer()
 
         # get the multiple choice question in the dictionary format {question index : question obj}
         multiple_choice_questions = self.survey_target.get_all_questions_by_type(question_type="multiple")
@@ -215,3 +201,38 @@ class Team:
             total_score += self.get_total_score_by_type(valid_type)
 
         return total_score
+
+    def get_multiple_choice_answer(self):
+        """
+        get all team members' multiple choice answers
+        :return: dict, all team members multiple choice answers.
+        i.e. {student id: {question_index,multiple_choice_answer_obj}}
+        """
+        # for each student, get multiple choice answers in the
+        # dictionary format {student id : {question index, multiple choice answer obj}}
+        multiple_choice_answers = {}
+        for student in self.__team_members:
+            # do the query, get the student response(answer sheet) to that survey
+            student_answer_sheet = student.get_answer_sheet_by_survey(survey=self.survey_target)
+            # get the all multiple choice questions from the student answer sheet, and put it in the
+            # multiple_choice_answers dict
+            multiple_choice_answers[student.id] = student_answer_sheet.get_all_answers_by_question_type(
+                question_type="multiple")
+        return multiple_choice_answers
+
+    def get_single_choice_answer(self):
+        """
+        get all team members' single choice answers
+        :return: dict, all team members single choice answer
+        i.e. {student id: {question_index,single_choice_answer_obj}}
+        """
+        # for each student,
+        # get single choice answers in the dictionary format {student id : {question index, answer obj}}
+        single_choice_answers = {}
+        for student in self.__team_members:
+            # do the query, get the student response(answer sheet) to that survey
+            student_answer_sheet = student.get_answer_sheet_by_survey(survey=self.survey_target)
+            # get the all single choice questions from the student answer sheet, and put it in the
+            # single_choice_questions dict
+            single_choice_answers[student.id] = student_answer_sheet.get_all_answers_by_question_type(question_type="single")
+        return single_choice_answers

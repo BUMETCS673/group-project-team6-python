@@ -1,10 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth import login, logout, authenticate
-from .forms import InstanceCreationForm,InstructorParameterForm
+from .forms import InstanceCreationForm, InstructorParameterForm
 from .models import Instance
 from survey.models import Survey
-
 
 
 # The iGroup system
