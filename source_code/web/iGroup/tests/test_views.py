@@ -2,6 +2,7 @@ from django.test import TestCase, Client
 from django.urls import reverse, resolve
 from iGroup.models import Instance, ConfigInstance
 from account.models import Instructor
+from survey.models import Survey
 
 
 class TestViews(TestCase):
@@ -17,7 +18,10 @@ class TestViews(TestCase):
 
 		self.client_not_login = Client()
 
+		# create instance
 		self.instance = Instance.objects.create(instance_name="test 1", instructor=self.instructor_1, slug="test-1")
+		# create survey link to this instance
+		self.survey = Survey.objects.create(survey_name='test survey', instance=self.instance)
 
 		self.instance_home_url = reverse('iGroup:home')
 		self.instance_detail_url = reverse('iGroup:detail', args=['test-1'])
@@ -109,32 +113,30 @@ class TestViews(TestCase):
 	prerequisite: survey creation
 	"""
 
-	def test_login_client_instance_config_GET(self):
+	def test_login_client_instance_config_GET_has_survey(self):
 		response = self.client_login.get(path=self.instance_config_url)
 		# code
 		self.assertEqual(response.status_code, 200)
 		# template
 		self.assertTemplateUsed(response, 'iGroup/config.html')
 
-	def test_not_login_client_instance_config_GET(self):
+	def test_not_login_client_instance_config_GET_has_survey(self):
 		response = self.client_not_login.get(path=self.instance_config_url)
 		# code, redirect
 		self.assertEqual(response.status_code, 302)
 
-	def test_alien_login_client_instance_config_GET(self):
+	def test_alien_login_client_instance_config_GET_has_survey(self):
 		response = self.client_alien_login.get(path=self.instance_config_url)
-
 		# status code
 		self.assertEqual(response.status_code, 404)
 
-	def test_login_client_instance_config_POST_create_config(self):
+	def test_login_client_instance_config_POST_create_config_has_survey(self):
 		response = self.client_login.post(path=self.instance_config_url, data={'max_num_pass': 10, 'num_group': 10})
-		# code
-		self.assertEqual(response.status_code, 200)
+		# code for redirect
+		self.assertEqual(response.status_code, 302)
 		# check database
-		self.assertTrue((ConfigInstance.first().max_num_pass == 10) and (ConfigInstance.first().num_group == 10))
-		# template
-		self.assertTemplateUsed(response, 'iGroup/config.html')
+		self.assertTrue(
+			(ConfigInstance.objects.first().max_num_pass == 10) and (ConfigInstance.objects.first().num_group == 10))
 
 	def test_not_login_client_instance_config_POST_create_config(self):
 		response = self.client_not_login.get(path=self.instance_config_url)
@@ -144,5 +146,5 @@ class TestViews(TestCase):
 	def test_alien_login_client_instance_config_POST_create_config(self):
 		response = self.client_alien_login.get(path=self.instance_config_url)
 
-		# status code
+		# status code, forbid this user to post
 		self.assertEqual(response.status_code, 404)
