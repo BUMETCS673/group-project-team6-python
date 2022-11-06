@@ -67,6 +67,7 @@ def create_update_options(request, question_id=None):
 				option.question = question_obj
 				option.choice_index = option_index
 				option.save()
+				option_index += 1
 		return redirect('survey:survey_create_update', instance_slug=instance_obj.slug)
 	else:
 		option_formset = OptionCreationFormSet(queryset=options)
