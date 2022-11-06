@@ -35,3 +35,7 @@ class test_single_choice_score(unittest.TestCase):
 
         self.assertEqual(None, single_choice_score.cal_single_score(self.team_size3, None))
 
+
+if __name__ == '__main__':
+    unittest.main()
+
