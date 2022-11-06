@@ -86,12 +86,13 @@ class Answer(models.Model):
 	answer_sheet = models.ForeignKey('AnswerSheet', on_delete=CASCADE)
 	answer_type = models.CharField(max_length=50)
 	question = models.ForeignKey('Question', on_delete=CASCADE)
-	num_choice = models.IntegerField()
+	num_choice = models.IntegerField(default=0)
 
 
 class AnswerChoice(models.Model):
 	"""
 	choice
 	"""
+	answer_choice_id = models.AutoField(primary_key = True)
 	choice = models.ForeignKey(Option, on_delete=CASCADE)
 	answer = models.ForeignKey(Answer, on_delete=CASCADE)

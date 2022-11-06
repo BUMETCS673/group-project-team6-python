@@ -83,6 +83,7 @@ def config_instance(request, slug=None):
 			config_instance_object.survey = survey
 			config_instance_object.instructor = current_instructor
 			config_instance_object.save()
+			return redirect('iGroup:home')
 
 
 	else:
@@ -92,5 +93,3 @@ def config_instance(request, slug=None):
 		'form': form
 	}
 	return render(request, 'iGroup/config.html', context)
-
-	return None
