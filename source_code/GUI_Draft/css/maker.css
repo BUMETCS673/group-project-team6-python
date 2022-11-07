@@ -1,0 +1,79 @@
+.menu-content{
+    padding: 2vw;
+}
+.menu-content .SuveryBox{
+    text-align: center;
+    width: 10%;
+    background: #e2e2e2;
+    color: black;
+    border-radius: 8vw;
+    position: absolute;
+    right: 8vw;
+}
+.menu-content .SuveryBox .content{
+    font-size: xx-large;
+    padding-top: 0vw;
+}
+
+.menu-content .row{
+    margin-top: 7%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+}
+.menu-content .row h1{
+    font-size: 36px;
+    font-weight: 600;
+    text-align: left;
+    width: 40%;
+    margin-bottom: 2vw;
+}
+.menu-content .row .InputBox{
+    text-align: left;
+    color: black;
+}
+.menu-content .row .InputBox label{
+
+}
+.menu-content .row .InputBox input{
+    background: #e2e2e2;
+    border: none;
+}
+.menu-content .row .ButtonBox{
+    margin-top: 4vw;
+}
+.menu-content .row .ButtonBox input{
+    background: #3592e4;
+    border: none;
+    color: white;
+    border-radius: 2vw;
+    padding: 0.5vw 3vw;
+    font-size: larger;
+    cursor: pointer;
+}
+.menu-content .row .ButtonBox input:nth-child(1){
+    margin-right: 21%;
+}
+.menu-content .row .ButtonBox input:nth-child(2){
+    margin-left: 6%;
+}
+.menu-content .row p{
+    width: 40%;
+}
+.menu-content .row .ButtonBox .submit{
+    margin-right: 0% !important;
+}
+.menu-content .row .ButtonBox_lg{
+    margin-top: 6vw;
+}
+.menu-content .row .ButtonBox_lg input{
+    background: #3592e4;
+    border: none;
+    color: white;
+    border-radius: 2vw;
+    padding: 0.5vw 9vw;
+    font-size: larger;
+    cursor: pointer;
+}
