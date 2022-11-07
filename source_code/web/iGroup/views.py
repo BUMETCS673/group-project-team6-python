@@ -96,3 +96,20 @@ def config_instance(request, slug=None):
 		'form': form
 	}
 	return render(request, 'iGroup/config.html', context)
+
+
+@login_required(login_url="/login")
+def delete_instance(request, slug):
+	"""delete this instance"""
+	current_instructor = request.user
+	instance = get_object_or_404(Instance, slug=slug)
+
+	if instance.instructor != current_instructor:
+		raise Http404('deny')  # need to change in future
+
+	instance.delete()
+	return redirect('iGroup:home')
+
+
+
+

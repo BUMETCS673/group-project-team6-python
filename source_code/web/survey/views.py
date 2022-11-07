@@ -97,9 +97,15 @@ def review(request):
 	return None
 
 
+
 def survey_lock(request):
+	"""shawn to do"""
 	return None
 
 
 def survey_response(request):
+	return None
+
+
+def survey_answer(request):
 	return None

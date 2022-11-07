@@ -10,5 +10,6 @@ urlpatterns = [
 	path('survey/question/<int:question_id>/create_update_option/', views.create_update_options, name='options_create_update'),
 	path('<slug:instance_slug>/survey-review/', views.review, name='review'),
 	path('<slug:instance_slug>/survey-lock/', views.survey_lock, name='lock'),
-	path('<slug:instance_slug>/survey-response-link/', views.survey_response, name='response')
+	path('<slug:instance_slug>/survey-response-link/', views.survey_response, name='response'),
+	path('survey/<int:survey_id>/student-answer/', views.survey_answer, name='survey_answer'),
 ]
