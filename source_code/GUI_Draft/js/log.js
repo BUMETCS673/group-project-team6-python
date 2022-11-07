@@ -80,9 +80,10 @@ new Vue({
         },
         add:function(){
             var courseName=this.courseName;
+            var title = this.title
             if(courseName!=""){
                 var data=JSON.parse(localStorage.getItem('courses'));
-                data.splice(data.length,0,{"name":courseName,"title":"null","show":true});
+                data.splice(data.length,0,{"name":courseName,"title":title,"show":true});
                 localStorage.setItem('courses',JSON.stringify(data));
                 alert("New success");
                 window.location.href="./instructor_log.html";
