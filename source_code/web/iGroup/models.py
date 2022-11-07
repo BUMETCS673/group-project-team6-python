@@ -10,7 +10,9 @@ class ConfigInstance(models.Model):
 	The parameter for running the instance
 	"""
 	config_id = models.AutoField(primary_key=True)
+
 	instance = models.ForeignKey('Instance', on_delete=CASCADE)
+
 	instructor = models.ForeignKey('account.Instructor', on_delete=CASCADE)  # need to specify
 	max_num_pass = models.IntegerField()
 	survey = models.ForeignKey('survey.Survey', on_delete=CASCADE)

@@ -47,6 +47,7 @@ class Question(models.Model):
 	question_name = models.CharField(max_length=50)
 	description = models.CharField(max_length=50)
 	weight = models.IntegerField(default=0)
+	max_choice = models.IntegerField(default=1)
 	survey = models.ForeignKey('Survey', on_delete=CASCADE)
 
 	def get_absolute_url(self):
@@ -55,6 +56,15 @@ class Question(models.Model):
 	def get_options_set(self):
 		"""get all option to this question"""
 		return self.option_set.all()
+
+	def get_options_set_order_by_index(self):
+		"""get all options to this question and order by their index value"""
+		return self.option_set.all().order_by('choice_index')
+
+	def get_options_name_order_by_index(self):
+		""""""
+		options_name = self.get_options_set_order_by_index().values('choice_name')
+		return options_name
 
 
 class Option(models.Model):
@@ -66,38 +76,33 @@ class Option(models.Model):
 	question = models.ForeignKey('Question', on_delete=CASCADE)
 
 
-
-
-
-
-
-
-
-
 # answer sheet
 class AnswerSheet(models.Model):
 	"""
 	Answer sheet
 	"""
 	answer_sheet_id = models.AutoField(primary_key=True)
-	survey = models.OneToOneField('Survey', on_delete=CASCADE)
-	student = None  # should link to student
+	survey = models.ForeignKey('Survey', on_delete=CASCADE)
+	student = models.ForeignKey('account.Instructor', on_delete=CASCADE)  # should link to student
 
 
 # generic answer
 class Answer(models.Model):
 	"""
-	abstract model answer
+	 model answer
 	"""
 	answer_id = models.AutoField(primary_key=True)
 	answer_index = models.IntegerField(default=None)
 	answer_sheet = models.ForeignKey('AnswerSheet', on_delete=CASCADE)
 	answer_type = models.CharField(max_length=50)
-	question = models.OneToOneField('Question', on_delete=CASCADE)
+	question = models.ForeignKey('Question', on_delete=CASCADE)
+	num_choice = models.IntegerField(default=0)
 
 
-class AnswerChoice(Answer):
+class AnswerChoice(models.Model):
 	"""
-	single choice
+	choice
 	"""
-	choice = models.ForeignKey('Option', on_delete=CASCADE)
+	answer_choice_id = models.AutoField(primary_key=True)
+	choice = models.ForeignKey(Option, on_delete=CASCADE)
+	answer = models.ForeignKey(Answer, on_delete=CASCADE)

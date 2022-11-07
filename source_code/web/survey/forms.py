@@ -1,7 +1,7 @@
 from .models import Survey, Question, Option
 from django.forms import ModelForm
 from django.forms.models import modelformset_factory, inlineformset_factory
-from django.forms.models import BaseInlineFormSet, BaseModelFormSet, BaseFormSet,ValidationError
+from django.forms.models import BaseInlineFormSet, BaseModelFormSet, BaseFormSet, ValidationError
 
 
 class SurveyCreationForm(ModelForm):
