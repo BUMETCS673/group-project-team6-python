@@ -35,11 +35,10 @@ INSTALLED_APPS = [
 	'django.contrib.sessions',
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
-
 	'survey',  # add iGroup to the web app
 	'iGroup',
 	'account',
-	'group'
+	'group',
 
 ]
 AUTH_USER_MODEL = "account.Instructor"  # use customized account model

@@ -1,0 +1,85 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iGroup instuctor</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,600,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> 
+<link rel="stylesheet" href="./css/maker.css?V=7"> 
+</head>
+<body>
+    <div class="bodys">
+    <section class="sub-header">
+        <nav>
+            <a href="index.html"><img src="images/logo_2.png"></a>
+            <div class="nav-links" id="navLinks">  
+                <i class="fa fa-close" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
+                    <li><a href="register.html">REGISTER</a></li>
+                    <li><a href="blog.html">BLOG</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+        </nav>
+            <h1>Team Maker</h1>
+    </section>
+    
+<!---------- Blog Page Content ---------->
+    
+    <section class="menu-content">
+        <div class="SuveryBox">
+            <p>Total suvery done</p>
+            <p class="content">--</p>
+        </div>
+        <div class="row">
+            <h1>Parameter:</h1>
+            <p class="InputBox">
+                <label for="member">Team member count:</label>
+                <input type="text" id="member" v-model="member"/>
+            </p>
+            <p class="InputBox">
+                <label for="role">Leader Role:</label>
+                <input type="text" id="role" v-model="role"/>
+            </p>
+            <p class="ButtonBox">
+                <input type="button" value="Back" @click="backs()"/>
+                <input type="button" value="Generate" @click="generateMaker()"/>
+            </p>
+            
+        </div>
+    </section>
+    
+<!-------- footer ---------->
+
+<section class="footer">
+        
+        <div class="icons">
+            <i class="fa fa-facebook"></i>
+            <i class="fa fa-twitter"></i>
+            <i class="fa fa-instagram"></i>
+            <i class="fa fa-linkedin"></i>
+        </div>
+
+</section>    
+</div>
+  
+<!----JavaScript for toggle menu---->
+<script>
+    var navLinks = document.getElementById("navLinks");
+
+    function showMenu() {
+        navLinks.style.right = "0";
+    }
+
+    function hideMenu() {
+        navLinks.style.right = "-200px";
+    }
+</script> 
+<script src="./js/jqeuery.js"></script>
+<script src="./js/vue.js"></script>
+<script src="./js/now.js?V=6"></script>
+</body>
+</html>    

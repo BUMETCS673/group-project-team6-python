@@ -10,3 +10,6 @@ class InstanceAdmin(admin.ModelAdmin):
 
 admin.site.register(Instance)
 admin.site.register(ConfigInstance)
+
+admin.site.register(ResultInstance)
+

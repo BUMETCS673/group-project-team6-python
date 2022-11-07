@@ -6,8 +6,8 @@
 <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,600,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> 
 </head>
-<body>
-    <section class="header">
+<body >
+    <section class="header" >
         
         <nav>
             <a href="index.html"><img src="images/logo_2.png"></a>
@@ -26,21 +26,21 @@
         
         <div class="text-box">
             <h1>iGroup</h1>
-            <form action="action_page.php" method="post">
+            
                 <div class="container">
                   <label for="uname"><b>Username</b></label>
-                  <input type="text" placeholder="Enter Username" name="uname" required>
+                  <input type="text" v-model="uname" placeholder="Enter Username" name="uname" id="uname" required>
               
                   <label for="psw"><b>Password</b></label>
-                  <input type="password" placeholder="Enter Password" name="psw" required>
+                  <input type="password" v-model="psw" placeholder="Enter Password" name="psw" id="psw" required>
               
-                  <button class = "hero-btn">Login</button>
-                  <button class = "hero-btn">REGISTER</button>
+                  <button class = "hero-btn" onclick="login()">Login</button>
+                  <button class = "hero-btn" onclick="register()">REGISTER</button>
                   <label>
                     <input type="checkbox" checked="checked" name="remember"> Remember me
                   </label>
                 </div>
-                </form>
+        
             
             <a href="contact.html" class="hero-btn">Visit Us to Know More</a>
         </div>
@@ -60,12 +60,15 @@
                 <p>We are here to help all students to find there perfect group. So you can maximize your potential in the group </p>
             </div>
             <div class="whatwedo-col">
-                <h3>Team’s scheduling</h3>
+                <h3>Team s scheduling</h3>
                 <p>We can help you manage your time by having every group member's schedule so you can have best team’s scheduling-compatibility</p>
             </div>
         </div>
     </section>
-
+    <div class="box">
+        <!-- 插值语法 -->
+        <!-- 功能：用于解析标签体内容。写法：{{xxx}}，xxx是js表达式，且可以直接读取到data中的所有属性。 -->
+    </div>
  
 <!-------- footer ---------->
 
@@ -93,8 +96,19 @@
     function hideMenu() {
         navLinks.style.right = "-200px";
     }
+
+    //跳转
+    function register(){
+        window.location.href="./register.html";
+    }
+
 </script> 
-    
+<script src="./js/jqeuery.js"></script>
+<script src="./js/vue.js"></script>
+<!-- 引入axios -->
+<!-- <script src="./js/axios.js"></script> -->
+<script src="./js/json.js"></script>
+<script src="./js/dl.js?V=6"></script>
 </body>
 </html>
 

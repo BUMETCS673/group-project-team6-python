@@ -1,23 +1,34 @@
 {% extends 'base.html' %}
 
+
+
+
 {% block title%}
-This is the iGroup system
+Hello {{ current_instructor.username }}
 {% endblock %}
 
+
+
 {%block content%}
+
     <p> welcome instructor: {{ current_instructor.username }}</p>
+
     {% if not instances %}
     <div> No instance here, please create one first</div>
+
     {% else %}
 
-    {% for instance in instances%}
-        <li><a href="{{ instance.get_absolute_url }}"> instance name : {{ instance.instance_name }} </a></li>
+    {% for instance in instances %}
+        <li>
+            <a href="{{ instance.get_absolute_url }}"> instance name : {{ instance.instance_name }} </a>
+            ||||||||||
+            <a href="{% url 'iGroup:delete' slug=instance.slug %}"> delete this instance </a>
+        </li>
 
     {% endfor %}
     {% endif %}
       <a href="{% url 'iGroup:create' %}">create an instance</a>
 
+
         <a href="{% url 'iGroup:home' %}">delete an instance</a>
-
-
 {% endblock %}

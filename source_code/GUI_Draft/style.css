@@ -18,6 +18,8 @@ nav{
     padding: 2% 4%;
     justify-content: space-between;
     align-items: center;
+    position: relative;
+    z-index: 3;
 }
 nav img{
     width: 70px;
@@ -393,7 +395,17 @@ h3{
 
 .container {
     padding: 16px;
-  }
+}
+.course-content .LogoutBox{
+    text-align: right;
+}
+.course-content .LogoutBox input{
+    border: none;
+    background: red;
+    border-radius: 3vw;
+    padding: 0.5vw 2vw;
+    cursor: pointer;
+}
 
 
 
@@ -427,8 +439,84 @@ h3{
 }
 
 
+/*------- Creat Survey page ------------*/
+
+.survey-btn{
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 12px 34px;
+    font-size: 13px;
+    background: transparent;
+    position: relative;
+    cursor: pointer;
+    transition: 1s;
+
+}
+.survey-form{
+    height: 700px; 
+    border: none;
+}
+
+label {
+    display: block;
+  }
 
 
-
+.addTC{
+    text-align: right;
+    width: 80vw;
+    margin-top: 1vw;
+}
+.addTC p{
+    background: #22ec10;
+    width: 200px;
+    height: 200px;
+    border-radius: 200px;
+    line-height: 200px;
+    text-align: center;
+    font-size: 200px;
+    font-weight: lighter;
+    color: white;
+    scale: 0.5;
+    display: inline-block;
+    cursor: pointer;
+}
+.addBox{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200vh;
+    background: #989a9b;
+    opacity: 0.9;
+    justify-content: center;
+    display: flex;
+    align-content: center;
+    align-items: center;
+}
+.addBox .contentBox{
+    background: white;
+    padding: 6vw 9vw;
+}
+.addBox .contentBox p:nth-child(1){
+    
+}
+.addBox .contentBox p:nth-child(1) input{
+    background: #bfc1c2;
+    border: none;
+    width: 100%;
+}
+.addBox .contentBox p:nth-child(2){
+    text-align: right;
+}
+.addBox .contentBox p:nth-child(2) input{
+    background: #bfc1c2;
+    border: none;
+    width: 34%;
+    height: 2vw;
+    cursor: pointer;
+}
 
 

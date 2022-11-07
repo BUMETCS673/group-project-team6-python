@@ -10,7 +10,9 @@ class ConfigInstance(models.Model):
 	The parameter for running the instance
 	"""
 	config_id = models.AutoField(primary_key=True)
+
 	instance = models.ForeignKey('Instance', on_delete=CASCADE)
+
 	instructor = models.ForeignKey('account.Instructor', on_delete=CASCADE)  # need to specify
 	max_num_pass = models.IntegerField()
 	survey = models.ForeignKey('survey.Survey', on_delete=CASCADE)
@@ -54,7 +56,7 @@ class Instance(models.Model):
 
 	def get_edit_url(self):
 		"""get url for updating instance"""
-		return reverse("iGroup:update",kwargs={"slug":self.slug})
+		return reverse("iGroup:update", kwargs={"slug":self.slug})
 
 
 def slugify_instance_name(instance, save=False):
