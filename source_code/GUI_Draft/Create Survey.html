@@ -1,0 +1,212 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iGroup Create Survey</title>
+<link rel="stylesheet" href="./style2.css?v=2"/>
+<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,600,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> 
+<link rel="stylesheet" href="./css/survey.css"/>
+<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/fileinput.min.css" rel="stylesheet">
+    <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/font-awesome/4.6.0/css/font-awesome.min.css">
+    <link href="form_builder/animate.min.css" rel="stylesheet">
+    <link href="form_builder/summernote.css" rel="stylesheet">
+    <link href="form_builder/style.min862f.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="javascript/fileinput.min.js"></script>
+    <script src="javascript/bootstrap-datetimepicker.min.js"></script>
+    <script src="javascript/distpicker.data.min.js"></script>
+    <script src="javascript/distpicker.min.js"></script>
+    <script src="javascript/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script src="javascript/zh.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="form_builder/beautifyhtml.js"></script>
+    <script src="javascript/index.js"></script>
+</head>
+<body>
+    <div class="bodys">
+    <section class="sub-header">
+        <nav>
+            <a style="display: block;float: left;" href="index.html"><img src="imagess/logo_2.png"></a>
+            <div class="nav-links" id="navLinks">  
+                <i class="fa fa-close" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
+                    <li><a href="register.html">REGISTER</a></li>
+                    <li><a href="blog.html">BLOG</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+        </nav>
+            <h1>Create Survey</h1>
+    </section>
+    
+<!---------- Survey Page Content ---------->
+    
+    <section class="Survey-content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="container">
+              <h2>Create New Survey</h2>
+              <div class="container">
+                  <label>Survey Title: </label>
+                  <input name="survey_title" id="survey_title" type="text" class="form-control input-group" />
+                  <input name="qnum" id="qnum" type="hidden" value="" />
+                  <input name="choicenum" id="choicenum" type="hidden" value="" />
+                  <label>Survey Questions:</label>
+                  <div id="questions">
+                    <div class="container-fluid" style="padding:0px; margin:0px;">
+                        <div class="row-fluid clearfix">
+                            <div class="col-md-12 column">
+                                <div style="width:1080px; margin:0 auto; margin-top:20px;">
+                                    <div class="conference-cont" style=" margin-top:20px;">
+                                        <div class="set-til">第一步<span style="padding-left:10px;">报名表单设置</span></div>
+                                        <div class="wrapper wrapper-content" style="margin-top: 55px;">
+                                            <div class="row" style="border-left: 2px dashed rgba(0,0,0,0.12);border-right: 2px dashed rgba(0,0,0,0.12);border-bottom: 2px dashed rgba(0,0,0,0.12);">
+                                                <div id="colzuo" class="col-sm-9" style="border-right: 2px dashed rgba(0,0,0,0.12);">
+                                                    <div class="ibox float-e-margins">
+                                                        <div class="ibox-title">
+                                                            <h5>Drag/click the right form item to this area</h5>
+                                                            <div class="ibox-tools">
+                                                                <button type="submit" class="btn btn-warning" data-clipboard-text="testing" id="copy-to-clipboard">Copy the code</button>
+                                                                <button type="button" class="btn btn-yulan">Preview</button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="ibox-content">
+                                                            <div class="row form-body form-horizontal m-t">
+                                                                <div class="col-md-12 droppable sortable ui-droppable ui-sortable">
+                                                                </div>
+                                                            </div>
+                
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="colyou" class="col-sm-3">
+                                                    <div class="ibox float-e-margins">
+                                                        <div class="ibox-title">
+                                                            <h5>Customize form entries</h5>
+                                                        </div>
+                                                        <div class="ibox-content">
+                                                            <form role="form" class="form-horizontal m-t">
+                                                                <p><b>Commonly used items</b></p>
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <div id="name" class="draggable ui-draggable btntexts">
+                                                                                name
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div id="phone" class="draggable ui-draggable btntexts">
+                                                                                phone
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div id="email" class="draggable ui-draggable btntexts">
+                                                                                email
+                                                                            </div>
+                                                                        </td>
+                
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <div id="sex" class="draggable ui-draggable btntexts">
+                                                                                sex
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div id="occupation" class="draggable ui-draggable btntexts">
+                                                                                occupation
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div id="profile" class="draggable ui-draggable btntexts">
+                                                                                profile
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                                <p><b>The custom items</b></p>
+                                                                <div id="text" class="form-group draggable ui-draggable btntext">
+                                                                    <label class="col-sm-12"><i class="fa fa-arrows"></i> Text <img src="images/add_form_img01.png"></label>
+                                                                </div>
+                                                                <div id="select" class="form-group draggable ui-draggable btntext">
+                                                                    <label class="col-sm-12"><i class="fa fa-arrows"></i> drop-down box <img src="images/add_form_img05.png"></label>
+                                                                </div>
+                                                                <div id="radio" class="form-group draggable ui-draggable btntext">
+                                                                    <label class="col-sm-12"><i class="fa fa-arrows"></i> Single-select <img src="images/add_form_img03.png"></label>
+                                                                </div>
+                                                                <div id="checkbox" class="form-group draggable ui-draggable btntext">
+                                                                    <label class="col-sm-12"><i class="fa fa-arrows"></i> Multi-select <img src="images/add_form_img04.png"></label>
+                                                                </div>
+                                                                <div id="textarea" class="form-group draggable ui-draggable btntext">
+                                                                    <label class="col-sm-12"><i class="fa fa-arrows"></i> Multiline text <img src="images/add_form_img02.png"></label>
+                                                                </div>
+                                                                <div id="datetime" class="form-group draggable ui-draggable btntext">
+                                                                    <label class="col-sm-12"><i class="fa fa-arrows"></i> Time <img src="images/add_form_img06.png"></label>
+                                                                </div>
+                                                                <div id="file" class="form-group draggable ui-draggable btntext">
+                                                                    <label class="col-sm-12"><i class="fa fa-arrows"></i> Upload <img src="images/add_form_img07.png"></label>
+                                                                </div>
+                                                            </form>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                  <button class="hero-btn red-btn" type="button" id="addq" @click="openUrl()"><span class="glyphicon glyphicon-plus"></span>Add a question</button>
+                  <!-- <button class="hero-btn red-btn" type="submit" id="uploadsurvey" name="uploadsurvey" >Upload Survey</button> -->
+                
+              </div>
+            </div>
+    </div>
+        
+    
+    
+    </div>
+    </section>
+    
+<!-------- footer ---------->
+
+<section class="footer">
+        
+        <div class="icons">
+            <i class="fa fa-facebook"></i>
+            <i class="fa fa-twitter"></i>
+            <i class="fa fa-instagram"></i>
+            <i class="fa fa-linkedin"></i>
+        </div>
+
+</section>    
+</div>
+  
+<!----JavaScript for toggle menu---->
+<script>
+    var navLinks = document.getElementById("navLinks");
+
+    function showMenu() {
+        navLinks.style.right = "0";
+    }
+
+    function hideMenu() {
+        navLinks.style.right = "-200px";
+    }
+
+    src="js/function.js"
+</script> 
+<script src="./js/vue.js"></script>
+<script src="./js/now.js?V=6"></script>
+</body>
+</html>    

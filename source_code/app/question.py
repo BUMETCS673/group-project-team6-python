@@ -17,20 +17,12 @@ class Question(ABC):
         :param kwargs: reserved for future use
         """
         # check None inputs
-        if description is not None:
-            self.description = description
-        else:
-            self.description = None
 
-        if question_name is not None:
-            self.question_name = question_name
-        else:
-            self.question_name = None
+        self.description = description
 
-        if weight is not None:
-            self.weight = weight
-        else:
-            self.weight = None
+        self.question_name = question_name
+
+        self.weight = weight
 
     def get_weight(self):
         return self.weight
@@ -70,13 +62,10 @@ class SingleChoiceQuestion(Question):
 
     def delete_choice(self, choice_index):
         # check choices len, and choice_index
-        if len(self.choices) > 0:
-            if len(self.choices) > choice_index >= 0:
-                self.choices.pop(choice_index)
-            else:
-                print("index out of bound")
+        if len(self.choices) > 0 and len(self.choices) > choice_index >= 0 and choice_index is not None:
+            self.choices.pop(choice_index)
         else:
-            print("choices is empty")
+            print("invalid choice_index or choices")
         """
         :param choice_index: the index of the choice need to be deleted from the question
         :return: None
@@ -114,10 +103,7 @@ class MultipleChoiceQuestion(Question):
 
         self.choices = choices
 
-        if max_num_choice is not None and max_num_choice >= 2:
-            self.max_num_choice = max_num_choice
-        else:
-            self.max_num_choice = 2
+        self.max_num_choice = max_num_choice if max_num_choice is not None and max_num_choice >= 2 else 2
 
     def add_choice(self, choice):
         """
@@ -133,13 +119,10 @@ class MultipleChoiceQuestion(Question):
 
     def delete_choice(self, choice_index):
         # check choices len, and choice_index
-        if len(self.choices) > 0:
-            if len(self.choices) > choice_index >= 0:
-                self.choices.pop(choice_index)
-            else:
-                print("index out bound")
+        if len(self.choices) > 0 and len(self.choices) > choice_index >= 0 and choice_index is not None:
+            self.choices.pop(choice_index)
         else:
-            print("choices is empty")
+            print("invalid input or invalid choices")
         """
         :param choice_index: the index of the choice need to be deleted from the question
         :return: None

@@ -1,1 +1,1 @@
-Here are the drafts for GUI
+Here are updated GUI Draft
