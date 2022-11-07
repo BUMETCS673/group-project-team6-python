@@ -7,6 +7,7 @@ from .models import Instance
 from survey.models import Survey
 
 
+
 # The iGroup system
 @login_required(login_url="/login")
 def index(request):
@@ -74,8 +75,10 @@ def config_instance(request, slug=None):
 	"""Instructor config parameter for this instance"""
 	current_instructor = request.user
 	instance = get_object_or_404(Instance, slug=slug)
+
 	if instance.instructor != current_instructor:
 		raise Http404('deny')  # need to change in future
+    
 	survey = get_object_or_404(Survey, instance=instance)  # need one survey
 
 	if request.method == 'POST':

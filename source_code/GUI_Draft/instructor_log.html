@@ -1,0 +1,113 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iGroup instuctor</title>
+<link rel="stylesheet" href="style.css?V=4">
+<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,600,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> 
+</head>
+<body>
+    <section class="sub-header">
+        <nav>
+            <a href="index.html"><img src="images/logo_2.png"></a>
+            <div class="nav-links" id="navLinks">  
+                <i class="fa fa-close" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
+                    <li><a href="register.html">REGISTER</a></li>
+                    <li><a href="blog.html">BLOG</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+        </nav>
+            <h1>Welcome</h1>
+    </section>
+    
+<!---------- Blog Page Content ---------->
+    
+    <section class="course-content">
+        <div class="LogoutBox">
+            <input type="button" value="Logout" onclick="fu()"/>
+        </div>
+    <div class="row">
+    <div class="course-left">
+        <h2>Courses</h2>
+        <div  v-for="course in courses">
+            <div v-if="course.show==true">
+                <div class="course">
+                    <h2 style="cursor: pointer;width: 22%;z-index: 2;position: relative;" @click="join(course.name)">{{course.name}}</h2>
+                    <p>{{course.title}}</p>
+                    <p style="text-align: right;position: relative;top: -4vw;">
+                        <input style="border: none;padding: 1vw 2vw;font-size: large;background: red;color: white;cursor: pointer;" type="button" value="delete" @click="del(course.name)"/>
+                    </p>
+                </div>
+               
+            </div>
+        </div>
+        <div></div>
+        
+        <div class="addTC">
+            <p onclick="show()">+</p>
+        </div>
+        <div class="addBox" id="addBox">
+            <div class="contentBox">
+                <p>
+                    <label style="color: black;"  id="courseName">course name:</label>
+                    <input type="text" v-model="courseName" >
+                </p>
+                <p>
+                    <input type="button" value="cancel" onclick="closes()"/>
+                    <input type="button" value="add" @click="add()"/>
+                </p>
+            </div>
+        </div>
+    </div>
+        
+    
+    
+    </div>
+    </section>
+
+
+
+<!-------- footer ---------->
+
+<section class="footer">
+        
+        <div class="icons">
+            <i class="fa fa-facebook"></i>
+            <i class="fa fa-twitter"></i>
+            <i class="fa fa-instagram"></i>
+            <i class="fa fa-linkedin"></i>
+        </div>
+
+</section>    
+  
+  
+<!----JavaScript for toggle menu---->
+<script src="./js/jqeuery.js"></script>
+<script>
+    var navLinks = document.getElementById("navLinks");
+    $("#addBox").hide();
+    function showMenu() {
+        navLinks.style.right = "0";
+    }
+
+    function hideMenu() {
+        navLinks.style.right = "-200px";
+    }
+    function fu(){window.location.href='index.html'}
+    function show(){
+        $("#addBox").show();
+    }
+    function closes(){
+        $("#addBox").hide();
+    }
+</script> 
+
+<script src="./js/vue.js"></script>
+<script src="./js/log.js?V=5"></script>
+</body>
+</html>    
