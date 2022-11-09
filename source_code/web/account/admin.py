@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .forms import InstructorChangeForm, InstructorCreationForm
-from .models import Instructor
+from .models import Instructor,Student
 
 
 class InstructorAdmin(UserAdmin):
@@ -13,3 +13,4 @@ class InstructorAdmin(UserAdmin):
 
 
 admin.site.register(Instructor, InstructorAdmin)
+admin.site.register(Student)

@@ -11,26 +11,15 @@ class Question(ABC):
 
     def __init__(self, question_name, description, weight, **kwargs):
         """
+
         :param question_name: the name for the question
         :param description: the description for the question
         :param weight: the weight of this question
         :param kwargs: reserved for future use
         """
-        # check None inputs
-        if description is not None:
-            self.description = description
-        else:
-            self.description = None
-
-        if question_name is not None:
-            self.question_name = question_name
-        else:
-            self.question_name = None
-
-        if weight is not None:
-            self.weight = weight
-        else:
-            self.weight = None
+        self.description = description
+        self.question_name = question_name
+        self.weight = weight
 
     def get_weight(self):
         return self.weight
@@ -59,28 +48,20 @@ class SingleChoiceQuestion(Question):
         :param choice: str datatype, add the available option to the question
         :return: None
         """
-        # check legal new choice
-        if choice is not None and choice != "":
-            self.choices.append(choice)
-        else:
-            print("input is illegal")
+        self.choices.append(choice)
+
+        return None
 
     def get_question_type(self):
         return self.question_type
 
     def delete_choice(self, choice_index):
-        # check choices len, and choice_index
-        if len(self.choices) > 0:
-            if len(self.choices) > choice_index >= 0:
-                self.choices.pop(choice_index)
-            else:
-                print("index out of bound")
-        else:
-            print("choices is empty")
         """
+
         :param choice_index: the index of the choice need to be deleted from the question
         :return: None
         """
+        pass
 
     def get_all_choice(self):
         """
@@ -103,6 +84,7 @@ class MultipleChoiceQuestion(Question):
 
     def __init__(self, choices=None, max_num_choice=9999, **kwargs):
         """
+
         :param choices: all available choices in list datatype, default to None
         :param max_num_choice: the max number of choice in int datatype student can choose, default to 0
         :param choices_score: the scores of each choice
@@ -113,11 +95,7 @@ class MultipleChoiceQuestion(Question):
             choices = []
 
         self.choices = choices
-
-        if max_num_choice is not None and max_num_choice >= 2:
-            self.max_num_choice = max_num_choice
-        else:
-            self.max_num_choice = 2
+        self.max_num_choice = max_num_choice
 
     def add_choice(self, choice):
         """
@@ -125,25 +103,17 @@ class MultipleChoiceQuestion(Question):
         :param choice: str datatype, add the available option to the question
         :return: None
         """
-        # check legal new choice
-        if choice is not None and choice != "":
-            self.choices.append(choice)
-        else:
-            print("input is illegal")
+        self.choices.append(choice)
+
+        return None
 
     def delete_choice(self, choice_index):
-        # check choices len, and choice_index
-        if len(self.choices) > 0:
-            if len(self.choices) > choice_index >= 0:
-                self.choices.pop(choice_index)
-            else:
-                print("index out bound")
-        else:
-            print("choices is empty")
         """
+
         :param choice_index: the index of the choice need to be deleted from the question
         :return: None
         """
+        pass
 
     def get_question_type(self):
         return self.question_type
@@ -154,17 +124,3 @@ class MultipleChoiceQuestion(Question):
         @return: int of length
         """
         return len(self.choices)
-
-    def get_max_num_of_choice(self):
-        """
-        get max number of the options that can be chosen
-        @return: int
-        """
-        return self.max_num_choice
-
-    def get_all_choices(self):
-        """
-        get all choice in this question
-        @return: string array
-        """
-        return self.choices

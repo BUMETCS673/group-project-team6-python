@@ -1,5 +1,5 @@
-from source_code.app.score_calculation import multiple_choice_score
-from source_code.app.score_calculation import single_choice_score
+from .score_calculation import multiple_choice_score
+from .score_calculation import single_choice_score
 
 
 class Team:
@@ -11,7 +11,6 @@ class Team:
         @param team_name: str, the name of the team
         @param survey_target: Survey, the survey target
         @param kwargs: reserved for future use
-        push testing
         """
         self.team_name = team_name
         self.survey_target = survey_target
@@ -45,16 +44,22 @@ class Team:
         del self.__team_members
 
     def get_member_by_index(self, member_index):
+        """
+        get a team member by its position
+        @return: Student
+        """
         return self.team_members[member_index]
 
     def add_team_member(self, student):
+        """
+
+        @param student: Student, the student add to the team
+        @return: None
+        """
+
         self.team_members.append(student)
         self.team_size += 1
         return
-
-    def remove_team_member(self, student):
-        self.team_members.remove(student)
-        self.team_size -= 1
 
     def replace_team_member(self, student_index, new_student):
         """
@@ -63,16 +68,24 @@ class Team:
         @param new_student: Student, the new student want to join in the team
         @return: Student, the old student pop out the team
         """
-        # old_student = self.team_members[student_index]
+        #old_student = self.team_members[student_index]
         self.team_members[student_index] = new_student
-        # return old_student
+        #return old_student
 
     def get_team_size(self):
+        """
+        
+        @return:
+        """
         return len(self.__team_members)
 
     def get_all_team_member_id(self):
+        """
+        return all team member id
+        @return: list, id s
+        """
         return [info.id for info in self.team_members]
-        "@return: list, id of all members"
+
 
     def get_single_choice_scores(self):
         """
@@ -82,7 +95,14 @@ class Team:
 
         # for each student,
         # get single choice answers in the dictionary format {student id : {question index, answer obj}}
-        single_choice_answers = self.get_single_choice_answer()
+        single_choice_answers = {}
+        for student in self.__team_members:
+            # do the query, get the student response(answer sheet) to that survey
+            student_answer_sheet = student.get_answer_sheet_by_survey(survey=self.survey_target)
+            # get the all single choice questions from the student answer sheet, and put it in the
+            # single_choice_questions dict
+            single_choice_answers[student.id] = student_answer_sheet.get_all_answers_by_question_type(
+                question_type="single")
         # get the single choice question in the dictionary format {question index : question obj}
         single_choice_questions = self.survey_target.get_all_questions_by_type(question_type="single")
 
@@ -122,7 +142,14 @@ class Team:
 
         # for each student, get multiple choice answers in the
         # dictionary format {student id : {question index, multiple choice answer obj}}
-        multiple_choice_answers = self.get_multiple_choice_answer()
+        multiple_choice_answers = {}
+        for student in self.__team_members:
+            # do the query, get the student response(answer sheet) to that survey
+            student_answer_sheet = student.get_answer_sheet_by_survey(survey=self.survey_target)
+            # get the all multiple choice questions from the student answer sheet, and put it in the
+            # multiple_choice_answers dict
+            multiple_choice_answers[student.id] = student_answer_sheet.get_all_answers_by_question_type(
+                question_type="multiple")
 
         # get the multiple choice question in the dictionary format {question index : question obj}
         multiple_choice_questions = self.survey_target.get_all_questions_by_type(question_type="multiple")
@@ -201,38 +228,3 @@ class Team:
             total_score += self.get_total_score_by_type(valid_type)
 
         return total_score
-
-    def get_multiple_choice_answer(self):
-        """
-        get all team members' multiple choice answers
-        :return: dict, all team members multiple choice answers.
-        i.e. {student id: {question_index,multiple_choice_answer_obj}}
-        """
-        # for each student, get multiple choice answers in the
-        # dictionary format {student id : {question index, multiple choice answer obj}}
-        multiple_choice_answers = {}
-        for student in self.__team_members:
-            # do the query, get the student response(answer sheet) to that survey
-            student_answer_sheet = student.get_answer_sheet_by_survey(survey=self.survey_target)
-            # get the all multiple choice questions from the student answer sheet, and put it in the
-            # multiple_choice_answers dict
-            multiple_choice_answers[student.id] = student_answer_sheet.get_all_answers_by_question_type(
-                question_type="multiple")
-        return multiple_choice_answers
-
-    def get_single_choice_answer(self):
-        """
-        get all team members' single choice answers
-        :return: dict, all team members single choice answer
-        i.e. {student id: {question_index,single_choice_answer_obj}}
-        """
-        # for each student,
-        # get single choice answers in the dictionary format {student id : {question index, answer obj}}
-        single_choice_answers = {}
-        for student in self.__team_members:
-            # do the query, get the student response(answer sheet) to that survey
-            student_answer_sheet = student.get_answer_sheet_by_survey(survey=self.survey_target)
-            # get the all single choice questions from the student answer sheet, and put it in the
-            # single_choice_questions dict
-            single_choice_answers[student.id] = student_answer_sheet.get_all_answers_by_question_type(question_type="single")
-        return single_choice_answers

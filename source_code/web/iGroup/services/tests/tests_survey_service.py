@@ -30,3 +30,6 @@ class TestSurveyService(TestCase):
 
 		# check number of questions
 		self.assertEqual(len(survey_service.survey.questions), 10)
+
+
+
