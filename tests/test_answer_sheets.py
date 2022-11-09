@@ -35,11 +35,11 @@ class answer_sheets_test(unittest.TestCase):
         self.single3 = answer.SingleChoiceAnswer(question=self.question3, survey=self.survey1, choice_result=2)
 
         self.multiple1 = answer.MultipleChoiceAnswer(question=self.question4, survey=self.survey2,
-                                                     choices_result=[1, 2])
+                                                     choices_result={0: 1, 1: 2})
         self.multiple2 = answer.MultipleChoiceAnswer(question=self.question5, survey=self.survey2,
-                                                     choices_result=[3, 1, 4])
+                                                     choices_result={0: 3, 1: 1, 2: 4})
         self.multiple3 = answer.MultipleChoiceAnswer(question=self.question6, survey=self.survey2,
-                                                     choices_result=[1, 0, 3, 4])
+                                                     choices_result={0: 1, 1: 0, 2: 3, 3: 4})
 
         self.raw_answers1 = {0: self.single1.choice_result, 1: self.single2.choice_result,
                              2: self.multiple1.choices_result}
@@ -86,7 +86,7 @@ class answer_sheets_test(unittest.TestCase):
                 else:
                     self.assertEqual(right_result1[key].question_type, response.question_type)
                     self.assertEqual(self.survey1, response.survey)
-                    self.assertEqual(sorted(right_result1[key].choices_result), response.choices_result)
+                    self.assertEqual(dict(sorted(right_result1[key].choices_result.items())), response.choices_result)
 
         for key, response in self.answer_sheet2.answers.items():
             if key in right_result2.keys():
@@ -98,7 +98,7 @@ class answer_sheets_test(unittest.TestCase):
                 else:
                     self.assertEqual(right_result2[key].question_type, response.question_type)
                     self.assertEqual(self.survey2, response.survey)
-                    self.assertEqual(sorted(right_result2[key].choices_result), response.choices_result)
+                    self.assertEqual(dict(sorted(right_result2[key].choices_result.items())), response.choices_result)
 
         # special
         self.assertEqual(dict(), self.answer_sheet3.answers)
@@ -112,12 +112,12 @@ class answer_sheets_test(unittest.TestCase):
         self.assertEqual(self.survey1, self.answer_sheet1.get_answer_by_index(0).survey)
         self.assertEqual(self.question1, self.answer_sheet1.get_answer_by_index(0).question)
 
-        self.assertEqual(sorted(self.multiple1.choices_result),
+        self.assertEqual(dict(sorted(self.multiple1.choices_result.items())),
                          self.answer_sheet1.get_answer_by_index(2).choices_result)
         self.assertEqual(self.survey1, self.answer_sheet1.get_answer_by_index(2).survey)
         self.assertEqual(self.question4, self.answer_sheet1.get_answer_by_index(2).question)
 
-        self.assertEqual(sorted(self.multiple2.choices_result),
+        self.assertEqual(dict(sorted(self.multiple2.choices_result.items())),
                          self.answer_sheet2.get_answer_by_index(0).choices_result)
         self.assertEqual(self.survey2, self.answer_sheet2.get_answer_by_index(0).survey)
         self.assertEqual(self.question5, self.answer_sheet2.get_answer_by_index(0).question)
@@ -162,17 +162,17 @@ class answer_sheets_test(unittest.TestCase):
         self.assertEqual(self.survey1, self.answer_sheet1.get_all_answers_by_question_type("single")[1].survey)
         self.assertEqual(self.question2, self.answer_sheet1.get_all_answers_by_question_type("single")[1].question)
 
-        self.assertEqual(sorted(self.multiple1.choices_result),
+        self.assertEqual(dict(sorted(self.multiple1.choices_result.items())),
                          self.answer_sheet1.get_all_answers_by_question_type("multiple")[2].choices_result)
         self.assertEqual(self.survey1, self.answer_sheet1.get_all_answers_by_question_type("multiple")[2].survey)
         self.assertEqual(self.question4, self.answer_sheet1.get_all_answers_by_question_type("multiple")[2].question)
 
-        self.assertEqual(sorted(self.multiple2.choices_result),
+        self.assertEqual(dict(sorted(self.multiple2.choices_result.items())),
                          self.answer_sheet2.get_all_answers_by_question_type("multiple")[0].choices_result)
         self.assertEqual(self.survey2, self.answer_sheet2.get_all_answers_by_question_type("multiple")[0].survey)
         self.assertEqual(self.question5, self.answer_sheet2.get_all_answers_by_question_type("multiple")[0].question)
 
-        self.assertEqual(sorted(self.multiple3.choices_result),
+        self.assertEqual(dict(sorted(self.multiple3.choices_result.items())),
                          self.answer_sheet2.get_all_answers_by_question_type("multiple")[1].choices_result)
         self.assertEqual(self.survey2, self.answer_sheet2.get_all_answers_by_question_type("multiple")[1].survey)
         self.assertEqual(self.question6, self.answer_sheet2.get_all_answers_by_question_type("multiple")[1].question)
