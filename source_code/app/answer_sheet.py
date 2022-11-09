@@ -33,12 +33,8 @@ class AnswerSheet:
         return: None
         """
         # check input None raw_answers
-        if raw_answers is None:
-            print("input raw_answers is None")
-            pass
-        # check None survey
-        elif self.survey is None:
-            print("empty survey")
+        if raw_answers is None or self.survey is None:
+            print("invalid input")
             pass
         else:
             for question_index, response in raw_answers.items():
