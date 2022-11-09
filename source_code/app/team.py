@@ -152,7 +152,7 @@ class Team:
                 choice_result = multiple_choice_answers[student.id][question_index].get_choice_result()
 
                 # according to the order, add choices score to the option_scores
-                for order, choice_index in enumerate(choice_result):
+                for i, (order, choice_index) in enumerate(choice_result.items()):
                     # check if number of choice exceed the max number of choice
                     if order > max_num_choice - 1:
                         break
@@ -163,11 +163,10 @@ class Team:
 
                     option_scores[choice_index][1] += 1
 
-                    print(option_scores)
-
             # after having option_scores, we can calculate the total scores for this question
             score = multiple_choice_score.cal_multiple_score(team_size=self.team_size, max_num_choice=max_num_choice,
                                                              option_scores=option_scores)
+
             # update scores by the question weight
 
             scores[question_index] = score * multiple_question_obj.get_weight()
@@ -189,7 +188,7 @@ class Team:
 
         }
         scores = score_functions[question_type]
-        return sum(s for s in scores.values())
+        return round(sum(s for s in scores.values()), 5)
 
     def get_total_score(self):
         """
