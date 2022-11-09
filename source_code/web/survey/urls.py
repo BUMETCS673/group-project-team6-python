@@ -11,7 +11,10 @@ urlpatterns = [
 
 	# #from shawn
 	path('survey/<int:question_id>/delete_quetions',views.delete_questions,name = 'delete_questions'),
+
 	path('survey/question/<int:question_id>/delete_options',views.delete_options,name='delete_options'),
+
+
 
 	path('<slug:instance_slug>/survey-review/', views.review, name='review'),
 	path('<slug:instance_slug>/survey-lock/', views.survey_lock, name='lock'),
