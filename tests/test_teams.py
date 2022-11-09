@@ -51,12 +51,9 @@ class test_team1(unittest.TestCase):
         self.multiple2_Jack = answer.MultipleChoiceAnswer(question=self.question4, survey=self.survey1,
                                                           choices_result=[1, 2, 4])
 
-        self.raw_answers_Jessie = {0: self.single1_Jessie.choice_result, 1: self.single2_Jessie.choice_result,
-                                   2: self.multiple1_Jessie.choices_result, 3: self.multiple2_Jessie.choices_result}
-        self.raw_answers_James = {0: self.single1_James.choice_result, 1: self.single2_James.choice_result,
-                                  2: self.multiple1_James.choices_result, 3: self.multiple2_James.choices_result}
-        self.raw_answers_Jack = {0: self.single1_Jack.choice_result, 1: self.single2_Jack.choice_result,
-                                 2: self.multiple1_Jack.choices_result, 3: self.multiple2_Jack.choices_result}
+        self.raw_answers_Jessie = {0: 0, 1: 1, 2: {0: 1, 1: 2}, 3: {0: 1, 1: 3, 2: 2}}
+        self.raw_answers_James = {0: 1, 1: 2, 2: {0: 2, 1: 3}, 3: {0: 2, 1: 3, 2: 4}}
+        self.raw_answers_Jack = {0: 0, 1: 3, 2: {0: 3, 1: 1}, 3: {0: 1, 1: 2, 2: 4}}
 
         self.student1.answer_survey(survey=self.survey1, raw_answers=self.raw_answers_Jessie)
         self.student2.answer_survey(survey=self.survey1, raw_answers=self.raw_answers_James)
@@ -138,7 +135,6 @@ class test_team1(unittest.TestCase):
 
         score2 = single_choice_score.cal_single_score(team_size=3, num_unique_choice=num_unique_choice2)
         scores[1] += score2 * single_choice_questions_weight[1]
-
         self.assertEqual(scores, self.team1.get_single_choice_scores())
 
     # test multiple score
@@ -168,8 +164,6 @@ class test_team1(unittest.TestCase):
         choice_weight6 = max_num_choice1 - 1
         option_scores1[1][0] += choice_weight6
         option_scores1[1][1] += 1
-
-        print(option_scores1)
 
         score1 = multiple_choice_score.cal_multiple_score(team_size=3, max_num_choice=2,
                                                           option_scores=option_scores1)
@@ -210,9 +204,14 @@ class test_team1(unittest.TestCase):
                                                           option_scores=option_scores2)
         scores[3] = score2 * self.question4.get_weight()
 
-        print(scores)
         self.assertEqual(scores, self.team1.get_mul_choices_scores())
 
+    def test06_get_total_score_by_type(self):
+        self.assertEqual(0.94, self.team1.get_total_score_by_type("multiple"))
+        self.assertEqual(2.66667, self.team1.get_total_score_by_type("single"))
+
+    def test07_get_total_score(self):
+        self.assertEqual(3.60667, self.team1.get_total_score())
 
 
 if __name__ == '__main__':
