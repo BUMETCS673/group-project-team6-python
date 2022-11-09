@@ -82,12 +82,13 @@ def create_update_options(request, question_id=None):
 	return render(request, "survey/option_create.html", context)
 
 
-#delete options
+
 @login_required(login_url="/login")
 def delete_options(request,question_id=None):
+	"""delete this options"""
 	current_instructor = request.user
-	question_obj = get_object_or_404(Question, question_id=question_id)
-	instance_obj = question_obj.survey.instance
+	question_obj = get_object_or_404(Question, slug = slug)
+
 	if question_obj.survey.instance.instructor != current_instructor:
 		raise Http404  # not allowed to modify
 
@@ -98,10 +99,32 @@ def delete_options(request,question_id=None):
 
 
 
+# @login_required(login_url="/login")
+# def delete_instance(request, slug):
+# 	"""delete this instance"""
+# 	current_instructor = request.user
+# 	instance = get_object_or_404(Instance, slug=slug)
+#
+# 	if instance.instructor != current_instructor:
+# 		raise Http404('deny')  # need to change in future
+#
+# 	instance.delete()
+# 	return redirect('iGroup:home')
+
+
 @login_required(login_url="/login")
-def delete_survey(request, id=None):
-	"""update a survey"""
-	return
+def delete_questions(request, question_id=None):
+	"""delete this questions"""
+	current_instructor = request.user
+	question_obj = get_object_or_404(Question, question_id=question_id)
+	instance_obj = question_obj.survey.instance
+
+	if instance.instructor != current_instructor:
+	  raise Http404('deny')  # need to change in future
+
+	question_obj.delete()
+	return redirect('survey:create-update-survey')
+
 
 
 @login_required(login_url="/login")
