@@ -47,10 +47,10 @@ class AnswerSheet:
                                                 choice_result=response)
                 elif question_type == "multiple":
                     # need to preprocess the result
-                    new_response = [val for val in sorted(response)]  # List
+                    new_r = dict(sorted(response.items()))
                     answer = MultipleChoiceAnswer(question=question,
                                                   survey=self.survey,
-                                                  choices_result=new_response)
+                                                  choices_result=new_r)
                     # weights_result=response.values()) reserved for future
                 else:
                     return False
