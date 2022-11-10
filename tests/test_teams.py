@@ -135,7 +135,9 @@ class test_team1(unittest.TestCase):
 
         score2 = single_choice_score.cal_single_score(team_size=3, num_unique_choice=num_unique_choice2)
         scores[1] += score2 * single_choice_questions_weight[1]
-        self.assertEqual(scores, self.team1.get_single_choice_scores())
+
+        self.assertEqual(0.66667, round(self.team1.get_single_choice_scores()[0], 5))
+        self.assertEqual(2.0, round(self.team1.get_single_choice_scores()[1], 5))
 
     # test multiple score
     def test05_get_multiple_choice_scores(self):
@@ -204,7 +206,7 @@ class test_team1(unittest.TestCase):
                                                           option_scores=option_scores2)
         scores[3] = score2 * self.question4.get_weight()
 
-        self.assertEqual(scores, self.team1.get_mul_choices_scores())
+        self.assertEqual({2: 0.4, 3: 0.54}, self.team1.get_mul_choices_scores())
 
     def test06_get_total_score_by_type(self):
         self.assertEqual(0.94, self.team1.get_total_score_by_type("multiple"))
