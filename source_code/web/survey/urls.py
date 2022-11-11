@@ -10,7 +10,7 @@ urlpatterns = [
 	path('survey/question/<int:question_id>/create_update_option/', views.create_update_options, name='options_create_update'),
 
 	# #from shawn
-	path('survey/<int:question_id>/delete_quetions',views.delete_questions,name = 'delete_questions'),
+	path('survey/<int:question_id>/delete_quetions',views.delete_questions,name = 'delete_question'),
 
 	path('survey/question/<int:question_id>/delete_options',views.delete_options,name='delete_options'),
 

@@ -98,7 +98,7 @@ def delete_options(request,question_id=None):
 
 
 @login_required(login_url="/login")
-def delete_questions(request, question_id=None):
+def delete_questions(request, question_id):
 	"""delete this questions"""
 	current_instructor = request.user
 	#instance_obj = get_object_or_404(Instance, instructor=current_instructor, instance = instance_id )
@@ -107,9 +107,16 @@ def delete_questions(request, question_id=None):
 	if question_obj.survey.instance.instructor != current_instructor:
 		raise Http404
 
-	question_obj.delete()
+	if request.method == 'POST':
+		question_obj.delete()
+		return redirect('../../delete_questions')
+	# context={
+	#
+	# 	"question": question_obj
+	# }
 
 	return render(request, "survey/survey_create.html")
+
 
 
 
