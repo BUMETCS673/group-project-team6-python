@@ -64,6 +64,10 @@ class answer_sheets_test(unittest.TestCase):
         self.assertEqual(dict(), self.answer_sheet2.answers)
         self.assertEqual(dict(), self.answer_sheet3.answers)
 
+        self.assertIsInstance(self.answer_sheet1.answers, answer_sheet.AnswerSheet)
+        self.assertIsInstance(self.answer_sheet2.answers, answer_sheet.AnswerSheet)
+        self.assertIsInstance(self.answer_sheet3.answers, answer_sheet.AnswerSheet)
+
     # test set answers
     def test02_set_answers(self):
         self.answer_sheet1.set_answers(raw_answers=self.raw_answers1)
