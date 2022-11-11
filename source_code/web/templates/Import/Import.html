@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% extends 'base.html' %}
+	{% block header %}
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Import File</title>
+	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400" rel="stylesheet">
+
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/animate.css') }}">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/icomoon.css') }}">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/magnific-popup.css') }}">
+
+	<!-- Owl Carousel -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/owl.theme.default.min.css') }}">
+
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+	<!-- Modernizr JS -->
+	<script src="{{ url_for('static', filename ='js/modernizr-2.6.2.min.js') }}"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="{{ url_for('static', filename = 'js/respond.min.js') }}"></script>
+	<![endif]-->
+
+	{% endblock %}
+    {% block content %}
+
+	<div class="colorlib-loader"></div>
+
+	<div id="page">
+		<nav class="colorlib-nav" role="navigation">
+			<div class="top-menu">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-4">
+							<div id="colorlib-logo"><a href="{{ url_for('teacher.choose_function') }}">Computer Graphics</a></div>
+						</div>
+						<div class="col-md-8 text-right memu-1">
+							<ul>
+								<li><a href="{{ url_for('user.logout') }}">Logout</a></li>
+							</ul>
+						</div>
+						<div class="col-md-11 text-left menu-1">
+							<ul>
+								<li><a href="{{ url_for('teacher.get_teacher') }}">Home</a></li>
+								<li><a href="{{ url_for('teacher.choose_function') }}">CG</a></li>
+								<li><a href="{{ url_for('file.Update_file') }}">Import file</a></li>
+                                <li><a href="{{ url_for('teacher.choose_function') }}"> Hello, {{ session['teacher_email'] }}</a></li>
+                            </ul>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</nav>
+
+		<section id="home" class="video-hero" style="height: 700px; background-image: url({{ url_for('static', filename ='images/cover_img_1.jpg')}});  background-size:cover; background-position: center center;background-attachment:fixed;" data-section="home">
+		<div class="overlay">
+			<div class="colorlib-pricing">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-4 col-md-2"></div>
+					<div class="col-xs-4 col-md-8">
+
+						<form accept-charset="UTF-8" role="form" action="#" method="post" enctype="multipart/form-data">
+						<div class="panel panel-default">
+							<div class="panel-body">
+								Please choose a file to upload<br>
+								<input type = "file" name="avatar"/><br>
+                                <br>
+                                <div id = "in"  align="left"><a href="{{ url_for('teacher.addone') }}">Add the account manually</a></div>
+								<input type="submit"  value="Upload">
+							</div>
+						</div>
+						</form>
+					</div>
+					<div class="col-xs-4 col-md-2"></div>
+				</div>
+			</div>
+			</div>
+		</div>
+		</section>
+
+
+
+
+
+		<footer id="colorlib-footer">
+			<div class="container">
+				<div class="col-md-12 text-center">
+					<p>
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with Light
+					</p>
+				</div>
+            </div>
+		</footer>
+	</div>
+
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="icon-arrow-up2"></i></a>
+	</div>
+
+	<!-- jQuery -->
+	<script src="{{ url_for('static', filename ='js/jquery.min.js')}}"></script>
+	<!-- jQuery Easing -->
+	<script src="{{ url_for('static', filename ='js/jquery.easing.1.3.js')}}"></script>
+	<!-- Bootstrap -->
+	<script src="{{ url_for('static', filename ='js/bootstrap.min.js')}}"></script>
+	<!-- Waypoints -->
+	<script src="{{ url_for('static', filename ='js/jquery.waypoints.min.js')}}"></script>
+	<!-- Stellar Parallax -->
+	<script src="{{ url_for('static', filename ='js/jquery.stellar.min.js')}}"></script>
+	<!-- YTPlayer -->
+	<script src="{{ url_for('static', filename ='js/jquery.mb.YTPlayer.min.js')}}"></script>
+	<!-- Owl carousel -->
+	<script src="{{ url_for('static', filename ='js/owl.carousel.min.js')}}"></script>
+	<!-- Magnific Popup -->
+	<script src="{{ url_for('static', filename ='js/jquery.magnific-popup.min.js')}}"></script>
+	<script src="{{ url_for('static', filename ='js/magnific-popup-options.js')}}"></script>
+	<!-- Counters -->
+	<script src="{{ url_for('static', filename ='js/jquery.countTo.js')}}"></script>
+	<!-- Main -->
+	<script src="{{ url_for('static', filename ='js/main.js')}}"></script>
+{% endblock %}
+</body>
+</html>
