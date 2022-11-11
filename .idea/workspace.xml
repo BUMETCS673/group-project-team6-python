@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e4541b27-369b-481f-a0b9-570afa5c28ad" name="Changes" comment="some multiple score calculation bug fix;">
-      <change afterPath="$PROJECT_DIR$/app/run.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/answer.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/answer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/instance.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/instance.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/question.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/question.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/survey.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/survey.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/team.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/team.py" afterDir="false" />
+    <list default="true" id="e4541b27-369b-481f-a0b9-570afa5c28ad" name="Changes" comment="update">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source_code/web/account/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/source_code/web/db.sqlite3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/source_code/web/group/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/source_code/web/group/migrations/0002_group_survey.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/source_code/web/iGroup/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/source_code/web/iGroup/migrations/0002_configinstance_survey.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/source_code/web/survey/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/source_code/web/survey/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source_code/web/survey/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/source_code/web/templates/registration/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/source_code/web/templates/registration/login.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,8 +92,8 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.main" />
       <item itemvalue="Python.object_id_dict" />
+      <item itemvalue="Python.main" />
     </list>
     <recent_temporary>
       <list>
@@ -173,5 +176,9 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/group_project_team6_java$main.coverage" NAME="main Coverage Results" MODIFIED="1666228738582" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
     <SUITE FILE_PATH="coverage/group_project_team6_java$object_id_dict.coverage" NAME="object_id_dict Coverage Results" MODIFIED="1665618477961" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_structure" />
+    <SUITE FILE_PATH="coverage/ourtests_py$scratch_2.coverage" NAME="scratch_2 Coverage Results" MODIFIED="1667794091832" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
+    <SUITE FILE_PATH="coverage/ourtests_py$main.coverage" NAME="main Coverage Results" MODIFIED="1668027110796" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/source_code/app" />
+    <SUITE FILE_PATH="coverage/ourtests_py$views.coverage" NAME="views Coverage Results" MODIFIED="1667506361582" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/source_code/web/survey" />
+    <SUITE FILE_PATH="coverage/ourtests_py$.coverage" NAME=" Coverage Results" MODIFIED="1667793504690" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
   </component>
 </project>
