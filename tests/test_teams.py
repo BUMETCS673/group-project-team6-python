@@ -73,6 +73,8 @@ class test_team1(unittest.TestCase):
 
         self.assertEqual(3, self.team1.team_size)
 
+        self.assertIsInstance(self.team1, team.Team)
+
     # test get single choice
     def test02_get_single_choice_answer(self):
         single_answers = self.team1.get_single_choice_answer()
