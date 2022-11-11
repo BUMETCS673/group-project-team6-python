@@ -115,40 +115,46 @@ class SurveyForm(forms.Form):
 				choices = [(-1, 'no preference')] + choices
 				# multiple choice, list all choice
 				for option_index, _ in enumerate(question.get_options_set_order_by_index()):
-					self.fields[f'question_multiple_{question.question_index}_choice_{option_index}'] = forms.ChoiceField(choices=choices)
-					self.fields[f'question_multiple_{question.question_index}_choice_{option_index}'].label = f'your_choice_{option_index+1}'
-					#self.fields[f'question_multiple_{question.question_index}_choice_{option.choice_index}'] = \
-					#	forms.IntegerField()
-					#self.fields[f'question_multiple_{question.question_index}_choice_{option.choice_index}'].label = \
-					#	f'question_multiple_{question.question_index}_choice_{option.choice_index}'
+					self.fields[
+						f'question_multiple_{question.question_index}_choice_{option_index}'] = forms.ChoiceField(
+						choices=choices)
+					self.fields[
+						f'question_multiple_{question.question_index}_choice_{option_index}'].label = f'your_choice_{option_index + 1}'
 
 	def save(self):
 		data = self.cleaned_data
-		answer_sheet = AnswerSheet(survey=self.survey,
-		                           student=self.student)
-		answer_sheet.save()
+		# should be get or created
+		# answer_sheet = AnswerSheet(survey=self.survey, student=self.student)
+		answer_sheet = AnswerSheet.objects.get_or_create(survey=self.survey, student=self.student)[0]
+
+		# answer_sheet.save()
+
 		for question in self.survey.get_questions_set():
 			if question.question_type == "SINGLE":
 				choice_index = data[f'question_single_{question.question_index}'][0]
-				option = Option.objects.get(choice_index=choice_index, question=question)
-				choice = ChoiceSingle(option=option)
-
+				option = Option.objects.get(choice_index=choice_index,
+				                            question=question)
+				choice = ChoiceSingle(option=option,
+				                      answer_sheet=answer_sheet)
 				choice.save()
-				answer_sheet.answer_single_choice.add(choice)
+			# answer_sheet.answer_single_choice.add(choice)
 			elif question.question_type == "MULTIPLE":
-				rank = 0 # init
+				rank = 0  # init
 				for option_index, _ in enumerate(question.get_options_set_order_by_index()):
 					choice_index = data[f'question_multiple_{question.question_index}_choice_{option_index}']
 					if choice_index == '-1':
 						continue
-					option = Option.objects.get(question=question, choice_index=choice_index)
+					option = Option.objects.get(question=question,
+					                            choice_index=choice_index)
 
 					choice = ChoiceMultiple(option=option,
-					                        rank=rank)
+					                        rank=rank,
+					                        answer_sheet=answer_sheet)
 					choice.save()
-					answer_sheet.answer_multiple_choice.add(choice)
+					# answer_sheet.answer_multiple_choice.add(choice)
 					rank += 1
-		answer_sheet.save()
+		# answer_sheet.save()
+
 		return answer_sheet
 
 
@@ -159,58 +165,3 @@ class MultipleAnswerForm(Form):
 		self.survey = kwargs.pop('survey', None)
 		super().__init__(*args, **kwargs)
 		self.questions = self.survey.get_questions_set()
-
-# def save(self, *args, **kwargs):
-#	"""save the student answer to question"""
-#	super().__init__(*args, **kwargs)
-#	question = self.question
-#	question_index = question.question_index
-#	question_type = question.question_type
-#	survey = question.survey
-#	student = self.student
-#	answer_sheet = AnswerSheet.objects.get_or_create(survey=survey,
-#	                                                 student=student)  # create or fetch the answer sheet
-#	# save answer to the question
-#	answer = Answer.objects.update_or_create(answer_sheet=answer_sheet,
-#	                                         answer_index=question_index,
-#	                                         answer_type=question_type,
-#	                                         question=question)
-#	if question_type == "SINGLE":
-#		answer_choice_object = AnswerChoiceSingle.objects
-#		choice = self.fields['choice']
-#		answer_choice_object.update_or_create(answer=answer, choice=choice)
-
-
-#
-#	elif question_type == "MULTIPLE":
-#		answer_choice_object = AnswerChoiceMultiple.objects
-#		for option in self.options:
-#			option_name = str(option)
-#			rank = self.fields[option_name]
-#			answer_choice_object.update_or_create(answer=answer, choice=option, rank=rank)
-
-
-# class SingleChoiceAnswerForm(ModelForm):
-#	class Meta:
-#		model = AnswerChoiceSingle
-#		fields = ('choice',)
-#
-#	def __init__(self, *args, **kwargs):
-#		super().__init__(*args, **kwargs)
-#		options = Option.objects.filter(question=self.instance)
-#		self.fields['choice'] = forms.ChoiceField(choices=options)
-#
-#
-# class MultipleChoiceAnswerForm(ModelForm):
-#	class Meta:
-#		model = AnswerChoiceMultiple
-#		fields = ('rank',)
-
-#	def __init__(self, *args, **kwargs):
-#		super().__init__(*args, **kwargs)
-
-
-# QuestionAnswerFormSet = modelformset_factory(Question, form=QuestionAnswerForm, extra=0)
-
-# MultipleChoiceAnswerFormSet = modelformset_factory(AnswerChoiceMultiple, form=MultipleChoiceAnswerForm,extra=0)
-# SingleChoiceAnswerFormSet = modelformset_factory(AnswerChoiceSingle, form=SingleChoiceAnswerForm, extra=0)

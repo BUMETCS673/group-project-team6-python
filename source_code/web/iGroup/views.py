@@ -100,16 +100,22 @@ def config_instance(request, slug=None):
 			survey_service.build_survey()
 			# student answer service
 			answer_sheet_obj_set = AnswerSheet.objects.filter(survey=survey_obj)
-			student_obj_set = [answer_sheet_obj.student for answer_sheet_obj in answer_sheet_obj_set]
+
+			student_obj_set = [answer_sheet_obj.student for
+			                   answer_sheet_obj in answer_sheet_obj_set] # should be unique student
+
 			student_answer_service = StudentAnswerService(student_obj_set=student_obj_set,
 			                                              answer_sheet_obj_set=answer_sheet_obj_set,
-			                                              survey=survey_service.survey, survey_obj=survey)
+			                                              survey=survey_service.survey,
+			                                              survey_obj=survey)
 			student_answer_service.build_students()
 			student_answer_service.build_answer_sheets()
 			student_answer_service.response_survey()
 			# iGroup service
-			iGroup_service = iGroupService(students_target=student_answer_service.students, num_team=num_group,
-			                               survey_target=survey_service.survey, num_pass=max_num_pass)
+			iGroup_service = iGroupService(students_target=student_answer_service.students,
+			                               num_team=num_group,
+			                               survey_target=survey_service.survey,
+			                               num_pass=max_num_pass)
 			iGroup_service.run()
 
 			print()

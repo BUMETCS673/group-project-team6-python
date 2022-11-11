@@ -3,6 +3,7 @@ from .app.survey import Survey
 from .app.question import SingleChoiceQuestion, MultipleChoiceQuestion
 from .app.user import Student
 from .app.instance import Instance
+from survey.models import ChoiceMultiple, ChoiceSingle
 
 
 class iGroupService:
@@ -61,7 +62,9 @@ class SurveyService:
 		survey_id = self.survey_obj.survey_id  # not important can be deleted
 		if not self.questions:
 			self.build_questions()
-		self.survey = Survey(survey_name=survey_name, survey_id=survey_id, questions=self.questions)
+		self.survey = Survey(survey_name=survey_name,
+		                     survey_id=survey_id,
+		                     questions=self.questions)
 
 	def build_questions(self):
 		question_list = []
@@ -78,7 +81,7 @@ class SurveyService:
 
 class StudentAnswerService:
 	students = []
-	answer_sheets = {}
+	answer_sheets = {} #
 
 	def __init__(self, student_obj_set, answer_sheet_obj_set, survey_obj, survey):
 		self.student_obj_set = student_obj_set
@@ -104,18 +107,21 @@ class StudentAnswerService:
 
 		for student_index, student_obj in enumerate(self.student_obj_set):
 			answer_sheet_obj = self.answer_sheet_obj_set.get(student=student_obj)
-			answer_single_choice_set = answer_sheet_obj.answer_single_choice.all()
-			answer_multiple_choice_set = answer_sheet_obj.answer_multiple_choice.all()
+
+			answer_single_choice_set = ChoiceSingle.objects.filter(answer_sheet=answer_sheet_obj)#answer_sheet_obj.answer_single_choice.all()
+			answer_multiple_choice_set = ChoiceMultiple.objects.filter(answer_sheet=answer_sheet_obj) #answer_sheet_obj.answer_multiple_choice.all()
+
 			response_dic = dict()
+			# transport the database record
 			for answer in answer_single_choice_set:
-				response_dic[answer.option.question.question_index] = answer.option.choice_index
+				response_dic[answer.get_question_index()] = answer.get_choice_index()
+				response_dic[answer.get_question_index()] = answer.get_choice_index()
+
 			for answer in answer_multiple_choice_set:
 				if answer.option.question.question_index in response_dic:
-					response_dic[answer.option.question.question_index] = response_dic[
-						                                                      answer.option.question.question_index] | {
-						                                                      answer.rank: answer.option.choice_index}
+					response_dic[answer.get_question_index()] = response_dic[answer.get_question_index()] | {answer.rank: answer.get_choice_index()}
 				else:
-					response_dic[answer.option.question.question_index] = {answer.rank: answer.option.choice_index}
+					response_dic[answer.get_question_index()] = {answer.rank: answer.get_choice_index()}
 			self.answer_sheets[student_index] = response_dic
 
 	def response_survey(self):
