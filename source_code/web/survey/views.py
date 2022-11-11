@@ -84,6 +84,22 @@ def create_update_options(request, question_id=None):
 	return render(request, "survey/option_create.html", context)
 
 
+#delete options
+@login_required(login_url="/login")
+def delete_options(request,question_id=None):
+	current_instructor = request.user
+	question_obj = get_object_or_404(Question, question_id=question_id)
+	instance_obj = question_obj.survey.instance
+	if question_obj.survey.instance.instructor != current_instructor:
+		raise Http404  # not allowed to modify
+
+	options = question_obj.get_options_set()
+
+	options.delete()
+	return redirect('survey:survey_create_update', instance_slug=instance_obj.slug)
+
+
+
 @login_required(login_url="/login")
 def delete_survey(request, id=None):
 	"""update a survey"""

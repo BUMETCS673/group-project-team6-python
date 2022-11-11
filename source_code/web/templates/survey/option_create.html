@@ -27,9 +27,17 @@ This is the option creation page
 
         {% endfor %}
     </div>
-    <div id = 'empty-form' class = 'hidden'>{{ option_formset.empty_form.as_p }}</div>
+    <div id = 'empty-form' class = 'hidden'>
+        {{ option_formset.empty_form.as_p }}
+    </div>
     <button id='add-more-option' type="button">add more option</button>
 
+
+
+    <div id = 'empty-form' class = 'hidden'>
+        <a href ="% url 'delete-option' question_id %}">delete option</a>
+    </div>
+    <button id='delete-option' type="button">delete option</button>
 
 
 
