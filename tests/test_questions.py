@@ -153,7 +153,7 @@ class test_multiple_choice_question(unittest.TestCase):
                                                          choices=None, max_num_choice=None)
 
     # test multiple choice question init
-    def test09_multiple_choice_question_init(self):
+    def test08_multiple_choice_question_init(self):
         # test question_name
         self.assertEqual("q1", self.question1.question_name)
         self.assertEqual("q2", self.question2.question_name)
@@ -183,7 +183,6 @@ class test_multiple_choice_question(unittest.TestCase):
         self.assertEqual([], self.question5.choices)
 
         # test max num choice
-        # test choice
         self.assertEqual(2, self.question1.max_num_choice)
         self.assertEqual(3, self.question2.max_num_choice)
         self.assertEqual(4, self.question3.max_num_choice)
@@ -198,7 +197,7 @@ class test_multiple_choice_question(unittest.TestCase):
         self.assertIsInstance(self.question5, question.MultipleChoiceQuestion)
 
     # Test get_weight
-    def test10_get_weight(self):
+    def test09_get_weight(self):
         self.assertEqual(1, self.question1.get_weight())
         self.assertEqual(2, self.question2.get_weight())
         self.assertEqual(3, self.question3.get_weight())
@@ -207,7 +206,7 @@ class test_multiple_choice_question(unittest.TestCase):
         self.assertEqual(None, self.question5.get_weight())
 
     # Test add_choice
-    def test11_add_choice(self):
+    def test10_add_choice(self):
         # add choices
         self.question1.add_choice("F")
         self.question2.add_choice("6")
@@ -225,7 +224,7 @@ class test_multiple_choice_question(unittest.TestCase):
         self.assertEqual(["1", "2", "3", "4", "5", "6"], self.question2.choices)
 
     # test delete_choice
-    def test12_delete_choice(self):
+    def test11_delete_choice(self):
         # delete choices
         self.question1.delete_choice(1)
         self.question2.delete_choice(0)
@@ -243,7 +242,7 @@ class test_multiple_choice_question(unittest.TestCase):
         self.assertEqual(["2", "3", "4", "5"], self.question2.choices)
 
     # test get_question_type
-    def test13_get_question_type(self):
+    def test12_get_question_type(self):
         self.assertEqual("multiple", self.question1.get_question_type())
         self.assertEqual("multiple", self.question2.get_question_type())
         self.assertEqual("multiple", self.question3.get_question_type())
@@ -251,7 +250,7 @@ class test_multiple_choice_question(unittest.TestCase):
         self.assertEqual("multiple", self.question5.get_question_type())
 
     # test get_choice_size
-    def test14_get_choice_size(self):
+    def test13_get_choice_size(self):
         self.assertEqual(5, self.question1.get_choice_size())
         self.assertEqual(5, self.question2.get_choice_size())
         self.assertEqual(4, self.question3.get_choice_size())
@@ -260,7 +259,7 @@ class test_multiple_choice_question(unittest.TestCase):
         self.assertEqual(0, self.question5.get_choice_size())
 
     # test get_max_num_of_choices
-    def test15_get_max_num_of_choices(self):
+    def test14_get_max_num_of_choices(self):
         self.assertEqual(2, self.question1.get_max_num_of_choice())
         self.assertEqual(3, self.question2.get_max_num_of_choice())
         self.assertEqual(4, self.question3.get_max_num_of_choice())
@@ -269,7 +268,7 @@ class test_multiple_choice_question(unittest.TestCase):
         self.assertEqual(2, self.question5.get_max_num_of_choice())
 
     # test get_all_choices
-    def test16_get_all_choices(self):
+    def test15_get_all_choices(self):
         self.assertEqual(["A", "B", "C", "D", "E"], self.question1.get_all_choices())
         self.assertEqual(["1", "2", "3", "4", "5"], self.question2.get_all_choices())
         self.assertEqual(["Python", "Java", "C", "C++"], self.question3.get_all_choices())
