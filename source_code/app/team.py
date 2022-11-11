@@ -152,7 +152,7 @@ class Team:
                 choice_result = multiple_choice_answers[student.id][question_index].get_choice_result()
 
                 # according to the order, add choices score to the option_scores
-                for order, choice_index in enumerate(choice_result):
+                for i, (order, choice_index) in enumerate(choice_result.items()):
                     # check if number of choice exceed the max number of choice
                     if order > max_num_choice - 1:
                         break
@@ -166,6 +166,7 @@ class Team:
             # after having option_scores, we can calculate the total scores for this question
             score = multiple_choice_score.cal_multiple_score(team_size=self.team_size, max_num_choice=max_num_choice,
                                                              option_scores=option_scores)
+
             # update scores by the question weight
 
             scores[question_index] = score * multiple_question_obj.get_weight()
@@ -187,8 +188,7 @@ class Team:
 
         }
         scores = score_functions[question_type]
-        total_score = sum(s for s in scores.values())
-        return total_score
+        return round(sum(s for s in scores.values()), 5)
 
     def get_total_score(self):
         """
@@ -234,5 +234,6 @@ class Team:
             student_answer_sheet = student.get_answer_sheet_by_survey(survey=self.survey_target)
             # get the all single choice questions from the student answer sheet, and put it in the
             # single_choice_questions dict
-            single_choice_answers[student.id] = student_answer_sheet.get_all_answers_by_question_type(question_type="single")
+            single_choice_answers[student.id] = student_answer_sheet.get_all_answers_by_question_type(
+                question_type="single")
         return single_choice_answers

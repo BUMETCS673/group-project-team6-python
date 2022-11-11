@@ -18,7 +18,6 @@ class User(ABC):
         self.email = email
 
 
-
 class Student(User):
     """
     student class
@@ -46,7 +45,7 @@ class Student(User):
 
         return None
 
-    def get_answer_sheet_by_survey(self,survey):
+    def get_answer_sheet_by_survey(self, survey):
         """
         @param survey: the survey
         @return: the answer sheet by the survey
@@ -54,14 +53,15 @@ class Student(User):
         survey_id = survey.id
         return self.response[survey_id]
 
-    def get_ID(self,):
+    def get_ID(self, ):
         return self.id
 
-    def get_name(self,):
+    def get_name(self, ):
         return self.name
 
-    def get_email(self,):
+    def get_email(self, ):
         return self.email
+
 
 class Instructor(User):
     """

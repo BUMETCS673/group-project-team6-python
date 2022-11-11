@@ -5,12 +5,8 @@
 <link rel="stylesheet" href="style.css">
 <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,600,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> 
-<link rel="stylesheet" href="./css/result.css?v=2"> 
 </head>
 <body>
-    <div class="bodys">
-
-    
     <section class="sub-header">
         <nav>
             <a href="index.html"><img src="images/logo_2.png"></a>
@@ -26,39 +22,37 @@
             </div>
             <i class="fa fa-bars" onclick="showMenu()"></i>
         </nav>
-            <h1>Result</h1>
+            <h1>Welcome</h1>
     </section>
     
 <!---------- Blog Page Content ---------->
     
-    <section class="menu-content">
-        <div class="row">
-            <table border="0">
-                <tr>
-                  <th>&nbsp;</th>
-                  <th>Team Leader </th>
-                  <th>Design and Implementation Leader</th>
-                  <th>Security Leader</th>
-                  <th>Configuration Leader</th>
-                  <th>QA Leader</th>
-                  <th>Requirement Leader</th>
-                </tr>
-                <tr>
-                    <td>item1</td>
-                    <td>Shawn</td>
-                    <td>Design and Implementation Leader</td>
-                    <td>Security Leader</td>
-                    <td>Configuration Leader</td>
-                    <td>QA Leader</td>
-                    <td>Requirement Leader</td>
-                  </tr>
-                  <tr class="buttonBox">
-                    <td><input type="button" value="Back" @click="backCS()"/></td>
-                    <td><input type="button" value="Save" @click="saveSurvey()"/></td>
-                  </tr>
-             </table>
-             
-        </div>
+    <section class="course-content">
+    <div class="row">
+    <div class="course-left">
+        <h2>Courses</h2>
+        <div class="course">
+            <h2>CS673</h2>
+            <p>SOFTWARE ENGINEERING</p>
+          </div>
+          
+          <div class="course">
+            <h2>CS683</h2>
+            <p>Mobile Application Development with Android</p>
+          </div>
+          
+          <div class="course">
+            <h2>CS575</h2>
+            <p>Operating Systems</p>
+          </div>
+        
+        
+        
+    </div>
+        
+    
+    
+    </div>
     </section>
     
 <!-------- footer ---------->
@@ -73,7 +67,7 @@
         </div>
 
 </section>    
-</div>
+  
   
 <!----JavaScript for toggle menu---->
 <script>
@@ -87,8 +81,6 @@
         navLinks.style.right = "-200px";
     }
 </script> 
-<script src="./js/jqeuery.js"></script>
-<script src="./js/vue.js"></script>
-<script src="./js/now.js?V=6"></script>
+    
 </body>
 </html>    

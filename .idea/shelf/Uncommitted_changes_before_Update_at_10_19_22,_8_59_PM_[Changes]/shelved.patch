@@ -1,0 +1,230 @@
+Index: app/team.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from score_calculation import multiple_choice_score\nfrom score_calculation import single_choice_score\n\n\nclass Team:\n\ttotal_score = 0\n\n\tdef __init__(self, team_size, team_name, survey_target, **kwargs):\n\t\t\"\"\"\n\n        :param team_size: the size of the team\n        :param team_name: the name of the team\n        :param members: list of students in the team\n        :param survey: the survey that is targeting for calculating the team score\n        :param kwargs: reserved\n        \"\"\"\n\t\tself.team_size = team_size\n\t\tself.team_name = team_name\n\t\tself.__team_members = None  # list of student\n\t\tself.survey_target = survey_target\n\n\t@property\n\tdef team_members(self):\n\t\t# print(f\"show group{self.team_name} members:{self.__team_members}\")\n\t\treturn self.__team_members\n\n\t@team_members.setter\n\tdef team_members(self, members):\n\t\tprint(\"set team members\")\n\t\tself.__team_members = members\n\n\t@team_members.deleter\n\tdef team_members(self):\n\t\tprint(\"deleting all members in the team\")\n\t\tdel self.__team_members\n\n\tdef add_team_member(self, student):\n\t\tself.team_members.append(student)\n\n\tdef get_team_size(self):\n\t\treturn len(self.__team_members)\n\n\tdef get_single_choice_scores(self):\n\t\t\"\"\"\n        calculate all the single choice scores for the team\n        :return: the score of all single choice questions of all members in the team\n        \"\"\"\n\n\t\t# for each student,\n\t\t# get single choice answers in the dictionary format {student id : {question index, answer obj}}\n\t\tsingle_choice_answers = {}\n\t\tfor student in self.__team_members:\n\t\t\t# do the query, get the student response(answer sheet) to that survey\n\t\t\tstudent_answer_sheet = student.get_answer_sheet_by_survey(survey=self.survey_target)\n\t\t\t# get the all single choice questions from the student answer sheet, and put it in the\n\t\t\t# single_choice_questions dict\n\t\t\tsingle_choice_answers[student.id] = student_answer_sheet.get_all_answers_by_question_type(\n\t\t\t\tquestion_type=\"single\")\n\t\t# get the single choice question in the dictionary format {question index : question obj}\n\t\tsingle_choice_questions = self.survey_target.get_all_questions_by_type(question_type=\"single\")\n\n\t\t# get the single choice question weight in the dictionary format {question index : weight}\n\t\tsingle_choice_questions_weight = self.survey_target.get_all_question_weight_by_type(question_type=\"single\")\n\n\t\t# initialize result dict = {question index, score}\n\t\tscores = {question_index: 0 for question_index in single_choice_questions.keys()}\n\n\t\t# the calculation for the score\n\t\t# for each single choice question\n\t\tfor question_index, single_question_obj in single_choice_questions.items():\n\t\t\tunique_choice = set()\n\t\t\t# for each student answer this question\n\t\t\tfor student in self.__team_members:\n\t\t\t\t# print(student.id, single_question)\n\t\t\t\tstudent_answer = single_choice_answers[student.id][question_index]\n\t\t\t\tstudent_choice = student_answer.get_choice_result()\n\t\t\t\tunique_choice.add(student_choice)\n\t\t\t# find the total len of unique choice\n\t\t\tnum_unique_choice = len(unique_choice)\n\t\t\t# then calculate the score for this single choice problem\n\t\t\tscore = single_choice_score.cal_single_score(team_size=self.team_size, num_unique_choice=num_unique_choice)\n\n\t\t\t# update return scores\n\t\t\tscores[question_index] += score * single_choice_questions_weight[\n\t\t\t\tquestion_index]\n\n\t\treturn scores\n\n\tdef get_mul_choices_scores(self):\n\t\t\"\"\"\n        calculate all multiple choice scores for this team\n        @return: all multiple choice question scores for this team.\n        \"\"\"\n\t\tself.team_size = len(self.__team_members)\n\n\t\t# for each student, get multiple choice answers in the\n\t\t# dictionary format {student id : {question index, multiple choice answer obj}}\n\t\tmultiple_choice_answers = {}\n\t\tfor student in self.__team_members:\n\t\t\t# do the query, get the student response(answer sheet) to that survey\n\t\t\tstudent_answer_sheet = student.get_answer_sheet_by_survey(survey=self.survey_target)\n\t\t\t# get the all multiple choice questions from the student answer sheet, and put it in the\n\t\t\t# multiple_choice_answers dict\n\t\t\tmultiple_choice_answers[student.id] = student_answer_sheet.get_all_answers_by_question_type(\n\t\t\t\tquestion_type=\"multiple\")\n\n\t\t# get the multiple choice question in the dictionary format {question index : question obj}\n\t\tmultiple_choice_questions = self.survey_target.get_all_questions_by_type(question_type=\"multiple\")\n\n\t\t# get the multiple choice question weight in the dictionary format {question index : weight}\n\t\tmultiple_choice_questions_weight = self.survey_target.get_all_question_weight_by_type(question_type=\"multiple\")\n\n\t\t# max valid choices will be the size of this team\n\t\tmax_valid_choices = len(self.__team_members)\n\n\t\t# initialize result dict = {question index, score}\n\t\tscores = {question_index: 0 for question_index in multiple_choice_questions.keys()}\n\n\t\t# the calculation for the score\n\t\t# for each multiple question\n\t\tfor question_index, multiple_question_obj in multiple_choice_questions.items():\n\t\t\t# find max number of choice for each multiple question, compare the manual setting and the max valid choices\n\t\t\tmax_num_choice = min(multiple_question_obj.max_num_choice, max_valid_choices)\n\t\t\t# initialize 0 score dict to record each option scores\n\n\t\t\t# [[0,0]] [score for i option, number of occurrence for ith]\n\t\t\toption_scores = [[0 for _ in range(2)] for _ in range(multiple_question_obj.get_choice_size())]\n\n\t\t\t# for each student calculate and add the option score to the option_scores\n\t\t\tfor student in self.__team_members:\n\t\t\t\t# get the student multiple choice result\n\t\t\t\tchoice_result = multiple_choice_answers[student.id][question_index].get_choice_result()\n\n\t\t\t\t# according to the order, add choices score to the option_scores\n\t\t\t\tfor order, choice_index in enumerate(choice_result):\n\t\t\t\t\t# check if number of choice exceed the max number of choice\n\t\t\t\t\tif order > max_num_choice - 1:\n\t\t\t\t\t\tbreak\n\t\t\t\t\t# set choice weight, the larger order the less weight, choice index 0 has weight max_num_choice\n\t\t\t\t\tchoice_weight = max_num_choice - order\n\t\t\t\t\t# update option_scores score and occurrence\n\t\t\t\t\toption_scores[choice_index][0] += choice_weight\n\n\t\t\t\t\toption_scores[choice_index][1] += 1\n\n\t\t\t# after having option_scores, we can calculate the total scores for this question\n\t\t\tscore = multiple_choice_score.cal_multiple_score(team_size=self.team_size, max_num_choice=max_num_choice,\n\t\t\t                                                 option_scores=option_scores)\n\t\t\t# update scores by the question weight\n\n\t\t\tscores[question_index] = score * multiple_question_obj.get_weight()\n\n\t\treturn scores\n\n\tdef get_sch_score(self):\n\t\tpass\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/team.py b/app/team.py
+--- a/app/team.py	(revision 3b295acd26d8d18146dac064220425423ad31f34)
++++ b/app/team.py	(date 1666139232892)
+@@ -21,11 +21,20 @@
+ 
+ 	@property
+ 	def team_members(self):
++		"""
++		get all the student
++		@return: all the student objects
++		"""
+ 		# print(f"show group{self.team_name} members:{self.__team_members}")
+ 		return self.__team_members
+ 
+ 	@team_members.setter
+ 	def team_members(self, members):
++		"""
++		set the team member for this team
++		@param members: the list of student members
++		@return: None
++		"""
+ 		print("set team members")
+ 		self.__team_members = members
+ 
+Index: app/main.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from question import SingleChoiceQuestion, MultipleChoiceQuestion\nfrom survey import Survey\nfrom user import Student\nfrom answer_sheet import AnswerSheet\nfrom team import Team\n\n\"\"\"\nillustrate the steps for creating survey and answer the survey from students\n\"\"\"\n\n# step 1: you need a survey, so create one\nsurvey_1 = Survey(survey_name=\"hello\", survey_id=\"unique_id\", questions=None, students=None)\n\n# step 2: you need to set questions for the survey\n\"\"\"\nfor example: if you have 3 questions: \n1. single choice(choose 1)\n    options: 1. Java, 2. C, 3. Python\n\n2. mul choice(choose 2 of them)\n    options: 1. Java, 2. C, 3. Python\n\n3. mul choice(choose 3 of them)\n    options: 1. Java, 2. C, 3. Python, 4. C++\n\"\"\"\nquestion_1 = SingleChoiceQuestion(question_name=\"q1\",\n                                  description=\"None\",\n                                  weight=1,\n                                  choices=[\"Java\", \"C\", \"Python\", \"R\"])\n\nquestion_2 = SingleChoiceQuestion(question_name=\"q2\",\n                                  description=\"None\",\n                                  weight=-1,\n                                  choices=[\"Java\", \"C\", \"Python\", \"C++\"])\n\nquestion_3 = MultipleChoiceQuestion(question_name=\"q3\",\n                                    description=\"None\",\n                                    weight=1,\n                                    choices=[\"Java\", \"C\", \"Python\", \"C++\", \"R\", \"Ruby\"],\n                                    max_num_choice=3)\n\n# step 3: add question to the survey\nsurvey_1.append_question(question_1)\nsurvey_1.append_question(question_2)\nsurvey_1.append_question(question_3)\nprint(len(survey_1.questions))\n\n# step 4: need to have student to answer the survey, so manually set 4 student here\n# note: student id should be unique\nstudent_1 = Student(name=\"stu 1\", email=\"test@gmail.com\", user_id=1)\nstudent_2 = Student(name=\"stu 2\", email=\"test@gmail.com\", user_id=2)\nstudent_3 = Student(name=\"stu 3\", email=\"test@gmail.com\", user_id=3)\nstudent_4 = Student(name=\"stu 4\", email=\"test@gmail.com\", user_id=4)\nstudent_5 = Student(name=\"stu 5\", email=\"test\",user_id=5)\n\n# step 5: student respond to the survey\n\n# dictionary\n# (key = question in that survey, value = index of the option of the question)\n\nstudent_1_answer = {\n    0: 3,  # single choice\n    1: 2,  # multiple choice\n    2: {0: 5, 1:2}  # multiple choice\n}\nstudent_2_answer = {\n    0: 3,  # single choice\n    1: 1,  # multiple choice\n    2: {0: 5, 1:2}  # multiple choice\n}\nstudent_3_answer = {\n    0: 1,  # single choice\n    1: 1,  # multiple choice\n    2: {0: 5}  # multiple choice\n}\nstudent_4_answer = {\n    0: 1,  # single choice\n    1: 2,  # multiple choice\n    2: {0: 5}  # multiple choice\n}\n\n# step 6. student submit their response\nstudent_1.answer_survey(survey_1, student_1_answer)\nstudent_2.answer_survey(survey_1, student_2_answer)\nstudent_3.answer_survey(survey_1, student_3_answer)\nstudent_4.answer_survey(survey_1, student_4_answer)\n#student_5.answer_survey(survey_1,student_5_answer)\n\n# step 7. randomly assigned 4 student to the 2 teams, but here for the sake of illustration, I manually assign them\nteam_1 = Team(team_size=4, team_name=\"t1\", survey_target=survey_1)\nteam_2 = Team(team_size=4, team_name=\"t2\", survey_target=survey_1)\nteam_1.team_members = [student_1, student_2, student_3, student_4]\nteam_2.team_members = [student_1, student_2, student_3]\n\n# step 8. calculate the two team scores?\n\n## please write score function for the team class\nprint(f\"team_1 scores for single choice are {team_1.get_single_choice_scores()}\")\nprint(f\"team_1 scores for multiple choices are {team_1.get_mul_choices_scores()}\")\n\nprint()\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/main.py b/app/main.py
+--- a/app/main.py	(revision 3b295acd26d8d18146dac064220425423ad31f34)
++++ b/app/main.py	(date 1666227583500)
+@@ -51,7 +51,7 @@
+ student_2 = Student(name="stu 2", email="test@gmail.com", user_id=2)
+ student_3 = Student(name="stu 3", email="test@gmail.com", user_id=3)
+ student_4 = Student(name="stu 4", email="test@gmail.com", user_id=4)
+-student_5 = Student(name="stu 5", email="test",user_id=5)
++student_5 = Student(name="stu 5", email="test", user_id=5)
+ 
+ # step 5: student respond to the survey
+ 
+@@ -59,24 +59,24 @@
+ # (key = question in that survey, value = index of the option of the question)
+ 
+ student_1_answer = {
+-    0: 3,  # single choice
+-    1: 2,  # multiple choice
+-    2: {0: 5, 1:2}  # multiple choice
++	0: 3,  # single choice
++	1: 2,  # multiple choice
++	2: {0: 3, 1: 1, 2: 2}  # multiple choice
+ }
+ student_2_answer = {
+-    0: 3,  # single choice
+-    1: 1,  # multiple choice
+-    2: {0: 5, 1:2}  # multiple choice
++	0: 3,  # single choice
++	1: 1,  # multiple choice
++	2: {0: 3, 1: 1, 2: 2}  # multiple choice
+ }
+ student_3_answer = {
+-    0: 1,  # single choice
+-    1: 1,  # multiple choice
+-    2: {0: 5}  # multiple choice
++	0: 1,  # single choice
++	1: 1,  # multiple choice
++	2: {0: 3, 1: 2, 2: 2}  # multiple choice
+ }
+ student_4_answer = {
+-    0: 1,  # single choice
+-    1: 2,  # multiple choice
+-    2: {0: 5}  # multiple choice
++	0: 1,  # single choice
++	1: 2,  # multiple choice
++	2: {0: 4, 1: 1, 2: 2}  # multiple choice
+ }
+ 
+ # step 6. student submit their response
+@@ -84,12 +84,12 @@
+ student_2.answer_survey(survey_1, student_2_answer)
+ student_3.answer_survey(survey_1, student_3_answer)
+ student_4.answer_survey(survey_1, student_4_answer)
+-#student_5.answer_survey(survey_1,student_5_answer)
++# student_5.answer_survey(survey_1,student_5_answer)
+ 
+ # step 7. randomly assigned 4 student to the 2 teams, but here for the sake of illustration, I manually assign them
+ team_1 = Team(team_size=4, team_name="t1", survey_target=survey_1)
+ team_2 = Team(team_size=4, team_name="t2", survey_target=survey_1)
+-team_1.team_members = [student_1, student_2, student_3, student_4]
++team_1.team_members = [student_1, student_2, student_3]
+ team_2.team_members = [student_1, student_2, student_3]
+ 
+ # step 8. calculate the two team scores?
+Index: app/survey.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\"\"\"\nData structure for survey\n\"\"\"\nfrom question import SingleChoiceQuestion, MultipleChoiceQuestion\n\n\nclass Survey:\n\t\"\"\"\n    survey class\n    \"\"\"\n\n\tdef __init__(self, survey_name, survey_id, questions=None, students=None, **kwargs):\n\t\t\"\"\"\n\n        :param survey_name: the name of the survey\n        :param survey_id: unique survey id\n        :param questions: the question in the survey (list type i.e. [question obj])\n        :param students: the student that should receive the survey(set type i.e. {student obj})\n        :param kwargs: reserved for future use\n        \"\"\"\n\t\t# if not default students\n\t\tif students is None:\n\t\t\tstudents = []\n\n\t\t# if no default questions in the survey\n\t\tif questions is None:\n\t\t\tquestions = []\n\t\tself.id = survey_id  # should be unique\n\t\tself.survey_name = survey_name\n\t\tself.questions = questions\n\t\tself.num_question = len(questions)\n\t\tself.students = students\n\t\tself.num_student = len(students)\n\t\tself.send_survey = False\n\t\tself.active = False\n\n\tdef append_question(self, question):\n\t\t\"\"\"\n        append question to the last question in the survey\n        :param question: the question obj\n        :return: None\n        \"\"\"\n\t\t# append last element to the questions\n\t\tself.questions.append(question)\n\n\t\t# update the num_question\n\t\tself.num_question += 1\n\n\t\treturn None\n\n\tdef insert_question(self, index_to_insert, question):\n\t\t\"\"\"\n\n        :param index_to_insert: index to insert the question\n        :param question: question obj\n        :return: None\n        \"\"\"\n\n\t\tself.questions.insert(index_to_insert, question)\n\n\t\treturn None\n\n\tdef get_all_question_indexes_by_type(self, question_type):\n\t\t\"\"\"\n\t\tget all questions indexes by such question type\n\t\t@param question_type: string, type of the question\n\t\t@return: the indexes of such type\n\t\t\"\"\"\n\t\tresult = set()\n\t\tfor index, question in enumerate(self.questions):\n\t\t\tif question.question_type == question_type:\n\t\t\t\tresult.add(index)\n\t\treturn result\n\n\tdef get_all_question_weight_by_type(self, question_type):\n\t\t\"\"\"\n\t\tget all question by type\n\t\t@param question_type:\n\t\t@return: {question index, question weight}\n\t\t\"\"\"\n\t\tquestions = self.get_all_questions_by_type(question_type=question_type)\n\t\tresult = dict()\n\t\tfor index, question in questions.items():\n\t\t\tresult[index] = question.get_weight()\n\t\treturn result\n\n\tdef get_question_by_index(self, index_value):\n\t\t\"\"\"\n\t\tget the question obj by the index\n\t\t@param index_value: the question position in the survey\n\t\t@return: the question obj\n\t\t\"\"\"\n\t\treturn self.questions[index_value]\n\n\tdef get_question_type_by_index(self, index_value):\n\t\t\"\"\"\n\t\tget question type by the index value\n\t\t@param index_value: the index value of the question\n\t\t@return: the type of such question\n\t\t\"\"\"\n\t\tquestion = self.get_question_by_index(index_value)\n\t\tquestion_type = question.question_type\n\t\treturn question_type\n\n\tdef get_all_questions_by_type(self, question_type):\n\t\t\"\"\"\n        get all the such type question and its options\n        :return: {question index: question obj}\n        \"\"\"\n\t\tresult = dict()\n\t\tindexes_result = self.get_all_question_indexes_by_type(question_type=question_type)\n\t\t# find all the answer that has such question type\n\t\tfor question_index in indexes_result:\n\t\t\t# check if this question is such question type\n\t\t\tresult[question_index] = self.questions[question_index]\n\t\treturn result\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/survey.py b/app/survey.py
+--- a/app/survey.py	(revision 3b295acd26d8d18146dac064220425423ad31f34)
++++ b/app/survey.py	(date 1666208293908)
+@@ -11,7 +11,7 @@
+ 
+ 	def __init__(self, survey_name, survey_id, questions=None, students=None, **kwargs):
+ 		"""
+-
++		this is the init method for survey class.
+         :param survey_name: the name of the survey
+         :param survey_id: unique survey id
+         :param questions: the question in the survey (list type i.e. [question obj])
+Index: app/instance.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\"\"\"\nThe instance class, which is the team formation for each pass\n\"\"\"\n\nclass Instance:\n\n\tdef
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/instance.py b/app/instance.py
+--- a/app/instance.py	(revision 3b295acd26d8d18146dac064220425423ad31f34)
++++ b/app/instance.py	(date 1666140111105)
+@@ -1,7 +1,19 @@
+ """
+-The instance class, which is the team formation for each pass
++The instance class, which is the team formation for each pass.
++Swap happens here
+ """
++
+ 
+ class Instance:
++	def __init__(self, num_pass, students_target, teams_size, survey_target):
++		"""
+ 
+-	def
+\ No newline at end of file
++		@param num_pass:
++		@param students_target:
++		@param teams_size:
++		@param survey_target:
++		"""
++
++	def __random_assignment(self):
++		pass
++	
+Index: app/answer.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\"\"\"\nData structure for answer class\n\"\"\"\nfrom abc import ABC, abstractmethod\n\n\nclass Answer(ABC):\n    \"\"\"\n    abstract class for the student answer\n    \"\"\"\n\n    def __init__(self, question, survey, **kwargs):\n        \"\"\"\n\n        @param question: the answer corresponding to the question object\n        @param survey: the question that in the survey\n        @param kwargs: reserved\n        \"\"\"\n        self.question_type = question\n        self.question_type = question.question_type\n        self.survey = survey\n\n\nclass SingleChoiceAnswer(Answer):\n    \"\"\"\n    the single choice answer class\n    \"\"\"\n    question_types = {\n        \"single\"\n    }\n    answer_type = \"single\"\n\n    def __init__(self, choice_result, **kwargs):\n        \"\"\"\n\n        @param choice_result: the choice of student, int: index of the option\n        @param kwargs: pass to the super class\n        @return: None\n        \"\"\"\n        super().__init__(**kwargs)\n        self.choice_result = choice_result\n\n    def get_choice_result(self):\n        \"\"\"\n        get the choice answer\n        @return: the index of the choice\n        \"\"\"\n        return self.choice_result\n\n\nclass MultipleChoiceAnswer(Answer):\n    \"\"\"\n    the multiple choice answer class\n    \"\"\"\n    question_types = {\n        \"multiple\"\n    }\n    answer_type = \"multiple\"\n\n    def __init__(self, choices_result, **kwargs):\n        \"\"\"\n\n        @param choices_result: all choices result for the question, should be the dictionary format,\n        i.e. {0: 2, 1: 3, 2: 5} which {order of choice, the index of the option}\n        @param weights_result: the weights for the choice\n        @param kwargs:\n        @return:\n        \"\"\"\n        super().__init__(**kwargs)\n        self.choices_result = choices_result  # should be list, order is the index\n\n        # reserved for future\n        # self.weights_result = weights_result\n\n    def get_choice_result(self):\n        \"\"\"\n        get the choice answer\n        @return: the index of the choice\n        \"\"\"\n        return self.choices_result\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/answer.py b/app/answer.py
+--- a/app/answer.py	(revision 3b295acd26d8d18146dac064220425423ad31f34)
++++ b/app/answer.py	(date 1666208993018)
+@@ -16,7 +16,7 @@
+         @param survey: the question that in the survey
+         @param kwargs: reserved
+         """
+-        self.question_type = question
++        self.question = question
+         self.question_type = question.question_type
+         self.survey = survey
+ 
+Index: app/question.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\"\"\"\nData structure for question collections\n\"\"\"\nfrom abc import ABC, abstractmethod\n\n\nclass Question(ABC):\n    \"\"\"\n    abstract class for question\n    \"\"\"\n\n    def __init__(self, question_name, description, weight, **kwargs):\n        \"\"\"\n\n        :param question_name: the name for the question\n        :param description: the description for the question\n        :param weight: the weight of this question\n        :param kwargs: reserved for future use\n        \"\"\"\n        self.description = description\n        self.question_name = question_name\n        self.weight = weight\n\n    def get_weight(self):\n        return self.weight\n\n\nclass SingleChoiceQuestion(Question):\n    \"\"\"\n    Single choice question\n    \"\"\"\n    question_type = \"single\"\n\n    def __init__(self, choices=None, **kwargs):\n        \"\"\"\n\n        :param choices: the all available choices in list datatype, default to None\n        :param kwargs: reserved for future use\n        \"\"\"\n        super().__init__(**kwargs)\n        if choices is None:\n            choices = []\n        self.choices = choices  # should contain list of options\n\n    def add_choice(self, choice):\n        \"\"\"\n        Add available option to the question\n        :param choice: str datatype, add the available option to the question\n        :return: None\n        \"\"\"\n        self.choices.append(choice)\n\n        return None\n\n    def get_question_type(self):\n        return self.question_type\n\n    def delete_choice(self, choice_index):\n        \"\"\"\n\n        :param choice_index: the index of the choice need to be deleted from the question\n        :return: None\n        \"\"\"\n        pass\n\n    def get_all_choice(self):\n        \"\"\"\n        get all available\n        @return: [all available choices]\n        \"\"\"\n        return self.choices\n\n    def get_choice_size(self):\n        \"\"\"\n        get size of the options\n        @return: int of length\n        \"\"\"\n        return len(self.choices)\n\n\nclass MultipleChoiceQuestion(Question):\n    \"\"\"Multiple choice question\"\"\"\n    question_type = \"multiple\"\n\n    def __init__(self, choices=None, max_num_choice=9999, **kwargs):\n        \"\"\"\n\n        :param choices: all available choices in list datatype, default to None\n        :param max_num_choice: the max number of choice in int datatype student can choose, default to 0\n        :param choices_score: the scores of each choice\n        :param kwargs: reserved for future use\n        \"\"\"\n        super().__init__(**kwargs)\n        if choices is None:\n            choices = []\n\n        self.choices = choices\n        self.max_num_choice = max_num_choice\n\n    def add_choice(self, choice):\n        \"\"\"\n        Add available option to the question\n        :param choice: str datatype, add the available option to the question\n        :return: None\n        \"\"\"\n        self.choices.append(choice)\n\n        return None\n\n    def delete_choice(self, choice_index):\n        \"\"\"\n\n        :param choice_index: the index of the choice need to be deleted from the question\n        :return: None\n        \"\"\"\n        pass\n\n    def get_question_type(self):\n        return self.question_type\n\n    def get_choice_size(self):\n        \"\"\"\n        get size of the options\n        @return: int of length\n        \"\"\"\n        return len(self.choices)\n\n    def get_weight(self):\n        \"\"\"\n        get this question weight\n        @return: weight of this question\n        \"\"\"\n        return self.weight\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/question.py b/app/question.py
+--- a/app/question.py	(revision 3b295acd26d8d18146dac064220425423ad31f34)
++++ b/app/question.py	(date 1666208222282)
+@@ -124,10 +124,3 @@
+         @return: int of length
+         """
+         return len(self.choices)
+-
+-    def get_weight(self):
+-        """
+-        get this question weight
+-        @return: weight of this question
+-        """
+-        return self.weight
+Index: app/run.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/run.py b/app/run.py
+new file mode 100644
+--- /dev/null	(date 1666139436242)
++++ b/app/run.py	(date 1666139436242)
+@@ -0,0 +1,25 @@
++"""
++class for instructor specific parameter
++"""
++
++
++class Run:
++
++	def __init__(self, num_max_pass, num_team, survey_target, student_pool):
++		"""
++
++		@param num_max_pass: the max number of pass allowed for climbing hill algorithm
++		@param num_team: the number of team formation
++		@param survey_target: the target survey for this allocation
++		"""
++		self.num_max_pass = num_max_pass
++		self.num_team = num_team
++		self.survey = survey_target
++		self.students = student_pool
++
++	def run(self):
++		"""
++		run the allocation algorithm
++		@return: the team formation
++		"""
++		for each_pass in range(self.num_max_pass)
+\ No newline at end of file

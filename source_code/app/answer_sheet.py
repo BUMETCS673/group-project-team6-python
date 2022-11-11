@@ -33,12 +33,8 @@ class AnswerSheet:
         return: None
         """
         # check input None raw_answers
-        if raw_answers is None:
-            print("input raw_answers is None")
-            pass
-        # check None survey
-        elif self.survey is None:
-            print("empty survey")
+        if raw_answers is None or self.survey is None:
+            print("invalid input")
             pass
         else:
             for question_index, response in raw_answers.items():
@@ -51,10 +47,10 @@ class AnswerSheet:
                                                 choice_result=response)
                 elif question_type == "multiple":
                     # need to preprocess the result
-                    new_response = [val for val in sorted(response)]  # List
+                    new_r = dict(sorted(response.items()))
                     answer = MultipleChoiceAnswer(question=question,
                                                   survey=self.survey,
-                                                  choices_result=new_response)
+                                                  choices_result=new_r)
                     # weights_result=response.values()) reserved for future
                 else:
                     return False
