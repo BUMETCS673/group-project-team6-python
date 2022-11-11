@@ -16,23 +16,18 @@ class Answer(ABC):
         @param survey: the question that in the survey
         @param kwargs: reserved
         """
-        # check None input
-        if question is not None:
-            self.question = question
-            self.question_type = question.question_type
-        else:
-            self.question = None
-            self.question_type = None
-        if survey is not None:
-            self.survey = survey
-        else:
-            self.survey = None
+        self.question = question
+        self.question_type = question.question_type
+        self.survey = survey
 
 
 class SingleChoiceAnswer(Answer):
     """
     the single choice answer class
     """
+    question_types = {
+        "single"
+    }
     answer_type = "single"
 
     def __init__(self, choice_result, **kwargs):
@@ -43,12 +38,7 @@ class SingleChoiceAnswer(Answer):
         @return: None
         """
         super().__init__(**kwargs)
-        # check if choice_result is None
-        if choice_result is not None:
-            self.choice_result = choice_result
-        else:
-            self.choice_result = None
-            print("choice_result is None")
+        self.choice_result = choice_result
 
     def get_choice_result(self):
         """
@@ -62,24 +52,22 @@ class MultipleChoiceAnswer(Answer):
     """
     the multiple choice answer class
     """
+    question_types = {
+        "multiple"
+    }
     answer_type = "multiple"
 
     def __init__(self, choices_result, **kwargs):
         """
 
-        @param choices_result: List, all choice option index result for the question,
-        i.e. [0,1,3,4] where its index is the order, and value is the option index
+        @param choices_result: all choices result for the question, should be the dictionary format,
+        i.e. {0: 2, 1: 3, 2: 5} which {order of choice, the index of the option}
         @param weights_result: the weights for the choice
         @param kwargs:
         @return:
         """
         super().__init__(**kwargs)
-        # check if choice_result is None
-        if choices_result is not None:
-            self.choices_result = choices_result
-        else:
-            self.choices_result = None
-            print("choice_result is None")  # should be dict, dict key is the index of question
+        self.choices_result = choices_result  # should be list, order is the index
 
         # reserved for future
         # self.weights_result = weights_result

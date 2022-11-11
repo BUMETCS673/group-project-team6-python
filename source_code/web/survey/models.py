@@ -75,6 +75,15 @@ class Option(models.Model):
 	choice_name = models.CharField(max_length=50)
 	question = models.ForeignKey('Question', on_delete=CASCADE)
 
+	def get_question_index(self):
+		return self.question.question_index
+
+	def __repr__(self):
+		return self.choice_name
+
+	def __str__(self):
+		return self.choice_name
+
 
 # answer sheet
 class AnswerSheet(models.Model):
@@ -83,26 +92,37 @@ class AnswerSheet(models.Model):
 	"""
 	answer_sheet_id = models.AutoField(primary_key=True)
 	survey = models.ForeignKey('Survey', on_delete=CASCADE)
-	student = models.ForeignKey('account.Instructor', on_delete=CASCADE)  # should link to student
+	student = models.ForeignKey('account.Student', on_delete=CASCADE)  # should link to student
 
 
-# generic answer
-class Answer(models.Model):
-	"""
-	 model answer
-	"""
-	answer_id = models.AutoField(primary_key=True)
-	answer_index = models.IntegerField(default=None)
+# answer_single_choice = models.ManyToManyField('ChoiceSingle')
+# answer_multiple_choice = models.ManyToManyField('ChoiceMultiple')
+
+
+class ChoiceMultiple(models.Model):
+	option = models.ForeignKey('Option', on_delete=CASCADE)
+	rank = models.IntegerField(null=False)
 	answer_sheet = models.ForeignKey('AnswerSheet', on_delete=CASCADE)
-	answer_type = models.CharField(max_length=50)
-	question = models.ForeignKey('Question', on_delete=CASCADE)
-	num_choice = models.IntegerField(default=0)
+
+	def get_student(self):
+		return self.answer_sheet.student
+
+	def get_question_index(self):
+		return self.option.get_question_index()
+
+	def get_choice_index(self):
+		return self.option.choice_index
 
 
-class AnswerChoice(models.Model):
-	"""
-	choice
-	"""
-	answer_choice_id = models.AutoField(primary_key=True)
-	choice = models.ForeignKey(Option, on_delete=CASCADE)
-	answer = models.ForeignKey(Answer, on_delete=CASCADE)
+class ChoiceSingle(models.Model):
+	option = models.ForeignKey('Option', on_delete=CASCADE)
+	answer_sheet = models.ForeignKey('AnswerSheet', on_delete=CASCADE)
+
+	def get_student(self):
+		return self.answer_sheet.student
+
+	def get_question_index(self):
+		return self.option.get_question_index()
+
+	def get_choice_index(self):
+		return self.option.choice_index

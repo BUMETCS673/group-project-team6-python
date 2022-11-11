@@ -31,10 +31,11 @@ class InstanceCreationForm(ModelForm):
 class InstructorParameterForm(ModelForm):
 	class Meta:
 		model = ConfigInstance
-		fields = ('max_num_pass','num_group')
+		fields = ('max_num_pass', 'num_group')
 
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
+
 	def clean(self):
 		"""Parameter validation"""
 		pass

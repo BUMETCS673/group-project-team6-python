@@ -1,0 +1,17 @@
+
+{% block content %}
+    <form action="." method="post">
+    {% csrf_token %}
+        {{ student_form.as_p }}
+
+        {{ survey_answer_form.as_p }}
+
+    <button style="margin-top: 10px" type="submit">save</button>
+    </form>
+
+
+
+{% endblock %}
+
+
+

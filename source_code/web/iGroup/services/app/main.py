@@ -1,9 +1,9 @@
-from source_code.app.question import SingleChoiceQuestion, MultipleChoiceQuestion
-from source_code.app.survey import Survey
-from source_code.app.user import Student
-from source_code.app.answer_sheet import AnswerSheet
-from source_code.app.team import Team
-from source_code.app.instance import Instance
+from question import SingleChoiceQuestion, MultipleChoiceQuestion
+from survey import Survey
+from user import Student
+from answer_sheet import AnswerSheet
+from team import Team
+from instance import Instance
 
 """
 illustrate the steps for creating survey and answer the survey from students
@@ -136,7 +136,7 @@ team_2.team_members = [student_1, student_2, student_3]
 
 #####run optimization####
 students_target = [student_1, student_2, student_3, student_4, student_5, student_6, student_7, student_8, student_9]
-test_instance = Instance(60, students_target=students_target, num_team=2, survey_target=survey_1)
+test_instance = Instance(20, students_target=students_target, num_team=2, survey_target=survey_1)
 
 result = test_instance.run_instance()
 print(result[0].get_all_team_member_id())

@@ -65,44 +65,44 @@ student_9 = Student(name="stu 9", email="test@gmail.com", user_id=9)
 student_1_answer = {
     #0: 3,  # single choice
     #1: 2,  # multiple choice
-    0: {0: 1}  # multiple choice
+    0: {0: 3}  # multiple choice
 }
 student_2_answer = {
     #0: 3,  # single choice
     #1: 2,  # multiple choice
-    0: {0: 1}  # multiple choice
+    0: {0: 3}  # multiple choice
 }
 student_3_answer = {
     #0: 3,  # single choice
     #1: 2,  # multiple choice
-    0: {0: 1}  # multiple choice
+    0: {0: 3}  # multiple choice
 }
 student_4_answer = {
     #0: 3,  # single choice
     #1: 2,  # multiple choice
-    0: {0: 1, 1: 2}  # multiple choice
+    0: {0: 1}  # multiple choice
 }
 student_5_answer = {
     #0: 3,  # single choice
     #1: 2,  # multiple choice
-    0: {0: 2, 1: 1}  # multiple choice
+    0: {0: 1}  # multiple choice
 }
 student_6_answer = {
     #0: 3,  # single choice
     #1: 2,  # multiple choice
-    0: {0: 2}  # multiple choice
+    0: {0: 1}  # multiple choice
 }
 
 student_7_answer = {
     #0: 3,  # single choice
     #1: 2,  # multiple choice
-    0: {0: 2}  # multiple choice
+    0: {0: 1}  # multiple choice
 }
 
 student_8_answer = {
     #0: 3,  # single choice
     #1: 2,  # multiple choice
-    0: {0: 2}  # multiple choice
+    0: {0: 1}  # multiple choice
 }
 
 student_9_answer = {
@@ -123,10 +123,10 @@ student_8.answer_survey(survey_1, student_8_answer)
 student_9.answer_survey(survey_1, student_9_answer)
 
 # step 7. randomly assigned 4 student to the 2 teams, but here for the sake of illustration, I manually assign them
-team_1 = Team(team_name="t1", survey_target=survey_1)
-team_2 = Team(team_name="t2", survey_target=survey_1)
-team_1.team_members = [student_1, student_2, student_3]
-team_2.team_members = [student_1, student_2, student_3]
+#team_1 = Team(team_name="t1", survey_target=survey_1)
+#team_2 = Team(team_name="t2", survey_target=survey_1)
+#team_1.team_members = [student_1, student_2, student_3]
+#team_2.team_members = [student_1, student_2, student_3]
 
 # step 8. calculate the two team scores?
 
@@ -136,7 +136,7 @@ team_2.team_members = [student_1, student_2, student_3]
 
 #####run optimization####
 students_target = [student_1, student_2, student_3, student_4, student_5, student_6, student_7, student_8, student_9]
-test_instance = Instance(60, students_target=students_target, num_team=2, survey_target=survey_1)
+test_instance = Instance(20, students_target=students_target, num_team=2, survey_target=survey_1)
 
 result = test_instance.run_instance()
 print(result[0].get_all_team_member_id())

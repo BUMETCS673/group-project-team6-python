@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Instance,ConfigInstance,ResultInstance
+from .models import Instance, ConfigInstance, ResultInstance
+from django.contrib import admin
 
 
 # Register your models here.
@@ -12,4 +13,3 @@ admin.site.register(Instance)
 admin.site.register(ConfigInstance)
 
 admin.site.register(ResultInstance)
-
