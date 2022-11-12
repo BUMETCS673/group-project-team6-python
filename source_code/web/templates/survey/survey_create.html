@@ -30,8 +30,13 @@ This is the survey creation page
           <div class = 'question-form'>
             {{ question_form.as_p }}
           {% if question_form.instance.question_id %}
-          <a href="{% url 'survey:options_create_update' question_id=question_form.instance.question_id %}"> to option</a>
+          <a href="{% url 'survey:options_create_update' question_id=question_form.instance.question_id %}"> create option</a>
+
+{#          <a href="{% url 'survey:delete_question' question_id=question_form.instance.question_id %}"> delete this question</a>#}
+              <button id =''>delete this question </button>
           {% endif %}
+
+
           </div>
 
        {% endfor %}
@@ -40,11 +45,9 @@ This is the survey creation page
     <div id = 'empty-form' class = 'hidden'>{{ question_formset.empty_form.as_p  }}</div>
     <button id='add-more-question' type="button">add more question</button>
 
-    <button id='delete-question' type="button">delete question</button>
-
-
     {% endif %}
     <button style="margin-top: 10px" type="submit">save</button>
+
     </div>
     </form>
 
