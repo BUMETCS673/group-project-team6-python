@@ -1,21 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e4541b27-369b-481f-a0b9-570afa5c28ad" name="Changes" comment="update">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_19_22,_8_59_PM_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_19_22__8_59_PM__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source_code/web/account/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/source_code/web/db.sqlite3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/source_code/web/group/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/source_code/web/group/migrations/0002_group_survey.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/source_code/web/iGroup/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/source_code/web/iGroup/migrations/0002_configinstance_survey.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/source_code/web/survey/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/source_code/web/survey/migrations/0002_remove_question_max_choice.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/source_code/web/survey/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/source_code/web/survey/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source_code/web/web/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/source_code/web/web/settings.py" afterDir="false" />
-    </list>
+    <list default="true" id="e4541b27-369b-481f-a0b9-570afa5c28ad" name="Changes" comment="delete uploaded database related files" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -30,6 +16,13 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubProjectSettings">
+    <option name="branchProtectionPatterns">
+      <list>
+        <option value="dev" />
+      </list>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -117,7 +110,7 @@
       <workItem from="1666064247935" duration="19371000" />
       <workItem from="1666207139571" duration="8368000" />
       <workItem from="1666239147741" duration="611000" />
-      <workItem from="1668233886067" duration="146000" />
+      <workItem from="1668233886067" duration="813000" />
     </task>
     <task id="LOCAL-00001" summary="add some comments;">
       <created>1666064722585</created>
@@ -140,7 +133,21 @@
       <option name="project" value="LOCAL" />
       <updated>1666118828195</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="update for iter2">
+      <created>1668234081982</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1668234081982</updated>
+    </task>
+    <task id="LOCAL-00005" summary="delete uploaded database related files">
+      <created>1668234217577</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1668234217577</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -162,7 +169,9 @@
     <MESSAGE value="add some comments;" />
     <MESSAGE value="some minor refactors;" />
     <MESSAGE value="some multiple score calculation bug fix;" />
-    <option name="LAST_COMMIT_MESSAGE" value="some multiple score calculation bug fix;" />
+    <MESSAGE value="update for iter2" />
+    <MESSAGE value="delete uploaded database related files" />
+    <option name="LAST_COMMIT_MESSAGE" value="delete uploaded database related files" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
