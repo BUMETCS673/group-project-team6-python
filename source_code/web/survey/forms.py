@@ -21,7 +21,7 @@ class QuestionCreationForm(ModelForm):
 
 	class Meta:
 		model = Question
-		fields = ('question_type', 'question_name', 'description', 'weight',)
+		fields = ('question_type', 'question_name', 'description', 'weight', 'max_choice',)
 
 
 QuestionCreationFormSet = modelformset_factory(Question, form=QuestionCreationForm, extra=0)
@@ -104,6 +104,7 @@ class SurveyForm(forms.Form):
 		super().__init__(*args, **kwargs)
 		self.questions = self.survey.get_questions_set()
 		for question in self.questions:
+			# all the option of the question
 			choices = [(option.choice_index, option.choice_name) for index, option in
 			           enumerate(question.get_options_set_order_by_index())]
 			if question.question_type == "SINGLE":
@@ -113,13 +114,14 @@ class SurveyForm(forms.Form):
 				self.fields[f'question_single_{question.question_index}'].label = question.question_name
 			elif question.question_type == "MULTIPLE":
 				choices = [(-1, 'no preference')] + choices
-				# multiple choice, list all choice
-				for option_index, _ in enumerate(question.get_options_set_order_by_index()):
+				# multiple choice, list max number of allowed choice
+				for option_index in range(question.max_choice): #enumerate(question.get_options_set_order_by_index()):
 					self.fields[
-						f'question_multiple_{question.question_index}_choice_{option_index}'] = forms.ChoiceField(
-						choices=choices)
+						f'question_multiple_{question.question_index}_choice_{option_index}'] =\
+						forms.ChoiceField(choices=choices)
 					self.fields[
-						f'question_multiple_{question.question_index}_choice_{option_index}'].label = f'your_choice_{option_index + 1}'
+						f'question_multiple_{question.question_index}_choice_{option_index}'].label =\
+						f'question_{question.question_index}_choice_{option_index}'
 
 	def save(self):
 		data = self.cleaned_data
