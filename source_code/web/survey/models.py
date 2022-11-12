@@ -47,7 +47,7 @@ class Question(models.Model):
 	question_name = models.CharField(max_length=50)
 	description = models.CharField(max_length=50)
 	weight = models.IntegerField(default=0)
-#	max_choice = models.IntegerField(default=1)
+	max_choice = models.IntegerField(default=1)
 	survey = models.ForeignKey('Survey', on_delete=CASCADE)
 
 	def get_absolute_url(self):
