@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block title%}
+This is the option creation page
+{% endblock %}
+
+
+{% block content %}
+    <style>
+        .question_form {
+
+        }
+        .hidden{
+            display: none;
+        }
+    </style>
+    <form action="." method="post">
+    {% csrf_token %}
+        <h3>This is the options section for {{ current_question.question_name }}</h3>
+        <div>Question description: {{ current_question.description }}</div>
+    <div id="option-form-list">
+    {% if option_formset %}
+        {{ option_formset.management_form }}
+        {% for option_form in option_formset %}
+            <div class="option-form">
+            {{ option_form.as_p }}
+            </div>
+    <button id='delete-option' type="button">delete option</button>
+        {% endfor %}
+    </div>
+    <div id = 'empty-form' class = 'hidden'>
+        {{ option_formset.empty_form.as_p }}
+
+    </div>
+    <button id='add-more-option' type="button">add more option</button>
+
+    <div id = 'empty-form' class = 'hidden'>
+      {{ option_formset.empty_form }}
+    </div>
+
+
+    {% endif %}
+    <button style="margin-top: 10px" type="submit">save</button>
+
+
+
+    </form>
+
+
+
+
+
+
+
+<script>
+
+    const addMoreQuestionBtn = document.getElementById('add-more-option')
+    const totalNewForm = document.getElementById('id_form-TOTAL_FORMS')
+
+
+    addMoreQuestionBtn.addEventListener('click',add_new_question_from)
+
+    function add_new_question_from(event){
+        if (event){
+            event.preventDefault()
+        }
+
+        const currentQuestionForms = document.getElementsByClassName('option-form')
+
+        const formCopyTarget = document.getElementById('option-form-list')
+        const currentQuestionFormCount = currentQuestionForms.length //index value
+        const copyEmptyFormEl = document.getElementById('empty-form').cloneNode(true)
+        copyEmptyFormEl.setAttribute('class','option-form')
+        copyEmptyFormEl.setAttribute('id', `form-${currentQuestionFormCount}`)
+        const regex = new RegExp('__prefix__','g')
+        copyEmptyFormEl.innerHTML = copyEmptyFormEl.innerHTML.replace(regex,currentQuestionFormCount)
+        totalNewForm.setAttribute('value', currentQuestionFormCount + 1)
+        // add new empty form element to html page
+        formCopyTarget.append(copyEmptyFormEl)
+    }
+
+
+
+</script>
+
+{% endblock %}
+
+

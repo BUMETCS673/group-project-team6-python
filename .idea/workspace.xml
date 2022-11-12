@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e4541b27-369b-481f-a0b9-570afa5c28ad" name="Changes" comment="some multiple score calculation bug fix;">
-      <change afterPath="$PROJECT_DIR$/app/run.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/answer.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/answer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/instance.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/instance.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/question.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/question.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/survey.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/survey.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/team.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/team.py" afterDir="false" />
-    </list>
+    <list default="true" id="e4541b27-369b-481f-a0b9-570afa5c28ad" name="Changes" comment="delete uploaded database related files" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -25,6 +17,13 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GithubProjectSettings">
+    <option name="branchProtectionPatterns">
+      <list>
+        <option value="dev" />
+      </list>
+    </option>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -34,15 +33,12 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/dawei/Desktop/CS673/project_source/group-project-team6-java&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
-  }
-}</component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
   <component name="RunManager" selected="Python.main">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="group-project-team6-java" />
@@ -89,8 +85,8 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.main" />
       <item itemvalue="Python.object_id_dict" />
+      <item itemvalue="Python.main" />
     </list>
     <recent_temporary>
       <list>
@@ -114,6 +110,7 @@
       <workItem from="1666064247935" duration="19371000" />
       <workItem from="1666207139571" duration="8368000" />
       <workItem from="1666239147741" duration="611000" />
+      <workItem from="1668233886067" duration="813000" />
     </task>
     <task id="LOCAL-00001" summary="add some comments;">
       <created>1666064722585</created>
@@ -136,7 +133,21 @@
       <option name="project" value="LOCAL" />
       <updated>1666118828195</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="update for iter2">
+      <created>1668234081982</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1668234081982</updated>
+    </task>
+    <task id="LOCAL-00005" summary="delete uploaded database related files">
+      <created>1668234217577</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1668234217577</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -152,12 +163,15 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add some comments;" />
     <MESSAGE value="some minor refactors;" />
     <MESSAGE value="some multiple score calculation bug fix;" />
-    <option name="LAST_COMMIT_MESSAGE" value="some multiple score calculation bug fix;" />
+    <MESSAGE value="update for iter2" />
+    <MESSAGE value="delete uploaded database related files" />
+    <option name="LAST_COMMIT_MESSAGE" value="delete uploaded database related files" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -171,7 +185,11 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/ourtests_py$views.coverage" NAME="views Coverage Results" MODIFIED="1667506361582" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/source_code/web/survey" />
     <SUITE FILE_PATH="coverage/group_project_team6_java$main.coverage" NAME="main Coverage Results" MODIFIED="1666228738582" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
+    <SUITE FILE_PATH="coverage/ourtests_py$scratch_2.coverage" NAME="scratch_2 Coverage Results" MODIFIED="1667794091832" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
+    <SUITE FILE_PATH="coverage/ourtests_py$.coverage" NAME=" Coverage Results" MODIFIED="1667793504690" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/group_project_team6_java$object_id_dict.coverage" NAME="object_id_dict Coverage Results" MODIFIED="1665618477961" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_structure" />
+    <SUITE FILE_PATH="coverage/ourtests_py$main.coverage" NAME="main Coverage Results" MODIFIED="1668027110796" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/source_code/app" />
   </component>
 </project>
