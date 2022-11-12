@@ -17,7 +17,14 @@ Haiyang(whaiyang@bu.edu) - QA leader |
 
 ## Project Description:
 
-Our project is making a team assignment tool that can automatically assign students to a team, which involves the concepts of front-end, back-end, database and so on. We named it "iGroup".  The main idea of the Team assignment tool is to help create teams based on students preferences and background. Algorithmically, we weight different preferences to create the most appropriate team.
+Our project is making a team assignment tool that can automatically assign students to a team, which involves the concepts of front-end, back-end, database and so on. We named it "iGroup". The main idea of the Team assignment tool is to help create teams based on students preferences and background. Algorithmically, we weight different preferences to create the most appropriate team.
+
+### High-level Description: 
+A Web-based Application for team assignment
+### Motivation: 
+Help professors automatically assign teams based on the survey while focusing on Class Size which is around 100 to 200 students.
+### Goal: 
+Efficiently form teams and visualize the results on web page
 
 <br /><br />
 
