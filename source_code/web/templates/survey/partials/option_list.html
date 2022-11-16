@@ -1,6 +1,8 @@
 <!--add option and list all option -->
 {% extends 'base.html' %}
 {% block content %}
+    <h1>all options</h1>
+    <h2> by order</h2>
     <section id="option-list" class="col-12">
         {% if option_set %}
             {% csrf_token %}

@@ -224,7 +224,11 @@ def edit_question(request, survey_id=None, question_id=None):
         question_form = QuestionCreationForm(request.POST, instance=question_obj)
         if question_form.is_valid():
             question_form.save()
-            return redirect('survey:question_list', survey_id=survey_obj.survey_id)
+            context = {
+                'survey_obj': survey_obj,
+
+            }
+            return render(request, 'survey/survey_index.html', context)
     else:
         # GET
         question_form = QuestionCreationForm(instance=question_obj)
