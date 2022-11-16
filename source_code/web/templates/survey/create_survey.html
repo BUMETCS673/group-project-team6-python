@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<form method="post">
+    {% csrf_token %}
+    {{ survey_form.as_p }}
+<button style="margin-top: 10px" type="submit">save</button>
+</form>
+
+
+{% endblock %}

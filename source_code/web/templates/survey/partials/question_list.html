@@ -1,0 +1,21 @@
+<section class="col-6">
+    {% if question_set %}
+        {% csrf_token %}
+        <div class="htmx-indicator">updating</div>
+        {% for question in question_set %}
+            <tr id="question-{{ question.question_id }}" class="question-row">
+
+                <li class="list-group-item justify-content-between align-items-center">
+                    {{ question.question_name }}
+                    <a class='btn btn-primary'
+                       href="{% url 'survey:edit_question' survey_id=question.survey.survey_id question_id=question.question_id %}">edit
+                        question</a>
+                    <a class='btn btn-primary'
+                       href="{% url 'survey:option_list' survey_id=question.survey.survey_id question_id=question.question_id %}">edit
+                        options</a>
+
+                </li>
+            </tr>
+        {% endfor %}
+    {% endif %}
+</section>

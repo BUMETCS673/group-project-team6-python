@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+    <form method="post" action="{{ request.path }}">
+        {% csrf_token %}
+        <div>
+            <h1>Edit question</h1>
+        </div>
+        <div>
+
+            {{ question_form.as_p }}
+
+        </div>
+        <button type="submit">save this question</button>
+    </form>
+
+    {% if question_obj %}
+    {% endif %}
+
+
+{% endblock %}

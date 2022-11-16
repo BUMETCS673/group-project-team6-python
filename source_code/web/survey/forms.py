@@ -34,7 +34,7 @@ class OptionCreationForm(ModelForm):
 		model = Option
 		fields = ('choice_name',)
 
-	def __init__(self, question, *args, **kwargs):
+	def __init__(self, *args, question, **kwargs):
 		super(OptionCreationForm, self).__init__(*args, **kwargs)
 		self.question = question
 
