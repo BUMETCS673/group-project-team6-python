@@ -84,7 +84,7 @@ class test_weight(unittest.TestCase):
             if sum(k.get_total_score() for k in result) == 0:
                 most_accurate = most_accurate + 1
 
-        self.assertTrue((most_accurate / num_of_times_running) > 0.8)
+        self.assertTrue((most_accurate / num_of_times_running) >= 0.8)
 
     def test02_positive_weight_accuracy(self):
         self.survey_1.questions[0].weight = 5
@@ -94,10 +94,13 @@ class test_weight(unittest.TestCase):
         for i in range(0, num_of_times_running):
             result = test_instance.run_instance()
 
+            for j in result:
+                print(j.get_all_team_member_id())
+
             if sum(k.get_total_score() for k in result) == 15:
                 most_accurate = most_accurate + 1
 
-        self.assertTrue((most_accurate / num_of_times_running) > 0.8)
+        self.assertTrue((most_accurate / num_of_times_running) >= 0.8)
 
 
 if __name__ == '__main__':
