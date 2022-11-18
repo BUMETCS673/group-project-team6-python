@@ -33,6 +33,8 @@ class Question(models.Model):
     """
     Generic question model
     """
+    class Meta:
+        unique_together = ('survey', 'question_index')
 
     class QuestionType(models.TextChoices):
         """
@@ -62,9 +64,10 @@ class Question(models.Model):
         return self.option_set.all().order_by('choice_index')
 
     def get_options_name_order_by_index(self):
-        """"""
+        """get all options name by its index"""
         options_name = self.get_options_set_order_by_index().values('choice_name')
         return options_name
+
 
 
 class Option(models.Model):
@@ -96,10 +99,6 @@ class AnswerSheet(models.Model):
     answer_sheet_id = models.AutoField(primary_key=True)
     survey = models.ForeignKey('Survey', on_delete=CASCADE)
     student = models.ForeignKey('account.Student', on_delete=CASCADE)  # should link to student
-
-
-# answer_single_choice = models.ManyToManyField('ChoiceSingle')
-# answer_multiple_choice = models.ManyToManyField('ChoiceMultiple')
 
 
 class ChoiceMultiple(models.Model):

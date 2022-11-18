@@ -25,4 +25,4 @@ class Student(models.Model):
     """
 	email = models.EmailField(max_length=256)
 	name = models.CharField(max_length=256)
-	course = models.CharField(max_length=256)
+	BUID = models.CharField(max_length=256)
