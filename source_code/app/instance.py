@@ -80,7 +80,7 @@ class Instance:
 							new_team_2_score = team_2.get_total_score()
 							min_new_score = min(new_team_1_score, new_team_2_score)
 
-							if min_new_score <= min_old_score:
+							if min_new_score < min_old_score:
 								unswap += 1
 								# if swap lead to decrease scores, un-swap
 								team_1.replace_team_member(ptr_team_1, student_team_1)
