@@ -102,7 +102,7 @@ class test_weight(unittest.TestCase):
             if sum(k.get_total_score() for k in result) == -3:
                 most_accurate = most_accurate + 1
 
-        self.assertTrue((most_accurate / num_of_times_running) > 0.8)
+        self.assertTrue((most_accurate / num_of_times_running) >= 0.8)
 
     # in this case, mult question is more important, final answer should be
     def test02_most_negative_weight_for_sing_accuracy(self):
@@ -116,7 +116,7 @@ class test_weight(unittest.TestCase):
             if sum(k.get_total_score() for k in result) == -2.66667 * 3:
                 most_accurate = most_accurate + 1
 
-        self.assertTrue((most_accurate / num_of_times_running) > 0.8)
+        self.assertTrue((most_accurate / num_of_times_running) >= 0.8)
 
     def test03_most_positive_weight_for_mult_accuracy(self):
         self.survey_1.questions[0].weight = 5
@@ -132,7 +132,7 @@ class test_weight(unittest.TestCase):
             if sum(k.get_total_score() for k in result) == 4.66667 * 3:
                 most_accurate = most_accurate + 1
 
-        self.assertTrue((most_accurate / num_of_times_running) > 0.8)
+        self.assertTrue((most_accurate / num_of_times_running) >= 0.8)
 
     def test03_most_positive_weight_for_sing_accuracy(self):
         self.survey_1.questions[1].weight = 5
@@ -148,7 +148,7 @@ class test_weight(unittest.TestCase):
             if sum(k.get_total_score() for k in result) == 5.0 * 3:
                 most_accurate = most_accurate + 1
 
-        self.assertTrue((most_accurate / num_of_times_running) > 0.8)
+        self.assertTrue((most_accurate / num_of_times_running) >= 0.8)
 
 
 if __name__ == '__main__':
