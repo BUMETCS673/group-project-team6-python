@@ -26,6 +26,8 @@ urlpatterns = [
 
     # student answer
     path('<int:survey_id>/student-answer/', views.survey_answer, name='survey_answer'),
+    path('<int:survey_id>/student-answer/upload', views.upload_answers_csv, name='upload_answers_csv'),
+
 
     path('thank-you/', TemplateView.as_view(template_name="survey/answer/thank_you.html"), name="thank-you")
 ]

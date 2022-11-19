@@ -3,25 +3,34 @@ from .models import Survey, AnswerSheet, Question, Option, ChoiceMultiple, Choic
 
 # Register your models here.
 
-admin.site.register(Question)
-admin.site.register(AnswerSheet)
 # admin.site.register(Answer)
 admin.site.register(Option)
 
 
 @admin.register(Survey)
 class SurveyAdmin(admin.ModelAdmin):
-	list_display = ('survey_id', 'survey_name')
+    list_display = ('survey_id', 'survey_name')
 
 
-@admin.register(ChoiceMultiple)
-class ChoiceMultiple(admin.ModelAdmin):
-	list_display = (
-		'rank',
-		'option',
-	)
+class OptionAdmin(admin.TabularInline):
+    model = Option
 
 
-@admin.register(ChoiceSingle)
-class ChoiceSingle(admin.ModelAdmin):
-	list_display = ('option',)
+@admin.register(Question)
+class Question(admin.ModelAdmin):
+    list_display = ('question_index', 'survey',)
+    inlines = [OptionAdmin, ]
+
+
+class ChoiceMultipleAdmin(admin.TabularInline):
+    model = ChoiceMultiple
+
+
+class ChoiceSingleAdmin(admin.TabularInline):
+    model = ChoiceSingle
+
+
+@admin.register(AnswerSheet)
+class AnswerSheet(admin.ModelAdmin):
+    list_display = ('student', 'survey',)
+    inlines = [ChoiceMultipleAdmin, ChoiceSingleAdmin]

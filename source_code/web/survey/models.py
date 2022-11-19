@@ -26,6 +26,14 @@ class Survey(models.Model):
         """get all question set to this survey"""
         return self.question_set.all()
 
+    def get_questions_set_order_by_index(self):
+        """get all question set order by index to this survey"""
+        return self.question_set.all().order_by('question_index')
+
+    def __str__(self):
+        """str repr"""
+        return self.survey_name
+
 
 # question
 
@@ -33,6 +41,7 @@ class Question(models.Model):
     """
     Generic question model
     """
+
     class Meta:
         unique_together = ('survey', 'question_index')
 
@@ -59,6 +68,10 @@ class Question(models.Model):
         """get all option to this question"""
         return self.option_set.all()
 
+    def get_option_by_index(self, option_index):
+        """get a option by its index"""
+        return self.option_set.get(choice_index=option_index)
+
     def get_options_set_order_by_index(self):
         """get all options to this question and order by their index value"""
         return self.option_set.all().order_by('choice_index')
@@ -68,6 +81,9 @@ class Question(models.Model):
         options_name = self.get_options_set_order_by_index().values('choice_name')
         return options_name
 
+    def __str__(self):
+        """str repr"""
+        return self.question_name
 
 
 class Option(models.Model):
@@ -99,9 +115,11 @@ class AnswerSheet(models.Model):
     answer_sheet_id = models.AutoField(primary_key=True)
     survey = models.ForeignKey('Survey', on_delete=CASCADE)
     student = models.ForeignKey('account.Student', on_delete=CASCADE)  # should link to student
+    active = models.BooleanField(default=True)  # if this answer sheet is the newest answer sheet
 
 
 class ChoiceMultiple(models.Model):
+    choice_id = models.AutoField(primary_key=True)
     option = models.ForeignKey('Option', on_delete=CASCADE)
     rank = models.IntegerField(null=False)
     answer_sheet = models.ForeignKey('AnswerSheet', on_delete=CASCADE)
@@ -117,6 +135,7 @@ class ChoiceMultiple(models.Model):
 
 
 class ChoiceSingle(models.Model):
+    choice_id = models.AutoField(primary_key=True)
     option = models.ForeignKey('Option', on_delete=CASCADE)
     answer_sheet = models.ForeignKey('AnswerSheet', on_delete=CASCADE)
 

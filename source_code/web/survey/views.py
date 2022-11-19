@@ -11,7 +11,7 @@ from django.forms.models import modelformset_factory
 from iGroup.models import Instance
 from .models import Survey, Question, AnswerSheet, Option
 from django.views.decorators.http import require_http_methods
-from .utils import reorder, save_question_set
+from .utils import reorder, save_question_set, save_all_student_answer_set
 from django.contrib import messages
 
 
@@ -162,7 +162,7 @@ def upload_questions_csv(request, survey_id=None):
     survey_obj = get_object_or_404(Survey, survey_id=survey_id, instance__instructor=current_instructor)
     context = {}
     if request.method == "GET":
-        render(request, 'survey/upload/upload_csv.html', context)
+        render(request, 'survey/upload/upload_questions_csv.html', context)
 
     csv_file = request.FILES['csv_file']
     if not csv_file.name.endswith('.csv'):
@@ -171,12 +171,13 @@ def upload_questions_csv(request, survey_id=None):
     question_set = csv_file.read().decode('utf-8-sig')
     io_string = io.StringIO(question_set)
     total_saved, total_upload = save_question_set(io_string, survey_obj)
-    context = {
+
+    context = {  # not used yet
         "total_saved": total_saved,
         "total_upload": total_upload,
         'survey_obj': survey_obj
     }
-    return redirect('survey:survey_index',survey_id=survey_id)
+    return redirect('survey:survey_index', survey_id=survey_id)
 
 
 @login_required(login_url="/login")
@@ -359,3 +360,28 @@ def delete_option(request, pk=None, question_id=None):
         'option_set': options
     }
     return render(request, 'survey/partials/option_list.html', context)
+
+
+@login_required(login_url="/login")
+def upload_answers_csv(request, survey_id):
+    current_instructor = request.user
+    survey_obj = get_object_or_404(Survey, survey_id=survey_id, instance__instructor=current_instructor)
+    instance_slug = survey_obj.instance.slug
+    context = {
+        'survey_obj': survey_obj
+    }
+    if request.method == "GET":
+        render(request, 'survey/upload/upload_questions_csv.html', context)
+
+    csv_file = request.FILES['csv_file']
+    if not csv_file.name.endswith('.csv'):
+        messages.error(request, 'THIS IS NOT A CSV FILE')
+
+    question_set = csv_file.read().decode('utf-8-sig')
+    io_string = io.StringIO(question_set)
+    save_all_student_answer_set(io_string, survey_obj)
+
+    context = {  # not used yet
+        'survey_obj': survey_obj
+    }
+    return redirect('iGroup:detail', slug=instance_slug)
