@@ -2,7 +2,7 @@
 
 
 {% block content %}
-
+<div>question form</div>
     <form method="post" action="{{ request.path }}">
         {% csrf_token %}
         <div>
@@ -17,6 +17,8 @@
     </form>
 
     {% if question_obj %}
+        <div>already exist</div>
+
     {% endif %}
 
 

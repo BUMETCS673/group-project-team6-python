@@ -1,5 +1,4 @@
 import io
-
 from django.shortcuts import render, redirect, Http404, get_object_or_404
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth import login, logout, authenticate
@@ -9,6 +8,7 @@ from .forms import SurveyCreationForm, QuestionCreationForm, \
     StudentCreationFrom, SurveyForm
 from django.forms.models import modelformset_factory
 from iGroup.models import Instance
+from account.models import Student
 from .models import Survey, Question, AnswerSheet, Option
 from django.views.decorators.http import require_http_methods
 from .utils import reorder, save_question_set, save_all_student_answer_set
@@ -313,7 +313,8 @@ def option_list(request, survey_id=None, question_id=None):
     option_set = question_obj.get_options_set()
     context = {
         'option_set': option_set,
-        'question_obj': question_obj
+        'question_obj': question_obj,
+        'survey_obj': survey_obj
     }
 
     return render(request, 'survey/partials/option_list.html', context)
@@ -363,7 +364,7 @@ def delete_option(request, pk=None, question_id=None):
 
 
 @login_required(login_url="/login")
-def upload_answers_csv(request, survey_id):
+def upload_answers_csv(request, survey_id=None):
     current_instructor = request.user
     survey_obj = get_object_or_404(Survey, survey_id=survey_id, instance__instructor=current_instructor)
     instance_slug = survey_obj.instance.slug
@@ -385,3 +386,64 @@ def upload_answers_csv(request, survey_id):
         'survey_obj': survey_obj
     }
     return redirect('iGroup:detail', slug=instance_slug)
+
+
+@require_http_methods(['GET'])
+@login_required(login_url="/login")
+def student_list(request, survey_id=None):
+    """list all student answer this survey"""
+    current_instructor = request.user
+    survey_obj = get_object_or_404(Survey, survey_id=survey_id, instance__instructor=current_instructor)
+    all_responses = survey_obj.answersheet_set  # all answer sheets of this survey
+    # only active response, which are all the students
+    all_students = [
+        ((AnswerSheet.objects.filter(survey=survey_obj, student=answer_sheet.student).count()),
+         answer_sheet.student) for answer_sheet in
+        all_responses.filter(active=True)]  # [(num of answer sheet, student obj)]
+
+    num_students = len(all_students)
+    num_responses = all_responses.count()
+
+    context = {
+        'num_students': num_students,
+        'num_responses': num_responses,
+        'all_responses': all_responses,
+        'all_students': all_students,
+        'survey_obj': survey_obj,
+
+    }
+
+    return render(request, 'survey/answer/student_list.html', context)
+
+
+@require_http_methods(['GET'])
+@login_required(login_url="/login")
+def answer_sheet_list(request, survey_id, student_id):
+    """list all answer sheet of a student that response to this survey"""
+    current_instructor = request.user
+    survey_obj = get_object_or_404(Survey, survey_id=survey_id, instance__instructor=current_instructor)
+    student_obj = get_object_or_404(Student, pk=student_id)
+    answer_sheet_set = AnswerSheet.objects.filter(survey=survey_obj, student=student_obj)
+    num_answer_sheet = answer_sheet_set.count()
+    context = {
+        'answer_sheet_set': answer_sheet_set,
+        'student_obj': student_obj,
+        'survey_obj': survey_obj,
+        'num_answer_sheet': num_answer_sheet
+    }
+
+    return render(request, 'survey/answer/answer_sheet_list.html', context)
+
+
+@require_http_methods(['GET'])
+@login_required(login_url="/login")
+def answer_sheet_detail(request, survey_id, answer_sheet_id):
+    """detail answer sheet view"""
+    current_instructor = request.user
+    survey_obj = get_object_or_404(Survey, survey_id=survey_id, instance__instructor=current_instructor)
+    answer_sheet_obj = AnswerSheet(answer_sheet_id=answer_sheet_id, survey=survey_obj)
+    question_answer_set = answer_sheet_obj.get_answers()  # list of (question,query set)
+    context = {
+        'question_answer_set': question_answer_set
+    }
+    return render(request, 'survey/answer/answer_sheet_detail.html', context)

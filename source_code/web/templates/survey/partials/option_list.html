@@ -1,8 +1,6 @@
 <!--add option and list all option -->
 {% extends 'base.html' %}
 {% block content %}
-    <h1>all options</h1>
-    <h2> by order</h2>
     <section id="option-list" class="col-12">
         {% if option_set %}
             {% csrf_token %}
@@ -25,7 +23,8 @@
         {% else %}
             no options yet please create one
         {% endif %}
-
+        <a class="btn btn-primary btn-lg active" href="{% url 'survey:add_option' survey_id=survey_obj.survey_id question_id=question_obj.question_id %}" > add option</a>
+        <a class="btn btn-primary btn-lg active" href="{% url 'survey:survey_index' survey_id=survey_obj.survey_id %}">go back</a>
 
     </section>
 {% endblock %}

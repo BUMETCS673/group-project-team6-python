@@ -81,6 +81,13 @@ class Question(models.Model):
         options_name = self.get_options_set_order_by_index().values('choice_name')
         return options_name
 
+    def get_choice_set(self):
+        """get all answers that relate to this question"""
+        if self.question_type == "SINGLE":
+            return self.choicesingle_set
+        elif self.question_type == "MULTIPLE":
+            return self.choicemultiple_set
+
     def __str__(self):
         """str repr"""
         return self.question_name
@@ -117,10 +124,23 @@ class AnswerSheet(models.Model):
     student = models.ForeignKey('account.Student', on_delete=CASCADE)  # should link to student
     active = models.BooleanField(default=True)  # if this answer sheet is the newest answer sheet
 
+    def get_answers(self):
+        """
+        get all answer that record on this answer sheet
+        return answers, which is list of (question,Query set)
+        """
+        question_set = self.survey.get_questions_set()
+        answers = []
+        for question in question_set:
+            answer = (question, question.get_choice_set().filter(answer_sheet=self))
+            answers.append(answer)
+        return answers
+
 
 class ChoiceMultiple(models.Model):
     choice_id = models.AutoField(primary_key=True)
     option = models.ForeignKey('Option', on_delete=CASCADE)
+    question = models.ForeignKey('Question', on_delete=CASCADE)
     rank = models.IntegerField(null=False)
     answer_sheet = models.ForeignKey('AnswerSheet', on_delete=CASCADE)
 
@@ -137,6 +157,7 @@ class ChoiceMultiple(models.Model):
 class ChoiceSingle(models.Model):
     choice_id = models.AutoField(primary_key=True)
     option = models.ForeignKey('Option', on_delete=CASCADE)
+    question = models.ForeignKey('Question', on_delete=CASCADE)
     answer_sheet = models.ForeignKey('AnswerSheet', on_delete=CASCADE)
 
     def get_student(self):

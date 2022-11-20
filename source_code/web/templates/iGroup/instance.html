@@ -11,11 +11,20 @@
         <a href="{% url 'survey:create_survey' instance_slug=instance.slug %}">create a survey to start the
             allocation</a>
     {% else %}
-        <a href="{% url 'survey:survey_index' survey_id=instance.survey.survey_id %}">edit survey</a>
-        <a href="{% url 'iGroup:config' slug=instance.slug %}">click to start the config</a>
-        <a href="{% url 'survey:survey_answer' survey_id=instance.survey.survey_id %}"> to answer link </a>
+        <li>
+            <a href="{% url 'survey:survey_index' survey_id=instance.survey.survey_id %}">edit survey</a>
+        </li>
+        <li>
+            <a href="{% url 'iGroup:config' slug=instance.slug %}">click to start the config</a>
+        </li>
+        <li>
+            <a href="{% url 'survey:survey_answer' survey_id=instance.survey.survey_id %}"> to answer link </a>
+        </li>
+
+        <a href="{% url 'survey:student_list' survey_id=instance.survey.survey_id %}"> view student status </a>
         <section>
-            {% include 'survey/upload/upload_answers_csv.html' with survey_obj=instance.survey %}
+        <div>{% include 'survey/upload/upload_answers_csv.html' with survey_obj=instance.survey %}</div>
+
         </section>
     {% endif %}
 {% endblock %}

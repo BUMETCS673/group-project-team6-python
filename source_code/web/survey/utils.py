@@ -131,14 +131,14 @@ def save_student_answers(answer_sheet, question_set, answer_set):
     :param answer_set: dict, {'question_x': str y}, x is the index of the question in survey, y is the option index
     :return: the answer sheet
     """
-    assert len(question_set) == len(answer_set)-2, "this should equal"
+    assert len(question_set) == len(answer_set) - 2, "this should equal"
 
     for question_index, question in enumerate(question_set):
         if question.question_type == "SINGLE":
             student_choice = int(
                 answer_set[f'question_{question_index}'])  # should be the int of index of single choice
             choice_option = question.get_option_by_index(option_index=student_choice)
-            ChoiceSingle(option=choice_option, answer_sheet=answer_sheet).save()
+            ChoiceSingle(option=choice_option, answer_sheet=answer_sheet, question=question).save()
 
         elif question.question_type == "MULTIPLE":
             student_choices = [int(i) for i in str(answer_set[f'question_{question_index}']).split(
@@ -146,6 +146,6 @@ def save_student_answers(answer_sheet, question_set, answer_set):
             for rank, student_choice in enumerate(student_choices):
                 # iterate over all choice and save
                 choice_option = question.get_option_by_index(option_index=student_choice)
-                ChoiceMultiple(rank=rank, option=choice_option, answer_sheet=answer_sheet).save()
+                ChoiceMultiple(rank=rank, option=choice_option, answer_sheet=answer_sheet, question=question).save()
         print(f"saved{question.question_name}")
     return answer_sheet
