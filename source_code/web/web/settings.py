@@ -39,7 +39,6 @@ INSTALLED_APPS = [
 	'iGroup',
 	'account',
 	'group',
-	'django_extensions',
 
 ]
 AUTH_USER_MODEL = "account.Instructor"  # use customized account model

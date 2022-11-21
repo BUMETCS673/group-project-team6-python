@@ -24,21 +24,18 @@ This is the option creation page
             <div class="option-form">
             {{ option_form.as_p }}
             </div>
-
+    <button id='delete-option' type="button">delete option</button>
         {% endfor %}
     </div>
     <div id = 'empty-form' class = 'hidden'>
         {{ option_formset.empty_form.as_p }}
+
     </div>
     <button id='add-more-option' type="button">add more option</button>
 
-
-
     <div id = 'empty-form' class = 'hidden'>
-        <a href ="% url 'delete-option' question_id %}">delete option</a>
+      {{ option_formset.empty_form }}
     </div>
-    <button id='delete-option' type="button">delete option</button>
-
 
 
     {% endif %}

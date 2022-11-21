@@ -123,6 +123,7 @@ def survey_answer(request, survey_id):
         student_form = StudentCreationFrom()
         survey_answer_form = SurveyForm(None, survey=survey, student=None)
 
+
     context = {
         'student_form': student_form,
         'survey_answer_form': survey_answer_form,
@@ -152,6 +153,7 @@ def create_survey(request, instance_slug=None):
         'survey_form': survey_form
     }
     return render(request, 'survey/create_survey.html', context)
+
 
 
 @require_http_methods(['POST'])
