@@ -22,7 +22,7 @@ class iGroupService:
 		for team in self.result:
 			print(f"_______{team.team_name}______")
 			for team_member in team.team_members:
-				print(team_member.name)
+				print(team_member.email)
 			print('______________________________')
 
 		return self.result

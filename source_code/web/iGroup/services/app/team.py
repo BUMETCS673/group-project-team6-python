@@ -176,7 +176,9 @@ class Team:
             # for each student calculate and add the option score to the option_scores
             for student in self.__team_members:
                 # get the student multiple choice result
+                # print(f'question_index{question_index},student.id{student.id},{multiple_choice_answers}')
                 choice_result = multiple_choice_answers[student.id][question_index].get_choice_result()
+
 
                 # according to the order, add choices score to the option_scores
                 for order, choice_index in enumerate(choice_result):

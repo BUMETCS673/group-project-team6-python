@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <h1>Detail answer page</h1>
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Question</th>
+                <th scope="col">Answers</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for question_answers in question_answer_set %}
+                <tr>
+
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ question_answers.0 }}</td>
+                    {% for question_answer in question_answers.1 %}
+                        <td> {{ question_answer.option.choice_name }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <h1>Total response from this student:{{ num_answer_sheet }}</h1>
+    {% for answer_sheet in answer_sheet_set %}
+        <li>
+            <a href="{% url 'survey:answer_sheet_detail' survey_id=survey_obj.survey_id answer_sheet_id=answer_sheet.answer_sheet_id %}">
+                student answer sheet {{ forloop.counter }}:
+                {% if answer_sheet.active %}
+                    active
+                {% else %}
+                    inactive
+                {% endif %}
+            </a>
+        </li>
+
+    {% endfor %}
+
+
+{% endblock %}
