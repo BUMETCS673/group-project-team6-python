@@ -23,8 +23,11 @@
         {% else %}
             no options yet please create one
         {% endif %}
-        <a class="btn btn-primary btn-lg active" href="{% url 'survey:add_option' survey_id=survey_obj.survey_id question_id=question_obj.question_id %}" > add option</a>
-        <a class="btn btn-primary btn-lg active" href="{% url 'survey:survey_index' survey_id=survey_obj.survey_id %}">go back</a>
+        <a class="btn btn-primary btn-lg active"
+           href="{% url 'survey:add_option' survey_id=survey_obj.survey_id question_id=question_obj.question_id %}"> add
+            option</a>
+        <a class="btn btn-primary btn-lg active" href="{% url 'survey:survey_index' survey_id=survey_obj.survey_id %}">go
+            back</a>
 
     </section>
 {% endblock %}
