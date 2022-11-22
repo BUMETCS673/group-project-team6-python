@@ -19,6 +19,21 @@ Haiyang(whaiyang@bu.edu) - QA leader |
 
 Our project is making a team assignment tool that can automatically assign students to a team, which involves the concepts of front-end, back-end, database and so on. We named it "iGroup".  The main idea of the Team assignment tool is to help create teams based on students preferences and background. Algorithmically, we weight different preferences to create the most appropriate team.
 
+
+<br />
+
+## How To Run:
+##### Step 1 - Clone the code from GitHub to local device
+##### Step 2 - Switch to "dev" branch and pull it again
+##### Step 3 - Open the Pycharm Terminal and type: 
+               $cd source_code
+               $cd web
+               $pip install -r requirements.txt
+               $python manage.py makemigrations
+               $python manage.py migrate
+               $python manage.py runserver
+
+
 <br /><br />
 
 ## Tech Stack and Frameworks:
