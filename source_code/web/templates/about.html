@@ -1,0 +1,28 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% block title %}About{% endblock %}
+{% block content %}
+    
+    
+<!------- about us content -------->
+    
+<section class="about-us">
+    <div class="row">
+        <div class="about-col">
+            <h1>We are iGroup</h1>     
+            <p>
+                <li>Shawn - Team leader </li>
+                <li>Dawei - Design & Implementation leader</li>
+                <li>Lijian - Configuration leader</li>
+                <li>Haiyang Wang - QA leader</li>
+                <li>Siming - Requirement Leader</li>
+                <li>Alex -Security leader </li>
+            </p>
+            <a href="" class="hero-btn red-btn">EXPOLER NOW</a>
+        </div>
+        <div class="about-col">
+            <img src="{% static 'web/images/about.jpeg' %}" alt="about image">
+        </div>
+    </div>    
+</section>
+{% endblock %}

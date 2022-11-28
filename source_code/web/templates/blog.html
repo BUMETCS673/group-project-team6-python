@@ -1,0 +1,30 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% block title %}Blog{% endblock %}
+{% block content %}
+<!---------- Blog Page Content ---------->
+    
+    <section class="blog-content">
+    <div class="row">
+    <div class="blog-left">
+        <img src="{% static 'web/images/blog.jpeg' %}" alt="about image">
+        <h2>OUR BLOG</h2>
+        
+        
+        
+        <div class="comment-box">
+            <h3>Leave a comment</h3>
+            <form class="comment-form">
+                    <input type="text" placeholder="Enter Name">
+                    <input type="email" placeholder="Enter email">
+                    <textarea rows="5" placeholder="Your Comment"></textarea>
+                    <button type="submit" class="hero-btn red-btn">POST COMMENT</button>
+            </form>
+        </div>
+    </div>
+        
+    
+    
+    </div>
+    </section>
+{% endblock %}
