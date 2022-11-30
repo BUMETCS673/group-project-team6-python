@@ -2,6 +2,7 @@
 Data structure for survey
 """
 from .question import SingleChoiceQuestion, MultipleChoiceQuestion
+from functools import lru_cache
 
 
 class Survey:
@@ -60,6 +61,7 @@ class Survey:
 
 		return None
 
+	@lru_cache
 	def get_all_question_indexes_by_type(self, question_type):
 		"""
 		get all questions indexes by such question type
@@ -72,6 +74,7 @@ class Survey:
 				result.add(index)
 		return result
 
+	@lru_cache
 	def get_all_question_weight_by_type(self, question_type):
 		"""
 		get all question by type
@@ -92,6 +95,7 @@ class Survey:
 		"""
 		return self.questions[index_value]
 
+	@lru_cache
 	def get_question_type_by_index(self, index_value):
 		"""
 		get question type by the index value
@@ -102,6 +106,7 @@ class Survey:
 		question_type = question.question_type
 		return question_type
 
+	@lru_cache
 	def get_all_questions_by_type(self, question_type):
 		"""
         get all the such type question and its options

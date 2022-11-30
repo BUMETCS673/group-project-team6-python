@@ -2,7 +2,7 @@ import io
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponse,HttpResponseRedirect
 from django.views.decorators.http import require_http_methods
 
 from .models import Survey
@@ -28,10 +28,11 @@ def upload_answers_csv(request, survey_id=None):
 	io_string = io.StringIO(question_set)
 
 	try:
-		save_all_student_answer_set(io_string, survey_obj, request)
+		save_all_student_answer_set(io_string, survey_obj)
 	except Exception as e:
 		# raise exception if error occur
-		return HttpResponse(str(e))
+		messages.info(request, f"{str(e)}")
+		return redirect('iGroup:detail', slug=instance_slug)
 
 	context = {  # not used yet
 		'survey_obj': survey_obj

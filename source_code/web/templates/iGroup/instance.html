@@ -4,7 +4,20 @@
     instance detail page
 {% endblock %}
 
+
 {% block content %}
+
+    {% if messages %}
+        <ul id="error_popup" class="messages">
+            {% for message in messages %}
+                <div {% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                    <p>{{ message }}</p>
+                    <button id="close_error_popup">Close</button>
+                </div>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
     {{ instance.instance_name }}
     {{ instance.instructor.username }}
     {% if not instance.survey %}
@@ -18,13 +31,33 @@
             <a href="{% url 'iGroup:config' slug=instance.slug %}">click to start the config</a>
         </li>
         <li>
-            <a href="{% url 'survey:survey_answer' survey_id=instance.survey.survey_id %}"> to answer link </a>
+            <a href="{% url 'survey:send_survey' survey_id=instance.survey.survey_id %}"> lock survey </a>
+        </li>
+        <li>
+            <a></a>
         </li>
 
         <a href="{% url 'survey:student_list' survey_id=instance.survey.survey_id %}"> view student status </a>
         <section>
-        <div>{% include 'survey/upload/upload_answers_csv.html' with survey_obj=instance.survey %}</div>
-
+            <div>{% include 'survey/upload/upload_answers_csv.html' with survey_obj=instance.survey %}</div>
         </section>
+
+        <div>
+            <a href="{% url 'iGroup:list_config' slug=instance.slug %}"> see all configurations</a>
+        </div>
+
     {% endif %}
+
+    <script>
+
+        let popupError = document.getElementById("error_popup")
+        let closePopupError = document.getElementById("close_error_popup")
+        popupError.addEventListener('load', () => {
+            popupError.style.display = "block";
+        })
+
+        closePopupError.addEventListener('click', () => {
+            popupError.style.display = "none";
+        })
+    </script>
 {% endblock %}

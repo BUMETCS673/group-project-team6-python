@@ -14,9 +14,8 @@
        href="{% url 'iGroup:detail' slug=survey_obj.instance.slug %}">back
         to instance</a>
 
-    <section>
     {% include 'survey/upload/upload_questions_csv.html'%}
-    </section>
+
 
 
 {% endblock %}

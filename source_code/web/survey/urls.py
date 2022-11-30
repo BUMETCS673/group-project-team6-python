@@ -2,7 +2,7 @@
 
 from django.urls import path, include
 from django.views.generic.base import TemplateView
-from . import views_student,views_question,views_survey,views_option,views_upload,views
+from . import views_student,views_question,views_survey,views_option,views_upload,views,views_answer
 
 
 app_name = "survey"
@@ -27,6 +27,7 @@ urlpatterns = [
     path('option_sort/<int:question_id>/', views_option.option_sort, name='option_sort'),
 
     # student answer
+    path('<int:survey_id>/send-survey/', views_answer.send_survey, name='send_survey'),
     path('<int:survey_id>/student-answer/', views.survey_answer, name='survey_answer'),
     path('<int:survey_id>/student-answer/upload', views_upload.upload_answers_csv, name='upload_answers_csv'),
     path('<int:survey_id>/students/all/', views_student.student_list, name='student_list'), # view all students answer this survey

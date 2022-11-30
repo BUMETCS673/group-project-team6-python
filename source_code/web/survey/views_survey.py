@@ -48,3 +48,8 @@ def survey_index(request, survey_id=None):
 		'survey_obj': survey_obj
 	}
 	return render(request, 'survey/survey_index.html', context)
+
+
+@login_required(login_url="/login")
+def get_survey_link(request, survey_id=None):
+	"""lock the survey and send the survey"""

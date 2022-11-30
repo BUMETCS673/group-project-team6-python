@@ -115,12 +115,12 @@ class SurveyForm(forms.Form):
 			elif question.question_type == "MULTIPLE":
 				choices = [(-1, 'no preference')] + choices
 				# multiple choice, list max number of allowed choice
-				for option_index in range(question.max_choice): #enumerate(question.get_options_set_order_by_index()):
+				for option_index in range(question.max_choice):  # enumerate(question.get_options_set_order_by_index()):
 					self.fields[
-						f'question_multiple_{question.question_index}_choice_{option_index}'] =\
+						f'question_multiple_{question.question_index}_choice_{option_index}'] = \
 						forms.ChoiceField(choices=choices)
 					self.fields[
-						f'question_multiple_{question.question_index}_choice_{option_index}'].label =\
+						f'question_multiple_{question.question_index}_choice_{option_index}'].label = \
 						f'question_{question.question_index}_choice_{option_index}'
 
 	def save(self):
@@ -167,3 +167,7 @@ class MultipleAnswerForm(Form):
 		self.survey = kwargs.pop('survey', None)
 		super().__init__(*args, **kwargs)
 		self.questions = self.survey.get_questions_set()
+
+
+class LockSurveyForm(Form):
+	lock_modify = forms.BooleanField(label="sure to lock the survey? you can not modify it later")

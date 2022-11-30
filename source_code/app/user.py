@@ -53,13 +53,13 @@ class Student(User):
         survey_id = survey.id
         return self.response[survey_id]
 
-    def get_ID(self, ):
+    def get_ID(self):
         return self.id
 
-    def get_name(self, ):
+    def get_name(self):
         return self.name
 
-    def get_email(self, ):
+    def get_email(self):
         return self.email
 
 

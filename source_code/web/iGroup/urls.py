@@ -20,10 +20,14 @@ app_name = "iGroup"
 
 urlpatterns = [
 
-    path('home/', views.index, name='home'),  # instance home page, list all instances
-    path('create/', views.create_instance, name='create'),
-    path('<slug:slug>/delete/', views.delete, name='delete'),
-    path('<slug:slug>/', views.detail_instance, name='detail'),
-    path('<slug:slug>/config/', views.config_instance, name="config"),  # configuration for running the instance
+	path('home/', views.index, name='home'),  # instance home page, list all instances
+	path('create/', views.create_instance, name='create'),
+	path('<slug:slug>/delete/', views.delete, name='delete'),
+	path('<slug:slug>/', views.detail_instance, name='detail'),
+
+	path('<slug:slug>/config/create/', views.config_instance, name="config"),  # configuration for running the instance
+	path('<slug:slug>/config/all/', views.list_config, name="list_config"),
+	path('<slug:slug>/config/<int:config_id>/', views.detail_config, name="detail_config"),
+	path('<slug:slug>/result/<int:config_id>/', views.detail_result, name="detail_result"),
 
 ]

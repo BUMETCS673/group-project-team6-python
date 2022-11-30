@@ -75,7 +75,7 @@ def save_option(choice_index, choice_name, question):
 	return option
 
 
-def save_all_student_answer_set(IO_string, survey, request):
+def save_all_student_answer_set(IO_string, survey):
 	"""read and save student answer set of a survey"""
 	"""
 	note: question type: 1 is mul,0 is single
@@ -88,27 +88,26 @@ def save_all_student_answer_set(IO_string, survey, request):
 		try:
 			name = str(student_answers['student_name'])
 			email = str(student_answers['student_email'])
-			student = save_student(email=email, name=name, request=request)
+			student = save_student(email=email, name=name)
 			question_set = survey.get_questions_set_order_by_index()
-			answer_sheet = save_answer_sheet(student, survey, request)
+			answer_sheet = save_answer_sheet(student, survey)
 			answer_sheet = save_student_answers(answer_sheet=answer_sheet,
 			                                    question_set=question_set,
-			                                    answer_set=student_answers,
-			                                    request=request)
+			                                    answer_set=student_answers)
 		except Exception as e:
 			error = f"error happen student_index:{student_index},{str(e)} "
 			raise Exception(error)
 	return
 
 
-def save_student(email, name, request):
+def save_student(email, name):
 	"""save student from the csv"""
 	student, _ = Student.objects.get_or_create(name=name,
 	                                           email=email)
 	return student
 
 
-def save_answer_sheet(student, survey, request):
+def save_answer_sheet(student, survey):
 	"""save answer sheet"""
 	previous_answer_sheet = AnswerSheet.objects.filter(student=student,
 	                                                   survey=survey).last()  # get the last create answer sheet or none
@@ -125,7 +124,7 @@ def save_answer_sheet(student, survey, request):
 	return answer_sheet
 
 
-def save_student_answers(answer_sheet, question_set, answer_set, request):
+def save_student_answers(answer_sheet, question_set, answer_set):
 	"""
 	save all of a student's answers to an answer sheet
 	:param answer_sheet: object of AnswerSheet

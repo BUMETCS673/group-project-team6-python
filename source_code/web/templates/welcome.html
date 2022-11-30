@@ -5,13 +5,11 @@
 {% if user.is_authenticated %}
   Hi {{ user.username }}!
   <p><a href="{% url 'logout' %}">Log Out</a></p>
-    <p><a href="{% url 'iGroup:home' %}"> to home page </a></p>
+    <p><a href="{% url 'iGroup:home' %}"> See all instances </a></p>
 {% else %}
   <p>You are not logged in</p>
   <a href="{% url 'login' %}">Log In</a> |
   <a href="{% url 'register' %}">Sign Up</a>
-
-
 
 
     <section class="whatwedo">
@@ -19,7 +17,7 @@
         <div class="row">
             <div class="whatwedo-col">
                 <h3>Group Managerment</h3>
-                <p>We can help all the instuctors creat student groups and also mananger all the groups </p>
+                <p>We can help all the instructors creat student groups and also mananger all the groups </p>
             </div>
             <div class="whatwedo-col">
                 <h3>Find You a Perfect Group</h3>

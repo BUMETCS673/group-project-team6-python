@@ -2,7 +2,7 @@
 
 <form action="{% url 'survey:upload_answers_csv' survey_id=survey_obj.survey_id %}" method="POST" enctype="multipart/form-data" >
     {% csrf_token %}
-    <label for="csv_file"> Upload a file</label>
+    <label for="csv_file"> Upload all student response</label>
     <input type="file" id="csv_file" name="csv_file">
     <small>Only accepts CSV files</small>
     <button type="submit">Upload</button>
