@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    {% if survey.modify %}
+        COPY URL: {% url 'survey:survey_answer' survey_id=survey.survey_id %}
+
+    {% else %}
+
+
+    {% endif %}
+{% endblock %}

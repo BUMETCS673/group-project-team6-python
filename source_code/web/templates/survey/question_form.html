@@ -1,22 +1,28 @@
 {% extends 'base.html' %}
-
+{% load crispy_forms_tags %}
 
 {% block content %}
-
+    <div>question form</div>
     <form method="post" action="{{ request.path }}">
         {% csrf_token %}
         <div>
             <h1>Edit question</h1>
         </div>
         <div>
-
-            {{ question_form.as_p }}
-
+            {{ question_form | crispy }}
         </div>
-        <button type="submit">save this question</button>
+        {% if modify %}
+            <button type="submit">save this question</button>
+        {% else %}
+            <a type="button" class="btn btn-primary btn-sm"
+               href="{% url 'survey:survey_index' survey_id=question_obj.survey.survey_id %}">back to survey</a>
+        {% endif %}
+
     </form>
 
     {% if question_obj %}
+        <div>already exist</div>
+
     {% endif %}
 
 

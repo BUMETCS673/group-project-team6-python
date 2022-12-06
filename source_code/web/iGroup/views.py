@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from .forms import InstanceCreationForm, InstructorParameterForm
-from .models import Instance
+from .models import Instance, ConfigInstance, ResultTeam
 from survey.models import Survey, AnswerSheet
+from .utils import run_algorithm, save_result
 
 from .services.services import SurveyService, StudentAnswerService, iGroupService
 
@@ -89,36 +90,12 @@ def config_instance(request, slug=None):
 			config_instance_object.survey = survey
 			config_instance_object.instructor = current_instructor
 			config_instance_object.save()
-			# run
-			max_num_pass = config_instance_object.max_num_pass
-			num_group = config_instance_object.num_group
-			# run services
-			# survey services
-			survey_obj = Survey.objects.get(instance=instance)
-			question_obj_set = survey_obj.get_questions_set()
-			survey_service = SurveyService(survey_obj, question_obj_set)
-			survey_service.build_survey()
-			# student answer service
-			answer_sheet_obj_set = AnswerSheet.objects.filter(survey=survey_obj)
 
-			student_obj_set = [answer_sheet_obj.student for
-			                   answer_sheet_obj in answer_sheet_obj_set] # should be unique student
-
-			student_answer_service = StudentAnswerService(student_obj_set=student_obj_set,
-			                                              answer_sheet_obj_set=answer_sheet_obj_set,
-			                                              survey=survey_service.survey,
-			                                              survey_obj=survey)
-			student_answer_service.build_students()
-			student_answer_service.build_answer_sheets()
-			student_answer_service.response_survey()
-			# iGroup service
-			iGroup_service = iGroupService(students_target=student_answer_service.students,
-			                               num_team=num_group,
-			                               survey_target=survey_service.survey,
-			                               num_pass=max_num_pass)
-			iGroup_service.run()
-
-			print()
+			result = run_algorithm(config_instance_obj=config_instance_object,
+			                       instance_obj=instance)
+			# save result
+			save_result(config_instance_obj=config_instance_object,
+			            result=result)
 
 			return redirect('iGroup:home')
 
@@ -143,3 +120,94 @@ def delete_instance(request, slug):
 
 	instance.delete()
 	return redirect('iGroup:home')
+
+
+### show run result
+@login_required(login_url="/login")
+def list_config(request, slug):
+	"""show all run configuration of an instance"""
+	# assume get only
+	current_instructor = request.user
+	instance = get_object_or_404(Instance,
+	                             instructor=current_instructor,
+	                             slug=slug)
+	# all the run configurations of this instance
+	config_set = instance.get_configure_instance_set()
+	context = {
+		"config_set": config_set,
+		"instance": instance
+	}
+
+	return render(request, 'iGroup/config_list.html', context)
+
+
+@login_required(login_url="/login")
+def detail_config(request, slug, config_id):
+	"""show detailed run configuration of an instance"""
+	# assume get only
+	current_instructor = request.user
+	instance = get_object_or_404(Instance,
+	                             instructor=current_instructor,
+	                             slug=slug)
+	# all the run configurations of this instance
+	config_obj = get_object_or_404(ConfigInstance,
+	                               instance=instance,
+	                               config_id=config_id)
+
+	context = {
+		"config_obj": config_obj
+	}
+
+	return render(request, 'iGroup/config_detail.html', context)
+
+
+@login_required(login_url="/login")
+def detail_result(request, slug, config_id):
+	"""show result of group formation"""
+	current_instructor = request.user
+	instance = get_object_or_404(Instance,
+	                             instructor=current_instructor,
+	                             slug=slug)
+	# all the run configurations of this instance
+	config_obj = get_object_or_404(ConfigInstance,
+	                               instance=instance,
+	                               config_id=config_id)
+
+	# get the result teams
+	team_obj_set = config_obj.get_result_teams()
+
+	# init result
+	result = list()
+	for team_obj in team_obj_set:
+		"""pack team data"""
+		team_data = dict()
+		team_data['team_index'] = team_obj.team_index
+		team_data['team_size'] = team_obj.team_size
+		team_data['team_name'] = team_obj.team_name
+		team_data['total_score'] = team_obj.total_score
+
+		"""pack result question data"""
+		all_result_questions = team_obj.get_question_scores()
+		questions_score = list()
+		for result_question in all_result_questions:
+			"""pack result question data"""
+			question_data = dict()
+			question_data['question_name'] = result_question.get_question_name()
+			question_data['question_score'] = result_question.question_score
+			question_data['question_weight'] = result_question.question_weight
+			question_data['question_type'] = result_question.question_type
+			questions_score.append(question_data)
+		team_data['result_questions'] = questions_score
+
+		"""pack student data"""
+		all_students = team_obj.get_student_team_set()
+		team_data['student_set'] = all_students
+
+		# update results
+		result.append(team_data)
+
+	context = {
+		"teams_result": result
+	}
+
+	return render(request, 'iGroup/result_detail.html', context)

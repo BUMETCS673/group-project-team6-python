@@ -5,10 +5,33 @@
 {% if user.is_authenticated %}
   Hi {{ user.username }}!
   <p><a href="{% url 'logout' %}">Log Out</a></p>
-    <p><a href="{% url 'iGroup:home' %}"> to home page </a></p>
+    <p><a href="{% url 'iGroup:home' %}"> See all instances </a></p>
 {% else %}
   <p>You are not logged in</p>
   <a href="{% url 'login' %}">Log In</a> |
   <a href="{% url 'register' %}">Sign Up</a>
+
+
+    <section class="whatwedo">
+        <h1>WHAT WE DO</h1>
+        <div class="row">
+            <div class="whatwedo-col">
+                <h3>Group Managerment</h3>
+                <p>We can help all the instructors creat student groups and also mananger all the groups </p>
+            </div>
+            <div class="whatwedo-col">
+                <h3>Find You a Perfect Group</h3>
+                <p>We are here to help all students to find there perfect group. So you can maximize your potential in the group </p>
+            </div>
+            <div class="whatwedo-col">
+                <h3>Team s scheduling</h3>
+                <p>We can help you manage your time by having every group member's schedule so you can have best team’s scheduling-compatibility</p>
+            </div>
+        </div>
+    </section>
+    <div class="box">
+        <!-- 插值语法 -->
+        <!-- 功能：用于解析标签体内容。写法：{{xxx}}，xxx是js表达式，且可以直接读取到data中的所有属性。 -->
+    </div>
 {% endif %}
 {% endblock %}

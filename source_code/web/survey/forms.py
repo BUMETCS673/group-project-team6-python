@@ -23,6 +23,12 @@ class QuestionCreationForm(ModelForm):
 		model = Question
 		fields = ('question_type', 'question_name', 'description', 'weight', 'max_choice',)
 
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		if not self.instance.survey.modify:
+			for field in self.fields:
+				self.fields[field].disabled = True
+
 
 QuestionCreationFormSet = modelformset_factory(Question, form=QuestionCreationForm, extra=0)
 
@@ -115,12 +121,12 @@ class SurveyForm(forms.Form):
 			elif question.question_type == "MULTIPLE":
 				choices = [(-1, 'no preference')] + choices
 				# multiple choice, list max number of allowed choice
-				for option_index in range(question.max_choice): #enumerate(question.get_options_set_order_by_index()):
+				for option_index in range(question.max_choice):  # enumerate(question.get_options_set_order_by_index()):
 					self.fields[
-						f'question_multiple_{question.question_index}_choice_{option_index}'] =\
+						f'question_multiple_{question.question_index}_choice_{option_index}'] = \
 						forms.ChoiceField(choices=choices)
 					self.fields[
-						f'question_multiple_{question.question_index}_choice_{option_index}'].label =\
+						f'question_multiple_{question.question_index}_choice_{option_index}'].label = \
 						f'question_{question.question_index}_choice_{option_index}'
 
 	def save(self):
@@ -137,8 +143,9 @@ class SurveyForm(forms.Form):
 				option = Option.objects.get(choice_index=choice_index,
 				                            question=question)
 				choice = ChoiceSingle(option=option,
+				                      question=question,
 				                      answer_sheet=answer_sheet)
-				choice.save()
+				#choice.save()
 			# answer_sheet.answer_single_choice.add(choice)
 			elif question.question_type == "MULTIPLE":
 				rank = 0  # init
@@ -160,10 +167,16 @@ class SurveyForm(forms.Form):
 		return answer_sheet
 
 
-class MultipleAnswerForm(Form):
+class SurveyAnswerForm(forms.Form):
 
 	def __init__(self, *args, **kwargs):
 		self.student = kwargs.pop('student', None)  # set student
 		self.survey = kwargs.pop('survey', None)
 		super().__init__(*args, **kwargs)
 		self.questions = self.survey.get_questions_set()
+
+
+
+
+class LockSurveyForm(Form):
+	lock_modify = forms.BooleanField(label="sure to lock the survey? you can not modify it later")
