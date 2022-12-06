@@ -15,7 +15,11 @@ def add_option(request, survey_id=None, question_id=None):
 	question_obj = get_object_or_404(Question, survey=survey_obj, question_id=question_id)
 	option_set = question_obj.get_options_set()
 	num_option = len(option_set)
-	if request.method == "POST":
+	if not survey_obj.modify:
+		# if the survey is locked
+		return # not allowed response
+
+	if request.method == "POST" and survey_obj.modify:
 		# create question
 		option_form = OptionCreationForm(request.POST, question=question_obj)
 		if option_form.is_valid():
@@ -57,11 +61,14 @@ def option_list(request, survey_id=None, question_id=None):
 @login_required(login_url="/login")
 def option_sort(request, question_id=None):
 	option_order = request.POST.getlist('option_order')
-	print(option_order)
+	# print(option_order)
 	current_instructor = request.user
 	question_obj = get_object_or_404(Question,
 	                                 question_id=question_id,
 	                                 survey__instance__instructor=current_instructor)
+	if not question_obj.survey.modify:
+		# if the survey is locke
+		return # not allowed response
 	option_set = []
 	for idx, option_pk in enumerate(option_order):
 		option_obj = Option.objects.get(pk=option_pk,

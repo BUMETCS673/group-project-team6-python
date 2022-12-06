@@ -37,6 +37,7 @@ INSTALLED_APPS = [
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
 	'nested_admin',
+	'crispy_forms',
 	'jquery',
 	'survey',  # add iGroup to the web app
 	'iGroup',
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
 	'group',
 
 ]
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 AUTH_USER_MODEL = "account.Instructor"  # use customized account model
 
 MIDDLEWARE = [

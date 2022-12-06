@@ -12,6 +12,8 @@ urlpatterns = [
     # survey
     path('<slug:instance_slug>/create-survey/', views_survey.create_survey, name='create_survey'),  # create survey
     path('<int:survey_id>/', views_survey.survey_index, name='survey_index'),  # list all questions and survey info
+    path('<int:survey_id>/lock', views_survey.lock_survey, name='lock_survey'),  # lock the survey
+    path('<int:survey_id>/get-link', views_survey.get_survey_link, name='get_survey_link'),
 
     # questions
     path('<int:survey_id>/questions/all/', views_question.question_list, name='question_list'),  # show all questions

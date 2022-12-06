@@ -26,6 +26,9 @@ def add_question(request, survey_id=None):
 	current_instructor = request.user
 	survey_obj = get_object_or_404(Survey, survey_id=survey_id, instance__instructor=current_instructor)
 	question_set = survey_obj.get_questions_set()
+	if not survey_obj.modify:
+		# survey has been locked
+		return  # not allowed response
 	num_questions = len(question_set)
 	if request.method == "POST":
 		# create question
@@ -51,8 +54,9 @@ def edit_question(request, survey_id=None, question_id=None):
 	current_instructor = request.user
 	survey_obj = get_object_or_404(Survey, survey_id=survey_id, instance__instructor=current_instructor)
 	question_obj = get_object_or_404(Question, survey=survey_obj, question_id=question_id)
-	if request.method == "POST":
-		# create question
+
+	if request.method == "POST" and survey_obj.modify:
+		# modify question if the survey is not locked
 		question_form = QuestionCreationForm(request.POST, instance=question_obj)
 		if question_form.is_valid():
 			question_form.save()
@@ -63,10 +67,13 @@ def edit_question(request, survey_id=None, question_id=None):
 			return render(request, 'survey/survey_index.html', context)
 	else:
 		# GET
+
 		question_form = QuestionCreationForm(instance=question_obj)
+
 	context = {
 		'question_form': question_form,
-		'question_obj': question_obj
+		'question_obj': question_obj,
+		'modify': survey_obj.modify
 	}
 	return render(request, 'survey/question_form.html', context)
 

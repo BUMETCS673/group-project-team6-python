@@ -28,11 +28,12 @@
             <a href="{% url 'survey:survey_index' survey_id=instance.survey.survey_id %}">edit survey</a>
         </li>
         <li>
-            <a href="{% url 'iGroup:config' slug=instance.slug %}">click to start the config</a>
+            <a href="{% url 'survey:get_survey_link' survey_id=instance.survey.survey_id %}"> get survey link</a>
         </li>
         <li>
-            <a href="{% url 'survey:send_survey' survey_id=instance.survey.survey_id %}"> lock survey </a>
+            <a href="{% url 'iGroup:config' slug=instance.slug %}">click to start the config</a>
         </li>
+
         <li>
             <a></a>
         </li>
