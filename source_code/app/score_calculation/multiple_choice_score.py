@@ -29,7 +29,7 @@ def cal_multiple_score(team_size, max_num_choice, option_scores):
     # calculate the total scores
 
     # 1. need to find the base
-    expression = lambda x: x ** 2
+    def expression(x): return x ** 2
     base = (team_size ** 2) * sum(expression(max_num_choice - i) for i in range(num_valid_option))
     sum_b = sum(expression(i[0]) for i in option_scores)
 
