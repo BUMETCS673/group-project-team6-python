@@ -32,7 +32,7 @@ def add_question(request, survey_id=None):
 	num_questions = len(question_set)
 	if request.method == "POST":
 		# create question
-		question_form = QuestionCreationForm(request.POST)
+		question_form = QuestionCreationForm(request.POST, survey=survey_obj)
 		if question_form.is_valid():
 			question_obj = question_form.save(commit=False)
 			question_obj.survey = survey_obj
@@ -41,9 +41,10 @@ def add_question(request, survey_id=None):
 			return redirect('survey:survey_index', survey_id=survey_obj.survey_id)
 	else:
 		# GET
-		question_form = QuestionCreationForm()
+		question_form = QuestionCreationForm(survey=survey_obj)
 	context = {
-		'question_form': question_form
+		'question_form': question_form,
+		'survey_obj': survey_obj
 	}
 	return render(request, 'survey/question_form.html', context)
 
@@ -68,12 +69,13 @@ def edit_question(request, survey_id=None, question_id=None):
 	else:
 		# GET
 
-		question_form = QuestionCreationForm(instance=question_obj)
+		question_form = QuestionCreationForm(instance=question_obj, survey=survey_obj)
 
 	context = {
 		'question_form': question_form,
 		'question_obj': question_obj,
-		'modify': survey_obj.modify
+		'modify': survey_obj.modify,
+		'survey_obj': survey_obj
 	}
 	return render(request, 'survey/question_form.html', context)
 

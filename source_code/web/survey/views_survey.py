@@ -92,7 +92,8 @@ def get_survey_link(request, survey_id=None):
 	else:
 		link = str(reverse('survey:survey_answer', kwargs={'survey_id': survey_id}))
 		context = {
-			'survey_link': link
+			'survey_link': link,
+			'survey_id': survey_id
 		}
 		return render(request, 'survey/survey_link.html', context)
 

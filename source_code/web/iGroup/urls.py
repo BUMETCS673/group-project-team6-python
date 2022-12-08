@@ -22,7 +22,7 @@ urlpatterns = [
 
 	path('home/', views.index, name='home'),  # instance home page, list all instances
 	path('create/', views.create_instance, name='create'),
-	path('<slug:slug>/delete/', views.delete, name='delete'),
+	path('<slug:slug>/delete/', views.delete_instance, name='delete'),
 	path('<slug:slug>/', views.detail_instance, name='detail'),
 
 	path('<slug:slug>/config/create/', views.config_instance, name="config"),  # configuration for running the instance

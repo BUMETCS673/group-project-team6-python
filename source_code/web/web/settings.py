@@ -42,7 +42,6 @@ INSTALLED_APPS = [
 	'survey',  # add iGroup to the web app
 	'iGroup',
 	'account',
-	'group',
 
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

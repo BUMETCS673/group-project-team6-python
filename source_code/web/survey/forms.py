@@ -23,9 +23,9 @@ class QuestionCreationForm(ModelForm):
 		model = Question
 		fields = ('question_type', 'question_name', 'description', 'weight', 'max_choice',)
 
-	def __init__(self, *args, **kwargs):
+	def __init__(self, *args,survey, **kwargs):
 		super().__init__(*args, **kwargs)
-		if not self.instance.survey.modify:
+		if not survey.modify:
 			for field in self.fields:
 				self.fields[field].disabled = True
 

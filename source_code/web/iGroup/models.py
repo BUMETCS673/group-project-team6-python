@@ -132,7 +132,6 @@ def slugify_instance_name(instance, save=False):
 
 def instance_pre_save(sender, instance, *args, **kwargs):
 	"""signal for pre save"""
-	print('pre_save')
 	if not instance.slug:
 		# if first time create, not save
 		slugify_instance_name(instance, save=False)
@@ -143,7 +142,6 @@ pre_save.connect(instance_pre_save, sender=Instance)
 
 def instance_post_save(sender, instance, created, *args, **kwargs):
 	"""signal for post save"""
-	print("post save")
 	if created:
 		slugify_instance_name(instance, save=True)
 

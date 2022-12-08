@@ -11,12 +11,11 @@
         <div>
             {{ question_form | crispy }}
         </div>
-        {% if modify %}
-            <button type="submit">save this question</button>
-        {% else %}
-            <a type="button" class="btn btn-primary btn-sm"
-               href="{% url 'survey:survey_index' survey_id=question_obj.survey.survey_id %}">back to survey</a>
+        {% if survey_obj.modify %}
+        <button type="submit">save this question</button>
         {% endif %}
+        <a type="button" class="btn btn-primary btn-sm"
+           href="{% url 'survey:survey_index' survey_id=survey_obj.survey_id %}">back to survey</a>
 
     </form>
 
