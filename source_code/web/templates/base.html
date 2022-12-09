@@ -18,20 +18,23 @@
 <body>
 <section class="sub-header">
     <nav>
-        <a href="base.html"><img src="{% static 'web/images/logo_2.png' %}"></a>
+        <a href="{% url 'about' %}"><img src="{% static 'web/images/logo_2.png' %}"></a>
         <div class="nav-links" id="navLinks">
             <i class="fa fa-close" onclick="hideMenu()"></i>
             <ul>
-                <li><a href="welcome.html">HOME</a></li>
-                <li><a href="about.html">ABOUT</a></li>
-                <li><a href="registration/register.html">Register</a></li>
-                <li><a href="blog.html">BLOG</a></li>
+                <li><a href="/">HOME</a></li>
+                <li><a href="{% url 'about' %}">ABOUT</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+                {% endif %}
                 <li><a href="contact.html">CONTACT</a></li>
             </ul>
         </div>
         <i class="fa fa-bars" onclick="showMenu()"></i>
     </nav>
-    <h1>Let's sign you up</h1>
+    {% if not user.is_authenticated %}
+        <h1>Let's sign you up</h1>
+    {% endif %}
 </section>
 
 
@@ -42,7 +45,7 @@
 
 
 <section class="footer">
-    <h4>About Us</h4>
+    <h4>THIs ssss</h4>
 
     <div class="icons">
         <a href=""><i class="fa fa-facebook"></i></a>

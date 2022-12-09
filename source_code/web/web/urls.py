@@ -18,12 +18,13 @@ from django.urls import path, include
 from django.views.generic.base import TemplateView
 
 urlpatterns = [
-	path('', TemplateView.as_view(template_name="welcome.html"), name="welcome"),
-	path('admin/', admin.site.urls),
-	path('', include('account.urls')),
-	path('', include('django.contrib.auth.urls')),
-	path('instance/', include('iGroup.urls')),
-	path('survey/', include('survey.urls')),
-	path('_nested_admin/', include('nested_admin.urls')),
+    path('', TemplateView.as_view(template_name="welcome.html"), name="welcome"),
+    path('admin/', admin.site.urls),
+    path('', include('account.urls')),
+    path('', include('django.contrib.auth.urls')),
+    path('instance/', include('iGroup.urls')),
+    path('survey/', include('survey.urls')),
+    path('_nested_admin/', include('nested_admin.urls')),
+    path('about/', TemplateView.as_view(template_name="about.html"), name="about")
 
 ]
