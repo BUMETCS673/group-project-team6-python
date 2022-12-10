@@ -134,7 +134,7 @@ class test_weight(unittest.TestCase):
 
         self.assertTrue((most_accurate / num_of_times_running) >= 0.8)
 
-    def test03_most_positive_weight_for_sing_accuracy(self):
+    def test04_most_positive_weight_for_sing_accuracy(self):
         self.survey_1.questions[1].weight = 5
         test_instance = Instance(50, students_target=self.students_target, num_team=3, survey_target=self.survey_1)
         num_of_times_running = 50
