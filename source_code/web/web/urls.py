@@ -25,5 +25,9 @@ urlpatterns = [
 	path('instance/', include('iGroup.urls')),
 	path('survey/', include('survey.urls')),
 	path('_nested_admin/', include('nested_admin.urls')),
-
+    path('home/',TemplateView.as_view(template_name="welcome.html")),
+    path('blog/',TemplateView.as_view(template_name="blog.html")),
+    path('about/',TemplateView.as_view(template_name="about.html")),
+    path('register/',TemplateView.as_view(template_name="register.html")),
+    path('contact/',TemplateView.as_view(template_name="contact.html")),
 ]

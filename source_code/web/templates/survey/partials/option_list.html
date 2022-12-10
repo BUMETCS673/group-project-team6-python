@@ -4,12 +4,12 @@
     <section id="option-list" class="col-12">
         {% if option_set %}
             {% csrf_token %}
-            <form class="sortable list-group" hx-trigger="end"
+            <form style="padding: 1vw 5vw;" class="sortable list-group" hx-trigger="end"
                   hx-post="{% url 'survey:option_sort' question_id=question_obj.question_id %}"
                   hx-target="#option-list">
                 <div class="htmx-indicator">Updating...</div>
                 {% for option in option_set %}
-                    <div>
+                    <div style="margin-bottom: 1vw;">
                         <input type="hidden" name="option_order" value="{{ option.pk }}"/>
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             {{ option.choice_name }}
@@ -23,11 +23,14 @@
         {% else %}
             no options yet please create one
         {% endif %}
-        <a class="btn btn-primary btn-lg active"
-           href="{% url 'survey:add_option' survey_id=survey_obj.survey_id question_id=question_obj.question_id %}"> add
-            option</a>
-        <a class="btn btn-primary btn-lg active" href="{% url 'survey:survey_index' survey_id=survey_obj.survey_id %}">go
-            back</a>
+        <div style="text-align: center;">
+            <a style="margin-right: 1vw;" class="btn btn-primary btn-lg active"
+            href="{% url 'survey:add_option' survey_id=survey_obj.survey_id question_id=question_obj.question_id %}"> add
+             option</a>
+         <a class="btn btn-primary btn-lg active" href="{% url 'survey:survey_index' survey_id=survey_obj.survey_id %}">go
+             back</a>
+        </div>
+        
 
     </section>
 {% endblock %}

@@ -1,23 +1,24 @@
+{% load static %}
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>iGroup Contact</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="{% static 'web/css/style.css' %}">
 <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,600,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> 
 </head>
 <body>
     <section class="sub-header">
         <nav>
-            <a href="index.html"><img src="images/logo_2.png"></a>
-            <div class="nav-links" id="navLinks">  
+            <a href="/home"><img src="{% static 'web/images/logo_2.png' %}"></a>
+            <div class="nav-links" id="navLinks">
                 <i class="fa fa-close" onclick="hideMenu()"></i>
                 <ul>
-                    <li><a href="index.html">HOME</a></li>
-                    <li><a href="about.html">ABOUT</a></li>
-                    <li><a href="register.html">REGISTER</a></li>
-                    <li><a href="blog.html">BLOG</a></li>
-                    <li><a href="contact.html">CONTACT</a></li>
+                    <li><a href="/home">HOME</a></li>
+                    <li><a href="/about">ABOUT</a></li>
+                    <li><a href="/register">Register</a></li>
+                    <li><a href="/blog">BLOG</a></li>
+                    <li><a href="/contact">CONTACT</a></li>
                 </ul>
             </div>
             <i class="fa fa-bars" onclick="showMenu()"></i>

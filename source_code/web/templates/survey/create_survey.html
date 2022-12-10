@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<form method="post">
+<form method="post" style="padding: 1vw 5vw;">
     {% csrf_token %}
     {{ survey_form.as_p }}
 <button style="margin-top: 10px" type="submit">save</button>

@@ -2,12 +2,15 @@
 
 
 {% block content %}
-lock page
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-<button style="margin-top: 10px" type="submit">save</button>
-</form>
+<div style="padding: 1vw 5vw;">
+    <h2>lock page</h2>
+    <form method="post" >
+        {% csrf_token %}
+        {{ form.as_p }}
+    <button style="margin-top: 10px" type="submit">save</button>
+    </form>
+</div>
+
 
 
 {% endblock %}

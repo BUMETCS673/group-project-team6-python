@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="row row-cols-1 row-cols-md-2 g-4">
+    <div class="row row-cols-1 row-cols-md-2 g-4" style="padding: 2vw 5vw;">
         {% for team in teams_result %}
             <div class="col">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title"> {{ team.team_name }}</h5>
-                        <li>Total Score: {{ team.total_score }}</li>
-                        <li>Number of students: {{ team.team_size }}</li>
+                        <h5 class="card-title" style="margin-bottom: 1vw;"> {{ team.team_name }}</h5>
+                        <li style="margin-left: 2vw;">Total Score: {{ team.total_score }}</li>
+                        <li style="margin-left: 2vw;">Number of students: {{ team.team_size }}</li>
 
 
                         <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -76,7 +76,17 @@
 
     </div>
 
-    <div>
+    <div  style="background-color: #068df5;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 80%;
+    margin-bottom: 1vw;
+    margin-left: 10%;
+    border-radius: 1vw;
+    text-align: center;">
         Back to
     </div>
 

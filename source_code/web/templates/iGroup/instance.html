@@ -6,40 +6,42 @@
 
 
 {% block content %}
-
+    <div style="padding: 1vw 5vw;">
     {% if messages %}
         <ul id="error_popup" class="messages">
             {% for message in messages %}
-                <div {% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                <div style="border: 1px solid black;
+                padding: 1vw;
+                border-radius: 1vw;" {% if message.tags %} class="{{ message.tags }}"{% endif %}>
                     <p>{{ message }}</p>
-                    <button id="close_error_popup">Close</button>
+                    <button style="border-radius: 1vw;" id="close_error_popup">Close</button>
                 </div>
             {% endfor %}
         </ul>
     {% endif %}
 
-    {{ instance.instance_name }}
-    {{ instance.instructor.username }}
+    <h2>{{ instance.instance_name }}</h2>
+    <h6 style="margin-left: 1vw;">{{ instance.instructor.username }}</h6>
     {% if not instance.survey %}
         <a href="{% url 'survey:create_survey' instance_slug=instance.slug %}">create a survey to start the
             allocation</a>
     {% else %}
-        <li>
+        <li style="margin-left: 3vw;">
             <a href="{% url 'survey:survey_index' survey_id=instance.survey.survey_id %}">edit survey</a>
         </li>
-        <li>
+        <li style="margin-left: 3vw;">
             <a href="{% url 'survey:get_survey_link' survey_id=instance.survey.survey_id %}"> get survey link</a>
         </li>
-        <li>
+        <li style="margin-left: 3vw;">
             <a href="{% url 'iGroup:config' slug=instance.slug %}">click to start the config</a>
         </li>
 
-        <li>
-            <a></a>
+        <li style="margin-left: 3vw;">
+            <a href="{% url 'survey:student_list' survey_id=instance.survey.survey_id %}"> view student status </a>
+
         </li>
 
-        <a href="{% url 'survey:student_list' survey_id=instance.survey.survey_id %}"> view student status </a>
-        <section>
+        <section style="margin: 1vw 3vw;">
             <div>{% include 'survey/upload/upload_answers_csv.html' with survey_obj=instance.survey %}</div>
         </section>
 
@@ -47,7 +49,7 @@
             <a href="{% url 'iGroup:list_config' slug=instance.slug %}"> see all configurations</a>
         </div>
         <a href="{% url 'iGroup:home' %}">back to home page</a>
-
+    </div>
     {% endif %}
 
     <script>

@@ -1,9 +1,13 @@
 <section>
-    <form action="{% url 'survey:upload_questions_csv' survey_id=survey_obj.survey_id %}" method="POST"
+    <form style="padding:0vw 1vw;" action="{% url 'survey:upload_questions_csv' survey_id=survey_obj.survey_id %}" method="POST"
           enctype="multipart/form-data">
         {% csrf_token %}
         <input type="file" id="csv_file" name="csv_file">
-        <small>Upload survey via CSV</small>
-        <button type="submit" class="btn btn-primary">Upload</button>
+        <br/>
+        <small style="color: red;
+        margin-top: 1vw;
+        display: inline-block;
+        margin-left: 1vw;">*Upload survey via CSV</small>
+        <button style="margin-top: 2vw;" type="submit" class="btn btn-primary">Upload</button>
     </form>
 </section>
