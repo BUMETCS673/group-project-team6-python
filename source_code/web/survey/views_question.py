@@ -58,7 +58,7 @@ def edit_question(request, survey_id=None, question_id=None):
 
 	if request.method == "POST" and survey_obj.modify:
 		# modify question if the survey is not locked
-		question_form = QuestionCreationForm(request.POST, instance=question_obj)
+		question_form = QuestionCreationForm(request.POST, instance=question_obj,survey=survey_obj)
 		if question_form.is_valid():
 			question_form.save()
 			context = {
