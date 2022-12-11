@@ -41,7 +41,8 @@ Iteration 3 : 11/12/2022 - 12/10/2022
                $pip install -r requirements.txt
                $python manage.py makemigrations
                $python manage.py migrate
-               $python manage.py runserver
+               $python manage.py runserver 8000
+##### Step 4 - Open browser and visit URL: http://127.0.0.1:8000/
 
 
 <br /><br />
