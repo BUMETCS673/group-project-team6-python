@@ -1,5 +1,5 @@
 from django import forms
-from .models import ConfigInstance, Instance, ResultInstance
+from .models import ConfigInstance, Instance
 
 from django.forms import ModelForm
 

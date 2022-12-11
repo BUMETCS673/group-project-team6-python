@@ -4,6 +4,7 @@ Swap happens here
 """
 import random
 from .team import Team
+import time
 
 
 class Instance:
@@ -48,9 +49,11 @@ class Instance:
 		# init randomized team formation [Team]
 		teams = self.random_assignment()
 
+
+
 		# print some info
 		print(f"Initialization, the team scores:{[(team.team_name, team.get_total_score()) for team in teams]}")
-
+		start_time = time.time()
 		unswap, swap = 0, 0
 		for iteration in range(self.num_pass):
 			# start from the first team
@@ -87,14 +90,13 @@ class Instance:
 								team_2.replace_team_member(ptr_team_2, student_team_2)
 							else:
 								pass
+
 							# update team 2 student
 							ptr_team_2 += 1
 						# update team 1 student
 						ptr_team_1 += 1
 
 		print(f"After swaps, the team scores:{[(team.team_name, team.get_total_score()) for team in teams]}")
-		print(f"time of unswap {unswap}, time of swap {swap}")
+		print(f"times of unswap {unswap}, time of swap {swap}")
+		print("time for swapping ", time.time() - start_time)
 		return teams
-
-
-print()

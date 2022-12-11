@@ -1,14 +1,40 @@
-{% extends 'base.html' %} 
 {% load static %}
-{% block title %}Blog{% endblock %}
-{% block content %}
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iGroup blog</title>
+<link rel="stylesheet" href="{% static 'web/css/style.css' %}">
+<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,600,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> 
+</head>
+<body>
+    <section class="sub-header">
+        <nav>
+            <a href="/home"><img src="{% static 'web/images/logo_2.png' %}"></a>
+            <div class="nav-links" id="navLinks">
+                <i class="fa fa-close" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="/home">HOME</a></li>
+                    <li><a href="/about">ABOUT</a></li>
+                    <li><a href="/register">Register</a></li>
+                    <li><a href="/blog">BLOG</a></li>
+                    <li><a href="/contact">CONTACT</a></li>
+                </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+        </nav>
+            <h1>Our blog</h1>
+    </section>
+    
+
 <!---------- Blog Page Content ---------->
     
     <section class="blog-content">
     <div class="row">
     <div class="blog-left">
-        <img src="{% static 'web/images/blog.jpeg' %}" alt="about image">
-        <h2>OUR BLOG</h2>
+
+        <img src="{% static 'web/images/blog.jpeg' %}">
+
         
         
         
@@ -27,4 +53,35 @@
     
     </div>
     </section>
-{% endblock %}
+
+    
+<!-------- footer ---------->
+
+<section class="footer">
+        
+        <div class="icons">
+            <i class="fa fa-facebook"></i>
+            <i class="fa fa-twitter"></i>
+            <i class="fa fa-instagram"></i>
+            <i class="fa fa-linkedin"></i>
+        </div>
+
+</section>    
+  
+  
+<!----JavaScript for toggle menu---->
+<script>
+    var navLinks = document.getElementById("navLinks");
+
+    function showMenu() {
+        navLinks.style.right = "0";
+    }
+
+    function hideMenu() {
+        navLinks.style.right = "-200px";
+    }
+</script> 
+    
+</body>
+</html>    
+

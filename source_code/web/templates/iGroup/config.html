@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block title %} Instance configuration{% endblock %}
  {% block content %}
-<form method="post">
+<form method="post" style="padding: 1vw 5vw;">
   {% csrf_token %}
   {{form.as_p}}
   <button type="submit" class="btn btn-success"> run </button>

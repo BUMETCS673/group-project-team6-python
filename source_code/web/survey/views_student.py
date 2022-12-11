@@ -1,9 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import Http404
 from account.models import Student
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 from django.views.decorators.http import require_http_methods
-
+from .forms import StudentCreationFrom,SurveyForm
 from .models import Survey, AnswerSheet
 
 
@@ -66,3 +66,30 @@ def answer_sheet_detail(request, survey_id, answer_sheet_id):
 		'question_answer_set': question_answer_set
 	}
 	return render(request, 'survey/answer/answer_sheet_detail.html', context)
+
+
+# not required login
+def survey_answer(request, survey_id):
+	"""student answer the survey"""
+	survey = get_object_or_404(Survey, survey_id=survey_id)
+
+	if request.method == "POST":
+		student_form = StudentCreationFrom(request.POST)
+		if student_form.is_valid():
+			student = student_form.save()
+		else:
+			raise Http404
+		survey_answer_form = SurveyForm(request.POST, survey=survey, student=student)
+		if survey_answer_form.is_valid():
+			survey_answer_form.save()
+
+	else:
+		student_form = StudentCreationFrom()
+		survey_answer_form = SurveyForm(None, survey=survey, student=None)
+
+	context = {
+		'student_form': student_form,
+		'survey_answer_form': survey_answer_form,
+		'survey': survey
+	}
+	return render(request, 'survey/answer/survey_answer.html', context)

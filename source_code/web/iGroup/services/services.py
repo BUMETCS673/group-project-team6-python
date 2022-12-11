@@ -18,7 +18,7 @@ class iGroupService:
 		                         survey_target=survey_target)
 
 	def run(self):
-		self.result = self.instance.run_instance()
+		self.result = self.instance.run_instance() # result has all the teams and their info
 		for team in self.result:
 			print(f"_______{team.team_name}______")
 			for team_member in team.team_members:

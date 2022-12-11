@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row row-cols-1 row-cols-md-2 g-4" style="padding: 2vw 5vw;">
+        {% for team in teams_result %}
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title" style="margin-bottom: 1vw;"> {{ team.team_name }}</h5>
+                        <li style="margin-left: 2vw;">Total Score: {{ team.total_score }}</li>
+                        <li style="margin-left: 2vw;">Number of students: {{ team.team_size }}</li>
+
+
+                        <div class="accordion accordion-flush" id="accordionFlushExample">
+                            <!-- all student allocate to this group -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingOne-{{ forloop.counter }}">
+                                    <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#flush-collapseOne-{{ forloop.counter }}"
+                                            aria-expanded="false"
+                                            aria-controls="flush-collapseOne-{{ forloop.counter }}">
+                                        Student
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseOne-{{ forloop.counter }}" class="accordion-collapse collapse"
+                                     aria-labelledby="flush-headingOne-{{ forloop.counter }}"
+                                     data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">
+                                        {% for student in team.student_set %}
+                                            <li>{{ student.student.email }} student email</li>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingTwo-{{ forloop.counter }}">
+                                    <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#flush-collapseTwo-{{ forloop.counter }}"
+                                            aria-expanded="false"
+                                            aria-controls="flush-collapseTwo-{{ forloop.counter }}">
+                                        Questions
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseTwo-{{ forloop.counter }}" class="accordion-collapse collapse"
+                                     aria-labelledby="flush-headingTwo-{{ forloop.counter }}"
+                                     data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">
+
+                                        <!-- question detail score-->
+                                        {% for question_data in team.result_questions %}
+
+                                            <div>
+                                                <h2>Question Name: {{ question_data.question_name }}  </h2>
+                                                <li> question score: {{ question_data.question_score }}</li>
+                                                <li>question type: {{ question_data.question_type }} </li>
+                                                <li>question weight: {{ question_data.question_weight }}</li>
+                                            </div>
+                                        {% endfor %}
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+    <a  style="background-color: #068df5;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 80%;
+    margin-bottom: 1vw;
+    margin-left: 10%;
+    border-radius: 1vw;
+    text-align: center;" href="{% url 'iGroup:list_config' slug=instance.slug %}">Go Back</a>
+
+
+{% endblock %}

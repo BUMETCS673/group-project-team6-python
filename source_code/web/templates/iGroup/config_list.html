@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row row-cols-1 row-cols-md-2 g-4" >
+        {% for config in config_set %}
+            <!-- put list information for each configuration -->
+            <div class="col" style="padding: 1vw 5vw;">
+                <div class="card">
+                    <div class="card-body" >
+                        <h5 class="card-title">Configuration id {{ config.config_id }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Number of passes {{ config.max_num_pass }}</h6>
+                        <h6 class="card-subtitle mb-2 text-muted">Number of groups {{ config.num_group }}</h6>
+
+                        <p class="card-text"></p>
+                        <a href="#" class="card-link"></a>
+                        <a href="{% url 'iGroup:detail_result' slug=instance.slug config_id=config.config_id %}"
+                           class="card-link">See result</a>
+                    </div>
+                </div>
+            </div>
+
+
+        {% endfor %}
+    </div>
+        <a  style="background-color: #068df5;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 80%;
+    margin-bottom: 1vw;
+    margin-left: 10%;
+    border-radius: 1vw;
+    text-align: center;" href="{% url 'iGroup:detail' slug=instance.slug %}">Go Back</a>
+
+{% endblock %}
+

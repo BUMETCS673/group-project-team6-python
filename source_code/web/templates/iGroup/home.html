@@ -2,31 +2,33 @@
 
 
 
-
-{% block title%}
-Hello {{ current_instructor.username }}
+{% block title %}
+    Hello {{ current_instructor.username }}
 {% endblock %}
 
 
 
-{%block content%}
+{% block content %}
 
-    <p> welcome instructor: {{ current_instructor.username }}</p>
+    <p style="text-align: center;"> welcome instructor: {{ current_instructor.username }}</p>
 
     {% if not instances %}
-    <div> No instance here, please create one first</div>
+        <div> No instance here, please create one first</div>
 
     {% else %}
+        <ul style="display: flex;
+        justify-content: center;
+        align-items: center;" class="list-group">
+            {% for instance in instances %}
+                <li style="margin-bottom: 1vw;">
+                    <a href="{{ instance.get_absolute_url }}"> Instance Name : {{ instance.instance_name }} </a>
+                    <a style="margin-left: 2vw;" class="btn btn-danger" role="button" href="{% url 'iGroup:delete' slug=instance.slug %}">
+                        Delete </a>
+                </li>
 
-    {% for instance in instances %}
-        <li>
-            <a href="{{ instance.get_absolute_url }}"> instance name : {{ instance.instance_name }} </a>
-            ||||||||||
-            <a href="{% url 'iGroup:delete' slug=instance.slug %}"> delete this instance </a>
-        </li>
-
-    {% endfor %}
+            {% endfor %}
+        </ul>
     {% endif %}
-      <a href="{% url 'iGroup:create' %}">create an instance</a>
+   <p style="text-align: center;"><a href="{% url 'iGroup:create' %}">create more instances</a></p> 
 
 {% endblock %}

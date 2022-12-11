@@ -1,18 +1,18 @@
 {% extends 'base.html' %}
-
+{% load crispy_forms_tags %}
 
 {% block content %}
-    <form method="post" action="{{ request.path }}">
+    <form method="post" style="padding: 1vw 5vw;" action="{{ request.path }}">
         {% csrf_token %}
         <div>
             <h1>Edit options</h1>
         </div>
         <div>
 
-            {{ option_form.as_p }}
+            {{ option_form | crispy }}
 
         </div>
-        <button class="btn btn-primary" type="submit">save option</button>
+        <button style="margin-top: 1vw;" class="btn btn-primary" type="submit">save option</button>
     </form>
 
 
