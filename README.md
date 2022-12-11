@@ -76,12 +76,16 @@ Django : SQLite
 
 <br /><br />
 
-## Proposed High level Requirements
+## Design Description
 
-#### a.Functional Requirements  
-#### b.Desirable Features
-#### c.Optional Features
-#### d.Security Requirements
+#### a.Software Architecture
+In our iGroup application, Since we have adopted the agile methodology as the development process, we mainly focus on developing the local application at this iteration, with using local file systems as our persistent data storage.
+Within the iGroup system, the user needs to use the account system to gain access to create surveys and send the survey to students, which the student responds to and creates the student account in the system. Then the instructor can gather the response from the students and call the allocation system to do the team allocation corresponding to the parameter that instructor assigned before the allocation.
+
+
+#### b.Business Logic and/or Key Algorithms
+For the process of the algorithm, the first step is to randomly assign all the students into different groups, and then calculate the score of each team (the part of calculating the score here uses the team-maker algorithm). After the score of each group is obtained, the group with the second highest score and the group with the lowest score will swap the team members and calculate the score again, until the new score of both groups has improved, and then confirm to switch the team members. After 20 rounds of this, all the groups were formed. (The Gale-Shapley Algorithm used here)
+
 
 <br /><br />
 
