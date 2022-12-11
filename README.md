@@ -19,6 +19,15 @@ Haiyang(whaiyang@bu.edu) - QA leader |
 
 Our project is making a team assignment tool that can automatically assign students to a team, which involves the concepts of front-end, back-end, database and so on. We named it "iGroup".  The main idea of the Team assignment tool is to help create teams based on students preferences and background. Algorithmically, we weight different preferences to create the most appropriate team.
 
+Iteration Process
+|---|
+Iteration 0 : 09/07/2022 - 09/21/2022
+Iteration 1 : 09/22/2022 - 10/20/2022
+Iteration 2 : 10/21/2022 - 11/11/2022
+Iteration 3 : 11/12/2022 - 12/10/2022
+
+
+
 
 <br />
 
