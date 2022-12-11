@@ -29,12 +29,14 @@ Iteration 3 : 11/12/2022 - 12/10/2022
 
 ## List of Completed Features
 
-User - Login,logout, save account data in backend database
-Application - Create and Delete (Instance,Survey,Questions,Options)
-              Import and uplode Data
-              Lock the Survey and Create Survey link to students
-              Run the Algorithm base on the collected data 
-              Save the all results of team assignment
+##### User 
+      Login,logout, save account data in backend database
+##### Application 
+      Create and Delete (Instance,Survey,Questions,Options)
+      Import and uplode Data
+      Lock the Survey and Create Survey link to students
+      Run the Algorithm base on the collected data 
+      Save the all results of team assignment
 
 
 
