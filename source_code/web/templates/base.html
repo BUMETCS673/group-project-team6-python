@@ -24,7 +24,11 @@
             <ul>
                 <li><a href="/home">HOME</a></li>
                 <li><a href="/about">ABOUT</a></li>
+                {% if not user.is_authenticated %}
                 <li><a href="/register">Register</a></li>
+                    {% else %}
+                    <li><a href="{% url 'logout' %}"> LOG OUT</a></li>
+                {% endif %}
                 <li><a href="/blog">BLOG</a></li>
                 <li><a href="/contact">CONTACT</a></li>
             </ul>
