@@ -36,7 +36,7 @@ for example: if you have 3 questions:
 
 question_3 = MultipleChoiceQuestion(question_name="q3",
                                     description="None",
-                                    weight=-3,
+                                    weight=-1,
                                     choices=["Java", "C", "Python", "C++", "R", "Ruby"],
                                     max_num_choice=3)
 
@@ -80,7 +80,7 @@ student_3_answer = {
 student_4_answer = {
     #0: 3,  # single choice
     #1: 2,  # multiple choice
-    0: {0: 1}  # multiple choice
+    0: {0: 3}  # multiple choice
 }
 student_5_answer = {
     #0: 3,  # single choice

@@ -17,25 +17,62 @@ Haiyang(whaiyang@bu.edu) - QA leader |
 
 ## Project Description:
 
-Our project is making a team assignment tool that can automatically assign students to a team, which involves the concepts of front-end, back-end, database and so on. We named it "iGroup".  The main idea of the Team assignment tool is to help create teams based on students preferences and background. Algorithmically, we weight different preferences to create the most appropriate team.
+Our project is making a team assign tool that can automatically assign students to a team, which involves the concepts of front-end, back-end, database and so on. We named it "iGroup". The main idea of the Team assignment tool is to help create teams based on students preferences and background. For this application, we choose Python as our development programming language, and use Django as framework. Algorithmically, we weight different preferences to create the most appropriate team.
+
+
+Iteration Process
+|---|
+Iteration 0 : 09/07/2022 - 09/21/2022
+Iteration 1 : 09/22/2022 - 10/20/2022
+Iteration 2 : 10/21/2022 - 11/11/2022
+Iteration 3 : 11/12/2022 - 12/10/2022
+
+
+
+
+<br />
+
+## How To Run:
+##### Step 1 - Clone the code from GitHub to local device
+##### Step 2 - Switch to "dev" branch and pull it again
+##### Step 3 - Open the Pycharm Terminal and type: 
+               $cd source_code
+               $cd web
+               $pip install -r requirements.txt
+               $python manage.py makemigrations
+               $python manage.py migrate
+               $python manage.py runserver 8000
+##### Step 4 - Open browser and visit URL: http://127.0.0.1:8000/
+
 
 <br /><br />
 
 ## Tech Stack and Frameworks:
 
 #### Front End: 
-HTML: Front End building block <br>
-CSS: Front End building block <br>
+HTML: Front End building block 
+
+CSS: Front End building block 
+
 Javascript: used for more dynamic elements in front end
+
+Django : Default
+
 #### Back End:
-Django(option)
-Pure Python(Algorithm)
+Django : Framework
+
+Pure Python : Algorithm part 
+
 #### Management:
 Git/Github: Version control tool 
+
 Pivotal Tracker: Project Management
+
 #### Database:
-MySQL(optional)
-.CSV file
+Django : SQLite
+
+.CSV file : Analog Data
+
 
 <br /><br />
 
@@ -56,29 +93,46 @@ https://docs.google.com/spreadsheets/d/1oXajwHWtP0rqrXSfCWsf2NTtd7TqJNTJ5b6tWfP5
 ## Configuration Management
 #### Tools
 Version Control: Git,Github
-Front end (optional): VS Code(HTML,CSS)
-Back end: intellJ(IDE)(Java),  framework(optional):Spring Boot,Maven
-Database(optional):DataGrip(PostgreSQL relational database) :
+
+Front end: VS Code(HTML,CSS), Pycharm (Django Defaults) 
+
+Back end: PyCharm (Python)
+
+Framework: Django
+
+Database: Django(SQLite)
+
 CI/CD:TeamCity(optional)
-(In this project, we will use Git and Github as the version control tools. Please also specify any other tools to be used, e.g. IDE tools, CI/CD tools, container tools, SAST or DAST tools, and any other DevOps tools)
 
 #### Code Commit Guideline and Git Branching Strategy
-GitHub-Flow
-GitHub Flow is a very suitable Git Branching Strategy for a small team like us. It allows us to all develop together effectively. and the pull request will be reviewed by every team member, especially tech lead before merge.
+During development, we each have our own branch of development. 
+Also, we created some special branches for important features.
 
-#### Deployment Plan if applicable
-Use Maven to pack our Spring Boot project to an executable jar file or in other ways.
+
 
 <br /><br />
 
 
 ## Quality Assurance Management
 
-
 ### Coding Standard
 Please refer to this link: 
 https://www.geeksforgeeks.org/coding-standards-and-guidelines/
 Our standards will be based on the contents in this link.
+
+### Code Review Process
+Team members review each other’s code. We will make sure we all review code that is not from ourselves. We will use pull requests for the code review, to make sure there is no conflict. Recently we don’t have a checklist that everyone must do, but we do require the reviewer to give feedback about cleanliness, clarity and bugs.
+
+### 
+Testing Plan
+|---|
+Unit Test 
+Integrate Test
+System Test
+Acceptance Test
+Regression Test
+
+
 
 
 <br /><br />
@@ -90,5 +144,5 @@ https://github.com/BUMETCS673/BUMETCS673A1F21P3
 https://docs.google.com/forms/d/e/1FAIpQLSfkskHnSJLweJSulYyeBenhNPSyzHkQTRW6wzakM_Ffb3gJFA/viewform
 #### Team Sign
 https://docs.google.com/document/d/1PzFrv9GLrKaXZP46fl1S_kaAev4Gb6BcfAxBUfSvNSs/edit
-#### Related Literature
+#### Reference
  https://drive.google.com/drive/u/1/folders/1BBafMsvOnvsn76p2TktR9ZJ1NIbP4Eg5

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>All students answers</h1>
+    {% for count,student in all_students %}
+        <li>
+            <a type="button" class="btn btn-primary"
+               href="{% url 'survey:answer_sheet_list' student_id=student.pk survey_id=survey_obj.survey_id %}">
+                {{ student.email }}
+                <span class="badge badge-light">{{ count }} answer_sheets</span>
+            </a>
+        </li>
+
+
+    {% endfor %}
+
+
+{% endblock %}

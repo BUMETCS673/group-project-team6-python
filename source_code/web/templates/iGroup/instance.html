@@ -1,15 +1,77 @@
 {% extends 'base.html' %}
 
-{% block title%}
-instance detail page
+{% block title %}
+    instance detail page
 {% endblock %}
 
-{%block content%}
-    {{ instance.instance_name }}
-    {{ instance.instructor.username }}
-    <a href= "{% url 'survey:survey_create_update' instance_slug=instance.slug %}" >create a survey to start the allocation</a>
-    <a href="{% url 'iGroup:config' slug=instance.slug %}">click to start the config</a>
-    {% if instance.survey %}
-    <a href="{% url 'survey:survey_answer' survey_id=instance.survey.survey_id %}"> to answer link </a>
+
+{% block content %}
+    <div style="padding: 1vw 5vw;">
+    {% if messages %}
+        <ul id="error_popup" class="messages">
+            {% for message in messages %}
+                <div style="border: 1px solid black;
+                padding: 1vw;
+                border-radius: 1vw;" {% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                    <p>{{ message }}</p>
+                    <button style="border-radius: 1vw;" id="close_error_popup">Close</button>
+                </div>
+            {% endfor %}
+        </ul>
     {% endif %}
+
+    <h2>{{ instance.instance_name }}</h2>
+    <h6 style="margin-left: 1vw;">{{ instance.instructor.username }}</h6>
+    {% if not instance.survey %}
+        <a href="{% url 'survey:create_survey' instance_slug=instance.slug %}">create a survey to start the
+            allocation</a>
+    {% else %}
+        <li style="margin-left: 3vw;">
+            <a href="{% url 'survey:survey_index' survey_id=instance.survey.survey_id %}">
+                {% if instance.survey.modify %}
+                edit survey
+                    {% else %}
+                view survey
+                {% endif %}
+            </a>
+        </li>
+        <li style="margin-left: 3vw;">
+            <a href="{% url 'survey:get_survey_link' survey_id=instance.survey.survey_id %}"> get survey link</a>
+        </li>
+        {% if not instance.survey.modify %}
+        <li style="margin-left: 3vw;">
+
+            <a href="{% url 'iGroup:config' slug=instance.slug %}">click to start the config</a>
+
+        </li>
+
+        <li style="margin-left: 3vw;">
+            <a href="{% url 'survey:student_list' survey_id=instance.survey.survey_id %}"> view student status </a>
+
+        </li>
+            {% endif %}
+
+        <section style="margin: 1vw 3vw;">
+            <div>{% include 'survey/upload/upload_answers_csv.html' with survey_obj=instance.survey %}</div>
+        </section>
+
+        <div>
+            <a href="{% url 'iGroup:list_config' slug=instance.slug %}"> see all configurations</a>
+        </div>
+        <a href="{% url 'iGroup:home' %}">back to home page</a>
+    </div>
+    {% endif %}
+
+    <script>
+
+        let popupError = document.getElementById("error_popup")
+        let closePopupError = document.getElementById("close_error_popup")
+        popupError.addEventListener('load', () => {
+            popupError.style.display = "block";
+        })
+
+        closePopupError.addEventListener('click', () => {
+            popupError.style.display = "none";
+        })
+    </script>
 {% endblock %}
