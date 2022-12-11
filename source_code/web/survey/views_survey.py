@@ -28,14 +28,6 @@ def create_survey(request, instance_slug=None):
 	return render(request, 'survey/create_survey.html', context)
 
 
-@login_required(login_url="/login")
-def edit_survey():
-	pass
-
-
-@login_required(login_url="/login")
-def delete_survey():
-	pass
 
 
 @login_required(login_url="/login")
@@ -108,4 +100,4 @@ def view_survey(request, survey_id=None):
 	if survey_obj.modify:
 		# if allow to modify go to modify page
 		return redirect('survey:question_list', survey_id=survey_id)
-	return
+	return #

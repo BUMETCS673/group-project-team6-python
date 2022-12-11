@@ -10,7 +10,9 @@
         </tbody>
     </table>
     <p style="display:inline-block;width:48%;">
+        {% if survey_obj.modify %}
         <a href="{% url 'survey:add_question' survey_id=survey_obj.survey_id %}">Add question</a>
+        {% endif %}
     </p>
     
     <p style="display:inline-block;width:48%; text-align: right;">
@@ -21,8 +23,9 @@
     
 </div>
    
-
+    {% if survey_obj.modify %}
     {% include 'survey/upload/upload_questions_csv.html'%}
+    {% endif %}
 
 
 

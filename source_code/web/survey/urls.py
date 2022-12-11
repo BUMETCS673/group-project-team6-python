@@ -2,13 +2,12 @@
 
 from django.urls import path, include
 from django.views.generic.base import TemplateView
-from . import views_student,views_question,views_survey,views_option,views_upload,views,views_answer
+from . import views_student,views_question,views_survey,views_option,views_upload,views_answer
 
 
 app_name = "survey"
 
 urlpatterns = [
-    # path('<slug:instance_slug>/create-update-survey/', views.create_update_survey, name='survey_create_update'),
     # survey
     path('<slug:instance_slug>/create-survey/', views_survey.create_survey, name='create_survey'),  # create survey
     path('<int:survey_id>/', views_survey.survey_index, name='survey_index'),  # list all questions and survey info
@@ -30,7 +29,7 @@ urlpatterns = [
 
     # student answer
     path('<int:survey_id>/send-survey/', views_answer.send_survey, name='send_survey'),
-    path('<int:survey_id>/student-answer/', views.survey_answer, name='survey_answer'),
+    path('<int:survey_id>/student-answer/', views_student.survey_answer, name='survey_answer'),
     path('<int:survey_id>/student-answer/upload', views_upload.upload_answers_csv, name='upload_answers_csv'),
     path('<int:survey_id>/students/all/', views_student.student_list, name='student_list'), # view all students answer this survey
     path('<int:survey_id>/student/<int:student_id>/all', views_student.answer_sheet_list, name='answer_sheet_list'), # list of a answer sheet of the student

@@ -22,6 +22,17 @@
 
         {% endfor %}
     </div>
+        <a  style="background-color: #068df5;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 80%;
+    margin-bottom: 1vw;
+    margin-left: 10%;
+    border-radius: 1vw;
+    text-align: center;" href="{% url 'iGroup:detail' slug=instance.slug %}">Go Back</a>
 
 {% endblock %}
 

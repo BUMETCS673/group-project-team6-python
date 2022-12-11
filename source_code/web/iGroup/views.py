@@ -2,12 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from .forms import InstanceCreationForm, InstructorParameterForm
-from .models import Instance, ConfigInstance, ResultTeam
-from survey.models import Survey, AnswerSheet
+from .models import Instance, ConfigInstance
+from survey.models import Survey
 from .utils import run_algorithm, save_result
-
-from .services.services import SurveyService, StudentAnswerService, iGroupService
-
 
 # The iGroup system
 @login_required(login_url="/login")
@@ -61,14 +58,6 @@ def detail_instance(request, slug=None):
 	return render(request, 'iGroup/instance.html', context)
 
 
-@login_required(login_url="/login")
-def update_instance(request):
-	return None
-
-
-@login_required(login_url="/login")
-def delete(request):
-	return None
 
 
 @login_required(login_url="/login")
@@ -207,7 +196,8 @@ def detail_result(request, slug, config_id):
 		result.append(team_data)
 
 	context = {
-		"teams_result": result
+		"teams_result": result,
+		"instance":instance
 	}
 
 	return render(request, 'iGroup/result_detail.html', context)

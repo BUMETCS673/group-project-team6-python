@@ -76,7 +76,7 @@
 
     </div>
 
-    <div  style="background-color: #068df5;
+    <a  style="background-color: #068df5;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
@@ -86,8 +86,7 @@
     margin-bottom: 1vw;
     margin-left: 10%;
     border-radius: 1vw;
-    text-align: center;">
-        Back to
-    </div>
+    text-align: center;" href="{% url 'iGroup:list_config' slug=instance.slug %}">Go Back</a>
+
 
 {% endblock %}

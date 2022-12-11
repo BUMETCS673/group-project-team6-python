@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import Http404
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 
@@ -28,7 +28,7 @@ def add_question(request, survey_id=None):
 	question_set = survey_obj.get_questions_set()
 	if not survey_obj.modify:
 		# survey has been locked
-		return  # not allowed response
+		raise Http404 # not allowed response
 	num_questions = len(question_set)
 	if request.method == "POST":
 		# create question
@@ -79,7 +79,3 @@ def edit_question(request, survey_id=None, question_id=None):
 	}
 	return render(request, 'survey/question_form.html', context)
 
-
-@login_required(login_url="/login")
-def remove_question():
-	pass
